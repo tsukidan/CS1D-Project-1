@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1100</width>
-    <height>900</height>
+    <width>1064</width>
+    <height>871</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,10 +17,10 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>140</y>
-      <width>181</width>
-      <height>81</height>
+      <x>10</x>
+      <y>250</y>
+      <width>221</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="font">
@@ -29,16 +29,16 @@
      </font>
     </property>
     <property name="text">
-     <string>Customer Page</string>
+     <string>Travel Options!</string>
     </property>
    </widget>
    <widget class="QPushButton" name="AdminPushButton">
     <property name="geometry">
      <rect>
-      <x>570</x>
-      <y>140</y>
-      <width>221</width>
-      <height>51</height>
+      <x>840</x>
+      <y>260</y>
+      <width>211</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="font">
@@ -50,16 +50,76 @@
      <string>Administrator Login</string>
     </property>
    </widget>
+   <widget class="QLabel" name="ImageLabel">
+    <property name="geometry">
+     <rect>
+      <x>4</x>
+      <y>5</y>
+      <width>1091</width>
+      <height>871</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>28</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>IMAGE LABEL</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="CustomerLabel">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>200</y>
+      <width>241</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>CustomerLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="AdminLabel">
+    <property name="geometry">
+     <rect>
+      <x>830</x>
+      <y>210</y>
+      <width>241</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <zorder>ImageLabel</zorder>
+   <zorder>CustomerLabel</zorder>
+   <zorder>pushButton</zorder>
+   <zorder>AdminLabel</zorder>
+   <zorder>AdminPushButton</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1100</width>
-     <height>21</height>
+     <width>1064</width>
+     <height>26</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuEuropean_Vacation">
+    <property name="title">
+     <string>European Vacation</string>
+    </property>
+   </widget>
+   <addaction name="menuEuropean_Vacation"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
