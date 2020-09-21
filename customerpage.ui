@@ -1,13 +1,13 @@
-<?xml version='1.0'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>CustomerPage</class>
- <widget name="CustomerPage" class="QDialog">
+ <widget class="QDialog" name="CustomerPage">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>480</height>
+    <width>1024</width>
+    <height>689</height>
    </rect>
   </property>
   <property name="windowTitle">

@@ -3,6 +3,7 @@
 
 //QMainWindow
 #include <QMainWindow>
+#include <QPixmap>
 
 //Error Message for login page
 #include <QMessageBox>
