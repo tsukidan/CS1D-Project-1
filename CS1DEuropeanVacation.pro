@@ -1,4 +1,5 @@
 QT       += core gui
+QT       += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -20,14 +21,16 @@ SOURCES += \
     customerpage.cpp \
     login.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    sqldatabase.cpp
 
 HEADERS += \
     Header.h \
     administrator.h \
     customerpage.h \
     login.h \
-    mainwindow.h
+    mainwindow.h \
+    sqldatabase.h
 
 FORMS += \
     administrator.ui \
