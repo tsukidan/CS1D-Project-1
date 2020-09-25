@@ -5,11 +5,21 @@
 #include <QMainWindow>
 #include <QPixmap>
 
+//SQL Database
+#include <QtSql>
+#include <QSqlDatabase>
+#include <QSqlDriver>
+#include <QSqlError>
+#include <QSqlQuery>
+
 //Error Message for login page
 #include <QMessageBox>
 
 
 #include <QDialog>
+#include <QDebug>
+using namespace std;
+using namespace Qt;
 
 
 #endif // HEADER_H

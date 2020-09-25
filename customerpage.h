@@ -17,6 +17,7 @@ public:
 
 private:
     Ui::CustomerPage *ui;
+
 };
 
 #endif // CUSTOMERPAGE_H
