@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/Database">
+        <file>Distances.json</file>
+        <file>Cities.txt</file>
+        <file>Foods.json</file>
+    </qresource>
+</RCC>

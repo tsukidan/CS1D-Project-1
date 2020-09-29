@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     /************************************************************
     * PROCESSING - Assign an image into new QPixmap variable
     ************************************************************/
-    QPixmap homePageBackground (":/new/background/european-cities.jpg");
+    QPixmap homePageBackground (":/new/Backgrounds/european-cities.jpg");
 
     /************************************************************
     * PROCESSING - Set the label to hold the image specified

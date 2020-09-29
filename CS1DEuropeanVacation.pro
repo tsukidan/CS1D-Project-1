@@ -1,5 +1,4 @@
-QT       += core gui
-QT       += sql
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -21,16 +20,16 @@ SOURCES += \
     customerpage.cpp \
     login.cpp \
     main.cpp \
-    mainwindow.cpp \
-    sqldatabase.cpp
+    sqldatabase.cpp \
+    mainwindow.cpp
 
 HEADERS += \
     Header.h \
     administrator.h \
     customerpage.h \
     login.h \
-    mainwindow.h \
-    sqldatabase.h
+    sqldatabase.h \
+    mainwindow.h
 
 FORMS += \
     administrator.ui \
@@ -44,4 +43,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    HomePageBackground.qrc
+    EuropeanVacation.qrc \
+    Images.qrc
