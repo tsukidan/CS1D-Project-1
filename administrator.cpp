@@ -2,11 +2,13 @@
 #include "ui_administrator.h"
 #include "sqldatabase.h"
 
+#include "login.h"
 #include <QSqlQuery>
 #include<QSqlError>
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QDebug>
 
 Administrator::Administrator(QWidget *parent) :
     QDialog(parent),
@@ -49,4 +51,12 @@ void Administrator::on_food_Button_clicked()
 void Administrator::on_distances_Button_clicked()
 {
 
+}
+
+void Administrator::on_returnFromAdminUI_clicked()
+{
+    Login *loginUi;
+    loginUi = new Login(this);
+    hide();
+    loginUi->show();
 }

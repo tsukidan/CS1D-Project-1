@@ -21,15 +21,16 @@
   <widget class="QPushButton" name="returnFromAdminUI">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>540</y>
-     <width>181</width>
-     <height>41</height>
+     <x>30</x>
+     <y>560</y>
+     <width>121</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>16</pointsize>
+     <family>Google Sans</family>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="text">
@@ -69,14 +70,14 @@
     </widget>
    </widget>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="enabled">
     <bool>true</bool>
    </property>
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>120</y>
+     <y>-20</y>
      <width>381</width>
      <height>251</height>
     </rect>
@@ -86,6 +87,14 @@
      <widget class="QLabel" name="label">
       <property name="enabled">
        <bool>true</bool>
+      </property>
+      <property name="font">
+       <font>
+        <family>Google Sans</family>
+        <pointsize>30</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
       </property>
       <property name="text">
        <string>Data Base</string>
@@ -102,7 +111,10 @@
       </property>
       <property name="font">
        <font>
+        <family>Google Sans</family>
         <pointsize>16</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
       <property name="text">
@@ -115,6 +127,14 @@
       <property name="enabled">
        <bool>true</bool>
       </property>
+      <property name="font">
+       <font>
+        <family>Google Sans</family>
+        <pointsize>16</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
       <property name="text">
        <string>View Foods</string>
       </property>
@@ -125,6 +145,14 @@
       <property name="enabled">
        <bool>true</bool>
       </property>
+      <property name="font">
+       <font>
+        <family>Google Sans</family>
+        <pointsize>16</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
       <property name="text">
        <string>View Distances</string>
       </property>
@@ -132,8 +160,8 @@
     </item>
    </layout>
   </widget>
+  <zorder>layoutWidget</zorder>
   <zorder>scrollArea</zorder>
-  <zorder>label</zorder>
   <zorder>returnFromAdminUI</zorder>
  </widget>
  <resources/>
