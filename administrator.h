@@ -15,6 +15,15 @@ public:
     explicit Administrator(QWidget *parent = nullptr);
     ~Administrator();
 
+private slots:
+    void on_pushButton_clicked();
+
+    void on_cities_Button_clicked();
+
+    void on_food_Button_clicked();
+
+    void on_distances_Button_clicked();
+
 private:
     Ui::Administrator *ui;
 };
