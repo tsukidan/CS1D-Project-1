@@ -15,8 +15,14 @@ public:
     explicit CustomerPage(QWidget *parent = nullptr);
     ~CustomerPage();
 
+private slots:
+    void on_CitySelect_currentIndexChanged(const QString &arg1);
+
+
 private:
     Ui::CustomerPage *ui;
+//    QSqlTableModel *sqlModel;
+    QSqlQueryModel *sqlModel;
 
 };
 

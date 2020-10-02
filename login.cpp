@@ -1,6 +1,6 @@
 #include "login.h"
 #include "ui_login.h"
-
+#include "mainwindow.h"
 
 Login::Login(QWidget *parent) :
     QDialog(parent),
@@ -33,4 +33,12 @@ void Login::on_pushButton_clicked()
     {
         QMessageBox::information(this, "", "Username and/or password is incorrect!");
     }
+}
+
+void Login::on_returnButton_clicked()
+{
+    MainWindow *mainWindow;
+    mainWindow = new MainWindow(this);
+    hide();
+    mainWindow->show();
 }

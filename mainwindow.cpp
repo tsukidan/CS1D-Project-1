@@ -40,16 +40,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui -> AdminLabel -> setText("");
     ui -> AdminLabel -> setStyleSheet("QLabel { background-color : tan;"
                                          "border: 1px solid black; }");
-
-
-
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-
 
 void MainWindow::on_pushButton_clicked()
 {

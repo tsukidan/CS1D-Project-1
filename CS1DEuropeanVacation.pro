@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     administrator.cpp \
     customerpage.cpp \
+    displayfoodsforcity.cpp \
     login.cpp \
     main.cpp \
     sqldatabase.cpp \
@@ -27,6 +28,7 @@ HEADERS += \
     Header.h \
     administrator.h \
     customerpage.h \
+    displayfoodsforcity.h \
     login.h \
     sqldatabase.h \
     mainwindow.h
@@ -34,6 +36,7 @@ HEADERS += \
 FORMS += \
     administrator.ui \
     customerpage.ui \
+    displayfoodsforcity.ui \
     login.ui \
     mainwindow.ui
 
