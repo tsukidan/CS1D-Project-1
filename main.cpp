@@ -7,9 +7,9 @@ int main(int argc, char *argv[])
 
     SQLDatabase db;
     db.createDatabase();
-    db.readFileCities();
-    db.readFileDistances();
-    db.readFileFoods();
+//    db.readFileCities();
+//    db.readFileDistances();
+//    db.readFileFoods();
 
     QApplication a(argc, argv);
     MainWindow w;

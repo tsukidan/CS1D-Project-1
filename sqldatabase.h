@@ -9,7 +9,6 @@ class SQLDatabase
 public:
     SQLDatabase();
 
-
 ~SQLDatabase();
 
 void createDatabase();
@@ -18,11 +17,11 @@ void readFileCities();
 
 void readFileDistances();
 
-
 void readFileFoods();
 
 QSqlDatabase GetDatabase() const;
 
+void editFoods(int foodID, double newPrice);
 
 //void addCity(City& newCity);
 

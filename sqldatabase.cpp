@@ -12,14 +12,20 @@
  * \brief Constructor for sqlDatabase
  * \param parent
  */
-
+// creates the database - wrapper around QSQLDatabase which manages the file
 SQLDatabase::SQLDatabase()
 {
+    // creating a SQLite db
     database = QSqlDatabase::addDatabase("QSQLITE");
+    // creating the db file
     QFileInfo db("database.sqlite");
+    // getting the path as a string
     QString DB_PATH = db.absoluteFilePath();
+    // printing debug output onto console
     qDebug() << DB_PATH;
+    // tell sqlite to use the file
     database.setDatabaseName(DB_PATH);
+    // open the db
     database.open();
 }
 
@@ -30,37 +36,70 @@ SQLDatabase::~SQLDatabase()
 {
 
 }
+
 /*!
  * \brief Creates the Database
  */
 void SQLDatabase::createDatabase()
 {
+    // to execute sql queries
     QSqlQuery query;
 
-    if(!query.exec("CREATE TABLE    Cities("
-                   "CityID          INTEGER NOT NULL PRIMARY KEY,"
-                   "Name            VARCHAR(50)"
-                   ");"))
-        qDebug() << "Failed: " << query.lastError();
+    // TODO: rewrite queries to check if the tables exists
+    // if they don't then create them & call the readfile function
 
-   if(!query.exec("CREATE TABLE            Distances("
-                  "FromCity                INTEGER DEFAULT 0 NOT NULL,"
-                  "ToCity                  INTEGER DEFAULT 0 NOT NULL,"
-                  "Distance                INTEGER DEFAULT 0 NOT NULL,"
-                  "foreign key(FromCity)   references City(CityID),"
-                  "foreign key(ToCity)     references City(CityID)"
-                  ");"))
-       qDebug() << "Failed: " << query.lastError();
+    bool initCities = false;
+    bool initFoods  = false;
+    bool initDistances = false;
 
-    if(!query.exec("CREATE TABLE        Foods("
-                   "FoodID              INTEGER NOT NULL PRIMARY KEY,"
-                   "FoodName            VARCHAR(50),"
-                   "CityID              INTEGER DEFAULT 0 NOT NULL,"
-                   "Price               REAL DEFAULT 0 NOT NULL,"
-                   "foreign key(CityID)   references City(CityID)"
-                   ");"))
-    qDebug() << "Failed: " << query.lastError();
- }
+    QStringList tables = database.tables();
+    if (!tables.contains("Cities", Qt::CaseInsensitive))
+    {
+        initCities = true;
+        // creates the 3 tables
+        if(!query.exec("CREATE TABLE    IF NOT EXISTS "
+                       "Cities("
+                       "CityID          INTEGER NOT NULL PRIMARY KEY,"
+                       "Name            VARCHAR(50)"
+                       ");"))
+            qDebug() << "Failed: " << query.lastError();
+
+    }
+
+    if (!tables.contains("Distances", Qt::CaseInsensitive))
+    {
+        initDistances = true;
+        if(!query.exec("CREATE TABLE            IF NOT EXISTS "
+                       "Distances("
+                       "FromCity                INTEGER DEFAULT 0 NOT NULL,"
+                       "ToCity                  INTEGER DEFAULT 0 NOT NULL,"
+                       "Distance                INTEGER DEFAULT 0 NOT NULL,"
+                       "foreign key(FromCity)   references City(CityID),"
+                       "foreign key(ToCity)     references City(CityID)"
+                       ");"))
+            qDebug() << "Failed: " << query.lastError();
+    }
+
+    if (!tables.contains("Foods", Qt::CaseInsensitive))
+    {
+        initFoods = true;
+        if(!query.exec("CREATE TABLE          IF NOT EXISTS "
+                       "Foods("
+                       "FoodID                INTEGER NOT NULL PRIMARY KEY,"
+                       "FoodName              VARCHAR(50),"
+                       "CityID                INTEGER DEFAULT 0 NOT NULL,"
+                       "Price                 REAL DEFAULT 0 NOT NULL,"
+                       "foreign key(CityID)   references City(CityID)"
+                       ");"))
+            qDebug() << "Failed: " << query.lastError();
+    }
+    if (initCities)
+        readFileCities();
+    if (initDistances)
+        readFileDistances();
+    if (initFoods)
+        readFileFoods();
+}
 
 /*!
  * \brief Reads the Shopper.txt file and inserts them into the CustomerTable
@@ -78,7 +117,8 @@ void SQLDatabase::readFileCities()
         {
             QString newCityname;
             newCityname = inFile.readLine();
-//            addCity(newCity);
+            //            addCity(newCity);  CAN ADD select, insert, delete, update
+            //
             QSqlQuery query;
             query.prepare("INSERT OR IGNORE INTO Cities(name) "
                           "VALUES(:name)");
@@ -109,7 +149,7 @@ void SQLDatabase::readFileDistances()
         qDebug() << "Opened File";
         QJsonDocument doc = QJsonDocument::fromJson(inFile.readAll().toUtf8());
         QJsonArray distances = doc.array();
-//        qDebug() << doc;
+        //        qDebug() << doc;
 
         for(auto distanceValue: distances)
         {
@@ -169,7 +209,7 @@ void SQLDatabase::readFileFoods()
         qDebug() << "Opened File";
         QJsonDocument doc = QJsonDocument::fromJson(inFile.readAll().toUtf8());
         QJsonArray foods= doc.array();
-//        qDebug() << doc;
+        //        qDebug() << doc;
 
         for(auto foodValue: foods)
         {
@@ -213,9 +253,21 @@ void SQLDatabase::readFileFoods()
 
     else
         qDebug() << "Cannot open file thats used to Read File from Distances list";
-
-
 }
+
+
+void SQLDatabase::editFoods(int foodID, double newPrice)
+{
+    QSqlQuery query;
+    query.prepare("UPDATE Foods SET Price = (:newPrice)"
+                  "WHERE foodID = (:foodID)");
+    query.bindValue(":newPrice", newPrice);
+    query.bindValue(":foodID", foodID);
+    if(!query.exec())
+        qDebug() << "Failed: " << query.lastError() << " (" << foodID << ")";
+}
+
+
 /*!
  * \brief Returns the Database
  */
