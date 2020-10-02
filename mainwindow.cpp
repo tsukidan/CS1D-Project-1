@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     /************************************************************
     * PROCESSING - Assign an image into new QPixmap variable
     ************************************************************/
-    QPixmap homePageBackground (":/new/background/european-cities.jpg");
+    QPixmap homePageBackground (":/new/Images/european-cities.jpg");
 
     /************************************************************
     * PROCESSING - Set the label to hold the image specified
@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     /************************************************************
     * PROCESSING - Access the label and give values of:
-    *              Background = white
+    *              Background = tan
     ************************************************************/
     ui -> CustomerLabel -> setText("");
     ui -> CustomerLabel -> setStyleSheet("QLabel { background-color : tan;"
@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     /************************************************************
     * PROCESSING - Access the label and give values of:
-    *              Background = white
+    *              Background = tan
     ************************************************************/
     ui -> AdminLabel -> setText("");
     ui -> AdminLabel -> setStyleSheet("QLabel { background-color : tan;"

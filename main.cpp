@@ -4,7 +4,6 @@
 
 int main(int argc, char *argv[])
 {
-
     SQLDatabase db;
     db.createDatabase();
     db.readFileCities();
@@ -15,5 +14,4 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
     return a.exec();
-
 }
