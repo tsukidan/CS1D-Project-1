@@ -24,8 +24,11 @@ private slots:
 
     void on_returnFromAdminUI_clicked();
 
+    void on_databaseView_clicked(const QModelIndex &index);
+
 private:
     Ui::Administrator *ui;
+    QSqlQueryModel *sqlModel;
 };
 
 #endif // ADMINISTRATOR_H

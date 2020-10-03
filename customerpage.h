@@ -19,6 +19,8 @@ private slots:
     void on_CitySelect_currentIndexChanged(const QString &arg1);
 
 
+    void on_returnButton_clicked();
+
 private:
     Ui::CustomerPage *ui;
 //    QSqlTableModel *sqlModel;

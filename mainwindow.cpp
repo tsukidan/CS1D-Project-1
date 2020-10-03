@@ -25,21 +25,6 @@ MainWindow::MainWindow(QWidget *parent)
                       (ImageLabelW, ImageLabelH,
                        Qt::KeepAspectRatio));
 
-    /************************************************************
-    * PROCESSING - Access the label and give values of:
-    *              Background = tan
-    ************************************************************/
-    ui -> CustomerLabel -> setText("");
-    ui -> CustomerLabel -> setStyleSheet("QLabel { background-color : tan;"
-                                         "border: 1px solid black; }");
-
-    /************************************************************
-    * PROCESSING - Access the label and give values of:
-    *              Background = tan
-    ************************************************************/
-    ui -> AdminLabel -> setText("");
-    ui -> AdminLabel -> setStyleSheet("QLabel { background-color : tan;"
-                                         "border: 1px solid black; }");
 }
 
 MainWindow::~MainWindow()

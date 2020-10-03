@@ -12,14 +12,13 @@
 
 Administrator::Administrator(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::Administrator)
+    ui(new Ui::Administrator),
+    sqlModel(new QSqlQueryModel(this))
 {
     ui->setupUi(this);
 
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "DB_PATH");
-
-    db.open();
-
+    sqlModel->setQuery("SELECT Name FROM Cities");
+    ui->databaseView->setModel(sqlModel);
 }
 
 Administrator::~Administrator()
@@ -29,28 +28,20 @@ Administrator::~Administrator()
 
 void Administrator::on_cities_Button_clicked()
 {
-    QSqlQuery query;
-
-    if(!query.exec("SELECT * FROM Cities"))
-         qDebug() << "Failed: " << query.lastError();
-
-    int tempCity = query.record().indexOf("Name");
-
-    while(query.next()) {
-
-        QString cityName = query.value(tempCity).toString();
-        qDebug() << cityName;
-    }
+    sqlModel->setQuery("SELECT CityID,Name FROM Cities");
+    ui->databaseView->setModel(sqlModel);
 }
 
 void Administrator::on_food_Button_clicked()
 {
-
+    sqlModel->setQuery("SELECT FoodID,FoodName, Price FROM Foods");
+    ui->databaseView->setModel(sqlModel);
 }
 
 void Administrator::on_distances_Button_clicked()
 {
-
+    sqlModel->setQuery("SELECT Distance, FromCity, ToCity FROM Distances");
+    ui->databaseView->setModel(sqlModel);
 }
 
 void Administrator::on_returnFromAdminUI_clicked()
@@ -59,4 +50,8 @@ void Administrator::on_returnFromAdminUI_clicked()
     loginUi = new Login(this);
     hide();
     loginUi->show();
+}
+
+void Administrator::on_databaseView_clicked(const QModelIndex &index)
+{
 }

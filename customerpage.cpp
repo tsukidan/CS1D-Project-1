@@ -1,6 +1,12 @@
 #include "customerpage.h"
 #include "ui_customerpage.h"
 #include "displayfoodsforcity.h"
+#include "mainwindow.h"
+
+CustomerPage::~CustomerPage()
+{
+    delete ui;
+}
 
 CustomerPage::CustomerPage(QWidget *parent) :
     QDialog(parent),
@@ -19,16 +25,11 @@ CustomerPage::CustomerPage(QWidget *parent) :
 
     QSqlQuery query;
     query.exec("SELECT Name FROM Cities");
-    while (query.next()) {
+    while (query.next())
+    {
         QString city = query.value(0).toString();
         ui->CitySelect->addItem(city);
     }
-
-}
-
-CustomerPage::~CustomerPage()
-{
-    delete ui;
 }
 
 void CustomerPage::on_CitySelect_currentIndexChanged(const QString &selectedCity)
@@ -46,8 +47,16 @@ void CustomerPage::on_CitySelect_currentIndexChanged(const QString &selectedCity
         qDebug() << "Failed: " << query.lastError();
     // Tells the model (that displays on the gui) to update it's state
     // Model will tell the GUI to update itself as well.
-//    sqlModel->setQuery(query);
+    // sqlModel->setQuery(query);
 
     QDialog *displayfoodsforcity = new DisplayFoodsForCity(this, query);
     displayfoodsforcity->show();
+}
+
+void CustomerPage::on_returnButton_clicked()
+{
+    MainWindow *mainWindow;
+    mainWindow = new MainWindow(this);
+    hide();
+    mainWindow->show();
 }
