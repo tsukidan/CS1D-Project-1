@@ -52,10 +52,6 @@ void Administrator::on_returnFromAdminUI_clicked()
     loginUi->show();
 }
 
-void Administrator::on_databaseView_clicked(const QModelIndex &index)
-{
-
-}
 
 void Administrator::on_databaseView_activated(const QModelIndex &index)
 {
@@ -79,4 +75,10 @@ void Administrator::on_delete_City_clicked()
     q.prepare("DELETE FROM Cities WHERE Name='"+queryVal+"'");
     if(!q.exec())
         qDebug() << "Failed: " << q.lastError();
+}
+
+void Administrator::on_databaseView_pressed(const QModelIndex &index)
+{
+    queryVal = ui->databaseView->model()->data(index).toString();
+    qDebug() << queryVal;
 }
