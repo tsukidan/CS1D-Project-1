@@ -24,11 +24,16 @@ private slots:
 
     void on_returnFromAdminUI_clicked();
 
-    void on_databaseView_clicked(const QModelIndex &index);
+    void on_databaseView_activated(const QModelIndex &index);
+
+    void on_delete_Food_clicked();
+
+    void on_delete_City_clicked();
 
 private:
     Ui::Administrator *ui;
     QSqlQueryModel *sqlModel;
+    QString queryVal;
 };
 
 #endif // ADMINISTRATOR_H

@@ -54,4 +54,29 @@ void Administrator::on_returnFromAdminUI_clicked()
 
 void Administrator::on_databaseView_clicked(const QModelIndex &index)
 {
+
+}
+
+void Administrator::on_databaseView_activated(const QModelIndex &index)
+{
+    queryVal = ui->databaseView->model()->data(index).toString();
+    qDebug() << queryVal;
+}
+
+void Administrator::on_delete_Food_clicked()
+{
+    QSqlQuery q;
+    qDebug() << "FoodName: " << queryVal;
+    q.prepare("DELETE FROM Foods WHERE FoodName='"+queryVal+"'");
+    if(!q.exec())
+        qDebug() << "Failed: " << q.lastError();
+}
+
+void Administrator::on_delete_City_clicked()
+{
+    QSqlQuery q;
+    qDebug() << "FoodName: " << queryVal;
+    q.prepare("DELETE FROM Cities WHERE Name='"+queryVal+"'");
+    if(!q.exec())
+        qDebug() << "Failed: " << q.lastError();
 }
