@@ -30,6 +30,8 @@ private slots:
 
     void on_databaseView_pressed(const QModelIndex &index);
 
+    void on_deleteDistances_clicked();
+
 private:
     Ui::Administrator *ui;
     QSqlQueryModel *sqlModel;

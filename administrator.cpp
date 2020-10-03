@@ -28,13 +28,13 @@ Administrator::~Administrator()
 
 void Administrator::on_cities_Button_clicked()
 {
-    sqlModel->setQuery("SELECT CityID,Name FROM Cities");
+    sqlModel->setQuery("SELECT Name FROM Cities");
     ui->databaseView->setModel(sqlModel);
 }
 
 void Administrator::on_food_Button_clicked()
 {
-    sqlModel->setQuery("SELECT FoodID,FoodName, Price FROM Foods");
+    sqlModel->setQuery("SELECT FoodName, Price FROM Foods");
     ui->databaseView->setModel(sqlModel);
 }
 
@@ -52,29 +52,41 @@ void Administrator::on_returnFromAdminUI_clicked()
     loginUi->show();
 }
 
-
-void Administrator::on_databaseView_activated(const QModelIndex &index)
-{
-    queryVal = ui->databaseView->model()->data(index).toString();
-    qDebug() << queryVal;
-}
-
 void Administrator::on_delete_Food_clicked()
 {
     QSqlQuery q;
-    qDebug() << "FoodName: " << queryVal;
+    qDebug() << "ID: " << queryVal;
     q.prepare("DELETE FROM Foods WHERE FoodName='"+queryVal+"'");
+    q.prepare("DELETE FROM Foods WHERE Price='"+queryVal+"'");
     if(!q.exec())
         qDebug() << "Failed: " << q.lastError();
+
+    sqlModel->setQuery("SELECT FoodName, Price FROM Foods");
+    ui->databaseView->setModel(sqlModel);
 }
 
 void Administrator::on_delete_City_clicked()
 {
     QSqlQuery q;
-    qDebug() << "FoodName: " << queryVal;
+    qDebug() << "ID: " << queryVal;
     q.prepare("DELETE FROM Cities WHERE Name='"+queryVal+"'");
     if(!q.exec())
         qDebug() << "Failed: " << q.lastError();
+
+    sqlModel->setQuery("SELECT Name FROM Cities");
+    ui->databaseView->setModel(sqlModel);
+}
+
+void Administrator::on_deleteDistances_clicked()
+{
+    QSqlQuery q;
+    qDebug() << "ID: " << queryVal;
+    q.prepare("DELETE FROM Distances WHERE Distance='"+queryVal+"'");
+    if(!q.exec())
+        qDebug() << "Failed: " << q.lastError();
+
+    sqlModel->setQuery("SELECT Distance, FromCity, ToCity FROM Distances");
+    ui->databaseView->setModel(sqlModel);
 }
 
 void Administrator::on_databaseView_pressed(const QModelIndex &index)
