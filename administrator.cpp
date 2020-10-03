@@ -55,11 +55,12 @@ void Administrator::on_returnFromAdminUI_clicked()
 void Administrator::on_delete_Food_clicked()
 {
     QSqlQuery q;
+    QSqlQuery p;
     qDebug() << "ID: " << queryVal;
     q.prepare("DELETE FROM Foods WHERE FoodName='"+queryVal+"'");
-    q.prepare("DELETE FROM Foods WHERE Price='"+queryVal+"'");
-    if(!q.exec())
-        qDebug() << "Failed: " << q.lastError();
+    p.prepare("DELETE FROM Foods WHERE Price='"+queryVal+"'");
+    if(!q.exec()||!p.exec())
+        qDebug() << "Failed: " << q.lastError() << p.lastError();
 
     sqlModel->setQuery("SELECT FoodName, Price FROM Foods");
     ui->databaseView->setModel(sqlModel);
@@ -77,17 +78,6 @@ void Administrator::on_delete_City_clicked()
     ui->databaseView->setModel(sqlModel);
 }
 
-void Administrator::on_deleteDistances_clicked()
-{
-    QSqlQuery q;
-    qDebug() << "ID: " << queryVal;
-    q.prepare("DELETE FROM Distances WHERE Distance='"+queryVal+"'");
-    if(!q.exec())
-        qDebug() << "Failed: " << q.lastError();
-
-    sqlModel->setQuery("SELECT Distance, FromCity, ToCity FROM Distances");
-    ui->databaseView->setModel(sqlModel);
-}
 
 void Administrator::on_databaseView_pressed(const QModelIndex &index)
 {

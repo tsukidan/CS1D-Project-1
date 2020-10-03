@@ -17,16 +17,16 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>30</y>
+      <x>860</x>
+      <y>20</y>
       <width>181</width>
       <height>31</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Google Sans</family>
-      <pointsize>13</pointsize>
+      <family>Arial Black</family>
+      <pointsize>10</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -38,16 +38,16 @@
    <widget class="QPushButton" name="AdminPushButton">
     <property name="geometry">
      <rect>
-      <x>840</x>
-      <y>30</y>
+      <x>860</x>
+      <y>60</y>
       <width>181</width>
       <height>31</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Google Sans</family>
-      <pointsize>13</pointsize>
+      <family>Arial Black</family>
+      <pointsize>10</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -77,15 +77,15 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>350</x>
+      <x>10</x>
       <y>10</y>
-      <width>341</width>
+      <width>401</width>
       <height>71</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Google Sans</family>
+      <family>Arial Black</family>
       <pointsize>28</pointsize>
       <weight>75</weight>
       <bold>true</bold>
@@ -98,10 +98,29 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>19</x>
+      <y>66</y>
+      <width>361</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>&quot;Plan your next European getaway!&quot;</string>
+    </property>
+   </widget>
    <zorder>ImageLabel</zorder>
    <zorder>pushButton</zorder>
    <zorder>AdminPushButton</zorder>
    <zorder>label</zorder>
+   <zorder>label_2</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

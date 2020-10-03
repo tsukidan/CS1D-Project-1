@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
                 /******************************
                  **** SPECIFIC TO HOME TAB ****
                  ******************************/
+    //PROCESSING - Setting Main Window Title
+    this->setWindowTitle("European Vacation Planner");
 
     /************************************************************
     * PROCESSING - Assign an image into new QPixmap variable
