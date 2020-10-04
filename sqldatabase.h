@@ -2,7 +2,7 @@
 #ifndef SQLDATABASE_H
 #define SQLDATABASE_H
 
-#include <QSqlDatabase>
+#include "Header.h"
 
 class SQLDatabase
 {

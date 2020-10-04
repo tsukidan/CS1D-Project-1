@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
                 /******************************
                  **** SPECIFIC TO HOME TAB ****
                  ******************************/
+    //PROCESSING - Setting Main Window Title
+    this->setWindowTitle("European Vacation Planner");
 
     /************************************************************
     * PROCESSING - Assign an image into new QPixmap variable
@@ -25,21 +27,6 @@ MainWindow::MainWindow(QWidget *parent)
                       (ImageLabelW, ImageLabelH,
                        Qt::KeepAspectRatio));
 
-    /************************************************************
-    * PROCESSING - Access the label and give values of:
-    *              Background = tan
-    ************************************************************/
-    ui -> CustomerLabel -> setText("");
-    ui -> CustomerLabel -> setStyleSheet("QLabel { background-color : tan;"
-                                         "border: 1px solid black; }");
-
-    /************************************************************
-    * PROCESSING - Access the label and give values of:
-    *              Background = tan
-    ************************************************************/
-    ui -> AdminLabel -> setText("");
-    ui -> AdminLabel -> setStyleSheet("QLabel { background-color : tan;"
-                                         "border: 1px solid black; }");
 }
 
 MainWindow::~MainWindow()
@@ -47,6 +34,12 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+/*************************************************************************
+ * void MainWindow::on_pushButton_clicked()
+ * ----------------------------------------------------------------------
+ * Upon clicking on the customer page button, the main window will become
+ * hidden and the prospective travler page will open.
+ ************************************************************************/
 void MainWindow::on_pushButton_clicked()
 {
     customerUI = new CustomerPage(this);
@@ -57,6 +50,12 @@ void MainWindow::on_pushButton_clicked()
     customerUI -> show();
 }
 
+/*************************************************************************
+ * void MainWindow::on_AdminPushButton_clicked()
+ * ----------------------------------------------------------------------
+ * Upon clicking on the administrator page button, the main window will become
+ * hidden and the administrator page will open.
+ ************************************************************************/
 void MainWindow::on_AdminPushButton_clicked()
 {
     loginUI = new Login(this);
@@ -66,3 +65,4 @@ void MainWindow::on_AdminPushButton_clicked()
 
     loginUI -> show();
 }
+
