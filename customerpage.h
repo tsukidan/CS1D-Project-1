@@ -16,7 +16,13 @@ public:
     ~CustomerPage();
 
 private slots:
-    void on_CitySelect_currentIndexChanged(const QString &arg1);
+    /*!
+     * \brief on_CitySelect_currentIndexChanged
+     * Runs a query and displays the cities for the customer to select.
+     * Takes the selection from a drop-down box and displays a separate box of
+     * the selected city's foods and prices.
+     */
+     void on_CitySelect_currentIndexChanged(const QString &arg1);
 
 
 private:

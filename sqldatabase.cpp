@@ -1,16 +1,14 @@
 #include "sqldatabase.h"
-
 #include <QFileInfo>
 #include <QDebug>
 #include <QSqlQuery>
-#include<QSqlError>
+#include <QSqlError>
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
 
 /*!
- * \brief Constructor for sqlDatabase
- * \param parent
+ * \brief SQLDatabase Constructor
  */
 // creates the database - wrapper around QSQLDatabase which manages the file
 SQLDatabase::SQLDatabase()
@@ -30,7 +28,7 @@ SQLDatabase::SQLDatabase()
 }
 
 /*!
- * \brief Destructor for sqlDatabase
+ * \brief SQLDatabase Destructor
  */
 SQLDatabase::~SQLDatabase()
 {
@@ -38,7 +36,10 @@ SQLDatabase::~SQLDatabase()
 }
 
 /*!
- * \brief Creates the Database
+ * \brief createDatabase
+ * Creates the Database.  Checks to see if the database has already
+ * been created, and if so doesn't re-create it. If not, it creates the
+ * databases and calls the readfile function.
  */
 void SQLDatabase::createDatabase()
 {
@@ -102,7 +103,8 @@ void SQLDatabase::createDatabase()
 }
 
 /*!
- * \brief Reads the Shopper.txt file and inserts them into the CustomerTable
+ * \brief readFileCities
+ * Reads the Cities file and inserts them into the CitiesTable
  */
 void SQLDatabase::readFileCities()
 {
@@ -137,7 +139,8 @@ void SQLDatabase::readFileCities()
 }
 
 /*!
- * \brief Reads the days.txt files and inserts them into the Sales table
+ * \brief readFileDistances
+ * Reads the Distance files and inserts them into the Distance table
  */
 void SQLDatabase::readFileDistances()
 {
@@ -199,6 +202,10 @@ void SQLDatabase::readFileDistances()
 
 }
 
+/*!
+ * \brief readFileFoods
+ * Reads from the foods file and adds to the database
+ */
 void SQLDatabase::readFileFoods()
 {
     QFile file(":/Database/Foods.json");
@@ -245,17 +252,19 @@ void SQLDatabase::readFileFoods()
                 if(!query.exec())
                     qDebug() << "Failed: " << query.lastError();
             }
-
         }
 
         file.close();
     }
-
     else
         qDebug() << "Cannot open file thats used to Read File from Distances list";
 }
 
 
+/*!
+ * \brief editFoods
+ * Edits selected food price.
+ */
 void SQLDatabase::editFoods(int foodID, double newPrice)
 {
     QSqlQuery query;
@@ -277,29 +286,45 @@ QSqlDatabase SQLDatabase::GetDatabase() const
 }
 
 /*!
- * \brief Inserts the customers into the Customer Table
+ * \brief addCity
+ * Adds a city to the database
  */
-
 /*
 void SQLDatabase::addCity(City& newCity)
 {
+    QSqlQuery query;
+    query.prepare("INSERT OR IGNORE INTO Cities(name) "
+                  "VALUES(:name)");
 
+    query.bindValue(":name", newCity.name);
+
+    if(!query.exec())
+        qDebug() << "Failed: " << query.lastError();
 }
+*/
 
+/*!
+ * \brief addDistance
+ * Adds a distance to the database
+ */
+/*
 void SQLDatabase::addDistance(Distance &newDistance)
-{
-
-}
-
-void SQLDatabase::addFood(Food &newFood)
 {
 
 }
 */
 
 /*!
- * \brief Inserts the sales info into the SalesTable
+ * \brief addFood
+ * Adds a food to the database
  */
+/*
+void SQLDatabase::addFood(Food &newFood)
+{
+
+}
+*/
+
 
 /*
 void SQLDatabase::addSalesIntoTable(salesTableInfo& salesData)
