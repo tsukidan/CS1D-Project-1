@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1024</width>
-    <height>689</height>
+    <width>821</width>
+    <height>567</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,6 +34,29 @@
    </property>
    <property name="text">
     <string>See foods from your city:</string>
+   </property>
+  </widget>
+  <widget class="QTableView" name="tableView">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>80</y>
+     <width>731</width>
+     <height>421</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="returnButton">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>526</y>
+     <width>80</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Home</string>
    </property>
   </widget>
  </widget>
