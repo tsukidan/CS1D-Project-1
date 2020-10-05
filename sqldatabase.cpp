@@ -1,12 +1,5 @@
 #include "sqldatabase.h"
 
-#include <QFileInfo>
-#include <QDebug>
-#include <QSqlQuery>
-#include<QSqlError>
-#include <QJsonDocument>
-#include <QJsonArray>
-#include <QJsonObject>
 
 /*!
  * \brief Constructor for sqlDatabase

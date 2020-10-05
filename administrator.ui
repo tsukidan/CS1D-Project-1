@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>902</width>
-    <height>614</height>
+    <width>1167</width>
+    <height>846</height>
    </rect>
   </property>
   <property name="font">
@@ -18,72 +18,85 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="returnFromAdminUI">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>560</y>
-     <width>121</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Google Sans</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Return</string>
-   </property>
-  </widget>
-  <widget class="QScrollArea" name="scrollArea">
-   <property name="geometry">
-    <rect>
-     <x>430</x>
-     <y>20</y>
-     <width>451</width>
-     <height>571</height>
-    </rect>
-   </property>
-   <property name="widgetResizable">
-    <bool>true</bool>
-   </property>
-   <widget class="QWidget" name="scrollAreaWidgetContents">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>449</width>
-      <height>569</height>
-     </rect>
-    </property>
-    <widget class="QTableWidget" name="displayDataTable">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>451</width>
-       <height>621</height>
-      </rect>
-     </property>
-    </widget>
-   </widget>
-  </widget>
   <widget class="QWidget" name="layoutWidget">
    <property name="enabled">
     <bool>true</bool>
    </property>
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>-20</y>
-     <width>381</width>
-     <height>251</height>
+     <x>120</x>
+     <y>20</y>
+     <width>982</width>
+     <height>207</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="1" column="3">
+     <widget class="QPushButton" name="AddFoodPushButton">
+      <property name="text">
+       <string>Add Food</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QPushButton" name="cities_Button">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="font">
+       <font>
+        <family>Google Sans</family>
+        <pointsize>16</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>View Cities</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="3">
+     <widget class="QPushButton" name="food_Button">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="font">
+       <font>
+        <family>Google Sans</family>
+        <pointsize>16</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>View Foods</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QPushButton" name="returnFromAdminUI">
+      <property name="font">
+       <font>
+        <family>Google Sans</family>
+        <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Return To Login</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="3">
+     <widget class="QPushButton" name="UpdateFoodPushButton">
+      <property name="text">
+       <string>Update Food Items</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
      <widget class="QLabel" name="label">
       <property name="enabled">
        <bool>true</bool>
@@ -104,8 +117,8 @@
       </property>
      </widget>
     </item>
-    <item>
-     <widget class="QPushButton" name="cities_Button">
+    <item row="3" column="3">
+     <widget class="QPushButton" name="DeleteFoodPushButton">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -118,29 +131,11 @@
        </font>
       </property>
       <property name="text">
-       <string>View Cities</string>
+       <string>Delete From Foods</string>
       </property>
      </widget>
     </item>
-    <item>
-     <widget class="QPushButton" name="food_Button">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="font">
-       <font>
-        <family>Google Sans</family>
-        <pointsize>16</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>View Foods</string>
-      </property>
-     </widget>
-    </item>
-    <item>
+    <item row="3" column="1">
      <widget class="QPushButton" name="distances_Button">
       <property name="enabled">
        <bool>true</bool>
@@ -158,11 +153,133 @@
       </property>
      </widget>
     </item>
+    <item row="2" column="1">
+     <widget class="QPushButton" name="delete_City">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="font">
+       <font>
+        <family>Google Sans</family>
+        <pointsize>16</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Delete From Cities</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QPushButton" name="pushButton">
+      <property name="text">
+       <string>Add Cities</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
-  <zorder>layoutWidget</zorder>
-  <zorder>scrollArea</zorder>
-  <zorder>returnFromAdminUI</zorder>
+  <widget class="QTableView" name="databaseView">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>350</y>
+     <width>871</width>
+     <height>401</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Panel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+   <attribute name="horizontalHeaderDefaultSectionSize">
+    <number>250</number>
+   </attribute>
+  </widget>
+  <widget class="QLineEdit" name="FoodNameLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>240</y>
+     <width>331</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>250</y>
+     <width>151</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Food Name</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="PriceLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>290</y>
+     <width>331</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>300</y>
+     <width>151</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Price</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

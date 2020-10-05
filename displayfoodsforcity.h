@@ -1,7 +1,6 @@
 #ifndef DISPLAYFOODSFORCITY_H
 #define DISPLAYFOODSFORCITY_H
 
-#include <QDialog>
 #include "Header.h"
 
 namespace Ui {
