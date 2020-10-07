@@ -38,6 +38,10 @@ private:
     Ui::Administrator *ui;
     QSqlQueryModel *sqlModel;
     QString queryVal;
+
+    void resetDatabaseView(QAbstractItemModel* model);
+    QSqlRelationalTableModel* rebuildQuery();
 };
+
 
 #endif // ADMINISTRATOR_H

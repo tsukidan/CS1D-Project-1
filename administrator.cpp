@@ -39,20 +39,38 @@ Administrator::~Administrator()
 
 void Administrator::on_cities_Button_clicked()
 {
-    sqlModel->setQuery("SELECT Name FROM Cities");
-    ui->databaseView->setModel(sqlModel);
+    QSqlRelationalTableModel *sqlTableModel = rebuildQuery();
+    sqlTableModel->setTable("Cities");
+    sqlTableModel->select();	// this runs the select query
+
+    resetDatabaseView(sqlTableModel);
+    ui->databaseView->hideColumn(0);
 }
 
 void Administrator::on_food_Button_clicked()
 {
-    sqlModel->setQuery("SELECT FoodName, Price, CItyID FROM Foods");
-    ui->databaseView->setModel(sqlModel);
+    QSqlRelationalTableModel *sqlTableModel = rebuildQuery();
+    sqlTableModel->setTable("Foods");
+    sqlTableModel->setRelation(2, QSqlRelation("Cities", "CityID", "Name"));
+    sqlTableModel->select();	// this runs the select query
+    sqlTableModel->setHeaderData(2, Qt::Horizontal, tr("City"));
+
+    resetDatabaseView(sqlTableModel);
+    ui->databaseView->hideColumn(0);
+    ui->databaseView->horizontalHeader()->moveSection(2, 1);
 }
 
 void Administrator::on_distances_Button_clicked()
 {
-    sqlModel->setQuery("SELECT Distance, FromCity, ToCity FROM Distances");
-    ui->databaseView->setModel(sqlModel);
+    QSqlRelationalTableModel *sqlTableModel = rebuildQuery();
+    sqlTableModel->setTable("Distances");
+    sqlTableModel->setRelation(0, QSqlRelation("Cities", "CityID", "Name"));
+    sqlTableModel->setRelation(1, QSqlRelation("Cities", "CityID", "Name"));
+    sqlTableModel->select();
+    sqlTableModel->setHeaderData(0, Qt::Horizontal, tr("From"));
+    sqlTableModel->setHeaderData(1, Qt::Horizontal, tr("To"));
+
+    resetDatabaseView(sqlTableModel);
 }
 
 void Administrator::on_returnFromAdminUI_clicked()
@@ -201,4 +219,29 @@ void Administrator::on_UpdateFoodPushButton_clicked()
     //Clear the line edits
     ui -> FoodNameLineEdit -> clear();
     ui -> PriceLineEdit    -> clear();
+}
+
+// this resets the tableview to show all the columns & resize them
+void Administrator::resetDatabaseView(QAbstractItemModel* model)
+{
+
+    ui->databaseView->reset();
+    ui->databaseView->horizontalHeader()->reset();
+    ui->databaseView->setModel(model);
+    for (int i = 0; i < model->columnCount(); i++)
+    {
+        ui->databaseView->showColumn(i);
+    }
+    ui->databaseView->resizeColumnsToContents();
+}
+
+// This creates a new query model by deleting the sqlModel and replacing it
+// with a relationalTableModel so that we can do the the column names and
+// foreign key relations
+QSqlRelationalTableModel *Administrator::rebuildQuery()
+{
+    delete sqlModel;
+    QSqlRelationalTableModel *sqlTableModel = new QSqlRelationalTableModel(this);
+    this->sqlModel = sqlTableModel;
+    return sqlTableModel;
 }

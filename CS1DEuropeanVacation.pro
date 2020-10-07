@@ -21,6 +21,8 @@ SOURCES += \
     displayfoodsforcity.cpp \
     login.cpp \
     main.cpp \
+    pathutils.cpp \
+    shortestpath.cpp \
     sqldatabase.cpp \
     mainwindow.cpp
 
@@ -30,6 +32,8 @@ HEADERS += \
     customerpage.h \
     displayfoodsforcity.h \
     login.h \
+    pathutils.h \
+    shortestpath.h \
     sqldatabase.h \
     mainwindow.h
 

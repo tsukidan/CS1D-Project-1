@@ -17,18 +17,18 @@ public:
 
 private slots:
     /*!
-     * \brief on_CitySelect_currentIndexChanged
+     * \brief on_CitySelect_activated
      * Runs a query and displays the cities for the customer to select.
      * Takes the selection from a drop-down box and displays a separate box of
      * the selected city's foods and prices.
      */
-     void on_CitySelect_currentIndexChanged(const QString &arg1);
-
+    void on_CitySelect_activated(const QString &arg1);
 
     void on_returnButton_clicked();
 
 private:
     Ui::CustomerPage *ui;
+// this was moved to display foods for city
 //    QSqlTableModel *sqlModel;
     QSqlQueryModel *sqlModel;
 
