@@ -21,6 +21,9 @@ SOURCES += \
     displayfoodsforcity.cpp \
     login.cpp \
     main.cpp \
+    pathutils.cpp \
+    routedisplayer.cpp \
+    shortestpath.cpp \
     sqldatabase.cpp \
     mainwindow.cpp
 
@@ -30,6 +33,9 @@ HEADERS += \
     customerpage.h \
     displayfoodsforcity.h \
     login.h \
+    pathutils.h \
+    routedisplayer.h \
+    shortestpath.h \
     sqldatabase.h \
     mainwindow.h
 
@@ -38,7 +44,8 @@ FORMS += \
     customerpage.ui \
     displayfoodsforcity.ui \
     login.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    routedisplayer.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
