@@ -13,9 +13,9 @@ int main(int argc, char *argv[])
 //    db.readFileDistances();
 //    db.readFileFoods();
 
-    cityGraph graph = createCityGraphFromDatabase();
-    vector<string> path = ShortestPath(graph, {"Berlin"}, {"Prague"});
-    printShortestPath(path);
+//    cityGraph graph = createCityGraphFromDatabase();
+//    vector<string> path = ShortestPath(graph, {"Berlin"}, {"Prague"});
+//    printShortestPath(path);
 
     QApplication a(argc, argv);
     MainWindow w;

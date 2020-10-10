@@ -22,15 +22,22 @@ private slots:
      * Takes the selection from a drop-down box and displays a separate box of
      * the selected city's foods and prices.
      */
-    void on_CitySelect_activated(const QString &arg1);
+    void on_CityFoodSelect_activated(const QString &selectedCity);
 
     void on_returnButton_clicked();
+
+    void on_pushButton_clicked();
 
 private:
     Ui::CustomerPage *ui;
 // this was moved to display foods for city
 //    QSqlTableModel *sqlModel;
     QSqlQueryModel *sqlModel;
+    QList<QCheckBox*> cityCheckBoxes;    // List of all cities to visit
+
+    QList<int> shortestPath(int startingCity, QList<int>selectedCities);
+
+    int nearestCity(int currentCity, QList<int>visitedCities);
 
 };
 

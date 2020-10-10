@@ -25,5 +25,7 @@
 using namespace std;
 using namespace Qt;
 
+#include "sqldatabase.h"
+
 
 #endif // HEADER_H

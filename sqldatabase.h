@@ -72,6 +72,12 @@ void editFoods(int foodID, double newPrice);
  */
 //void addFood(Food &newFood);
 
+static int GetCityIdByName(QString cityName);
+
+static QString GetCityNameById(int id);
+
+static int GetDistance(int fromID, int toID);
+
 private:
 QSqlDatabase database;
 };

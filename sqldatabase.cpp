@@ -266,7 +266,63 @@ void SQLDatabase::editFoods(int foodID, double newPrice)
     query.bindValue(":newPrice", newPrice);
     query.bindValue(":foodID", foodID);
     if(!query.exec())
-        qDebug() << "Failed: " << query.lastError() << " (" << foodID << ")";
+        qDebug() << "Query " << query.executedQuery() << " Failed: " << query.lastError() << " (" << foodID << ")";
+}
+
+/*!
+ * \brief Returns the CityID #
+ */
+int SQLDatabase::GetCityIdByName(QString cityName)
+{
+    QSqlQuery query;
+    query.prepare("SELECT CityID FROM Cities "
+                  "WHERE Name = (:name)");
+
+    query.bindValue(":name", cityName);
+
+    if(!query.exec())
+        qDebug() << "GetCityIdByName Failed: " << query.lastError() << " " << cityName;
+// fetch row
+    query.next();
+    return query.value(0).toInt();
+}
+
+/*!
+ * \brief Returns the CityID #
+ */
+QString SQLDatabase::GetCityNameById(int id)
+{
+    QSqlQuery query;
+    query.prepare("SELECT Name FROM Cities "
+                  "WHERE cityID = (:id)");
+
+    query.bindValue(":id", id);
+
+    if(!query.exec())
+        qDebug() << "GetCityNameById Failed: " << query.lastError() << " " << id;
+// fetch row
+    query.next();
+    return query.value(0).toString();
+}
+
+/*!
+ * \brief Returns the distance between two cities
+ */
+int SQLDatabase::GetDistance(int fromID, int toID)
+{
+    QSqlQuery query;
+    query.prepare("SELECT distance FROM Distances "
+                  "WHERE fromCity = (:fromID) "
+                  "AND toCity = (:toID)");
+
+    query.bindValue(":fromID", fromID);
+    query.bindValue(":toID", toID);
+
+    if(!query.exec())
+        qDebug() << "GetDistance Failed: "<< fromID << " to " << toID << query.lastError() << " " << query.executedQuery() ;
+// fetch row
+    query.next();
+    return query.value(0).toInt();
 }
 
 
