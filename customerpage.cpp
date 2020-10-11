@@ -3,6 +3,7 @@
 #include "displayfoodsforcity.h"
 #include "mainwindow.h"
 #include "routedisplayer.h"
+#include "purchasefoods.h"
 #include <QComboBox>
 
 /*!
@@ -31,6 +32,7 @@ CustomerPage::CustomerPage(QWidget *parent) :
     {
         QString city = query.value(0).toString();
         ui->CityFoodSelect->addItem(city);
+        ui->filterCartBox->addItem(city);
         ui->StartingCitySelect->addItem(city);
 
         // Checkboxes for cities to be visited
@@ -43,10 +45,12 @@ CustomerPage::CustomerPage(QWidget *parent) :
 
     // Adjust combo box to size of contents
     ui->CityFoodSelect->setSizeAdjustPolicy( QComboBox::AdjustToContents );
+    ui->filterCartBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     ui->StartingCitySelect->setSizeAdjustPolicy( QComboBox::AdjustToContents );
 
     // sets index to nothing - won't show on dropdown
     ui->CityFoodSelect->setCurrentIndex(-1);
+    ui->filterCartBox->setCurrentIndex(-1);
 //    ui->StartingCitySelect->setCurrentIndex(-1);
 }
 
@@ -200,4 +204,62 @@ int CustomerPage::nearestCity(int currentCity, QList<int>visitedCities)
 
     query.next();
     return query.value(0).toInt();
+}
+
+void CustomerPage::on_pushButton_2_clicked()
+{
+    //PROC - Create new window of purchase dialogue.
+}
+
+void CustomerPage::on_filterCartBox_activated(const QString &selectedCity)
+{
+    if (selectedCity != "")
+    {
+
+        // Begins new query
+        QSqlQuery query;
+        // Prepared statement: Get every food for the current city.
+
+        query.prepare("SELECT FoodName, Price FROM Foods "
+                      "INNER JOIN Cities on cities.CityID = foods.CityID "
+                      "WHERE cities.Name = (:City)");
+
+        // Tell the query which city we're looking for
+        query.bindValue(":City", selectedCity);
+
+        // runs & cks for errors
+        if(!query.exec())
+            qDebug() << "Failed: " << query.lastError();
+
+        sqlModel->setQuery(query);
+        ui->cartCityView->setModel(sqlModel);
+    }
+
+}
+
+void CustomerPage::on_updateCart_clicked()
+{
+    // Begins new query
+    QSqlQuery query;
+    query.prepare("SELECT FROM Cities WHERE Name='"+queryVal+"'");
+
+    // Tell the query which city we're looking for
+    query.bindValue(":FoodName", queryVal);
+
+    if(!query.exec())
+        qDebug() << "Failed: " << query.lastError();
+
+    sqlModel->setQuery(query);
+    ui->tableView->setModel(sqlModel);
+}
+
+void CustomerPage::on_cartCityView_activated(const QModelIndex &index)
+{
+       qDebug() << "activated " << index;
+}
+
+void CustomerPage::on_cartCityView_pressed(const QModelIndex &index)
+{
+        queryVal = ui->cartCityView->model()->data(index).toString();
+        qDebug() << queryVal;
 }

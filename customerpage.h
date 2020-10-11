@@ -28,11 +28,22 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_pushButton_2_clicked();
+
+    void on_filterCartBox_activated(const QString &arg1);
+
+    void on_updateCart_clicked();
+
+    void on_cartCityView_activated(const QModelIndex &index);
+
+    void on_cartCityView_pressed(const QModelIndex &index);
+
 private:
     Ui::CustomerPage *ui;
 // this was moved to display foods for city
 //    QSqlTableModel *sqlModel;
     QSqlQueryModel *sqlModel;
+        QString queryVal;
     QList<QCheckBox*> cityCheckBoxes;    // List of all cities to visit
 
     QList<int> shortestPath(int startingCity, QList<int>selectedCities);

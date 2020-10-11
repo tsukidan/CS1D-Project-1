@@ -26,9 +26,7 @@ Administrator::Administrator(QWidget *parent) :
 
     ui -> UpdateFoodPushButton -> setStyleSheet(QString("#%1 { background-color: green; }").arg(ui -> UpdateFoodPushButton->objectName()));
 
-    ui -> DeleteFoodPushButton -> setStyleSheet(QString("#%1 { background-color: pink; }").arg(ui -> DeleteFoodPushButton->objectName()));
-
-
+    ui -> DeleteFoodPushButton -> setStyleSheet(QString("#%1 { background-color: #ff4d4d; }").arg(ui -> DeleteFoodPushButton->objectName()));
 
 }
 

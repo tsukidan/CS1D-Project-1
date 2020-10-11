@@ -22,6 +22,7 @@ SOURCES += \
     login.cpp \
     main.cpp \
     pathutils.cpp \
+    purchasefoods.cpp \
     routedisplayer.cpp \
     shortestpath.cpp \
     sqldatabase.cpp \
@@ -34,6 +35,7 @@ HEADERS += \
     displayfoodsforcity.h \
     login.h \
     pathutils.h \
+    purchasefoods.h \
     routedisplayer.h \
     shortestpath.h \
     sqldatabase.h \
@@ -45,6 +47,7 @@ FORMS += \
     displayfoodsforcity.ui \
     login.ui \
     mainwindow.ui \
+    purchasefoods.ui \
     routedisplayer.ui
 
 # Default rules for deployment.
