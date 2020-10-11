@@ -47,7 +47,7 @@ CustomerPage::CustomerPage(QWidget *parent) :
 
     // sets index to nothing - won't show on dropdown
     ui->CityFoodSelect->setCurrentIndex(-1);
-//    ui->StartingCitySelect->setCurrentIndex(-1);
+    ui->StartingCitySelect->setCurrentIndex(-1);
 }
 
 /*!
@@ -94,7 +94,6 @@ void CustomerPage::on_CityFoodSelect_activated(const QString &selectedCity)
         // show the window for the selected city
         displayfoodsforcity->show();
     }
-
 }
 
 void CustomerPage::on_returnButton_clicked()
