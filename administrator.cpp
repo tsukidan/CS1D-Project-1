@@ -47,17 +47,29 @@ void Administrator::on_cities_Button_clicked()
     ui->databaseView->hideColumn(0);
 }
 
+
+/*************************************************************************
+ * void Administrator::on_food_Button_clicked()
+ * ----------------------------------------------------------------------
+ * This will display the City ID, City Name, Food Name, and price of all
+ * food items in the database.
+ ************************************************************************/
 void Administrator::on_food_Button_clicked()
 {
-    QSqlRelationalTableModel *sqlTableModel = rebuildQuery();
-    sqlTableModel->setTable("Foods");
-    sqlTableModel->setRelation(2, QSqlRelation("Cities", "CityID", "Name"));
-    sqlTableModel->select();	// this runs the select query
-    sqlTableModel->setHeaderData(2, Qt::Horizontal, tr("City"));
+//    QSqlRelationalTableModel *sqlTableModel = rebuildQuery();
+//    sqlTableModel->setTable("Foods");
+//    sqlTableModel->setRelation(2, QSqlRelation("Cities", "CityID", "Name"));
+//    sqlTableModel->select();	// this runs the select query
+//    sqlTableModel->setHeaderData(2, Qt::Horizontal, tr("City"));
 
-    resetDatabaseView(sqlTableModel);
-    ui->databaseView->hideColumn(0);
-    ui->databaseView->horizontalHeader()->moveSection(2, 1);
+//    resetDatabaseView(sqlTableModel);
+//    ui->databaseView->hideColumn(0);
+//    ui->databaseView->horizontalHeader()->moveSection(2, 1);
+    /*************************************************************************
+     * PROCESSING - Run query to display information on each food item
+     ************************************************************************/
+    sqlModel->setQuery("SELECT Cities.CityID, Cities.Name, Foods.FoodName, Foods.Price FROM Foods, Cities WHERE Cities.CityID = Foods.CityID");
+    ui->databaseView->setModel(sqlModel);
 }
 
 void Administrator::on_distances_Button_clicked()
@@ -115,47 +127,65 @@ void Administrator::on_AddFoodPushButton_clicked()
     QString price    = ui -> PriceLineEdit    -> text(); //IN & PROC - Price of food item will be added
     QSqlQuery query;
 
-    /*************************************************************************
-     * PROCESSING - Query the database to add the item
-     ************************************************************************/
-    query.prepare("INSERT OR IGNORE INTO Foods(FoodName, CityID, Price) "
-                  "VALUES(:name, :city, :price)");
-
-    //bind values
-    query.bindValue(":name", foodName);
-    query.bindValue(":city", queryVal.toInt());
-    query.bindValue(":price", price);
 
     /*************************************************************************
-     * OUTPUT - Error message if query fails
+     * PROCESSING - Load datatable to show information
      ************************************************************************/
-    if(!query.exec())
-        qDebug() << "Failed: " << query.lastError() << " (" << queryVal << ")";
-
-
-    qDebug() << "cityID:   " << queryVal;
-    qDebug() << ":name     " << foodName;
-    qDebug() << ":price    " << price;
-    qDebug() << "";
-
-    /*************************************************************************
-     * PROCESSING - Reload datatable to show updated information
-     ************************************************************************/
-    sqlModel->setQuery("SELECT FoodName, Price, CityID FROM Foods");
+    sqlModel->setQuery("SELECT Cities.CityID, Cities.Name, Foods.FoodName, Foods.Price FROM Foods, Cities WHERE Cities.CityID = Foods.CityID");
     ui->databaseView->setModel(sqlModel);
 
-    //Clear the line edits
-    ui -> FoodNameLineEdit -> clear();
-    ui -> PriceLineEdit    -> clear();
+    /*************************************************************************
+     * PROCESSING - Add to the database if a country was selected
+     ************************************************************************/
+    if(queryVal != 0)
+    {//begin if
+
+        /*************************************************************************
+         * PROCESSING - Query the database to add the item
+         ************************************************************************/
+         query.prepare("INSERT OR IGNORE INTO Foods(FoodName, CityID, Price) "
+                      "VALUES(:name, :city, :price)");
+
+         //bind values
+         query.bindValue(":name", foodName);
+         query.bindValue(":city", queryVal.toInt());
+         query.bindValue(":price", price);
+
+        /*************************************************************************
+         * OUTPUT - Error message if query fails
+         ************************************************************************/
+        if(!query.exec())
+            qDebug() << "Failed: " << query.lastError() << " (" << queryVal << ")";
+
+
+        qDebug() << "cityID:    " << queryVal;
+        qDebug() << "cityID int:" << queryVal.toInt();
+
+        qDebug() << ":name      " << foodName;
+        qDebug() << ":price     " << price;
+        qDebug() << "";
+
+        /*************************************************************************
+         * PROCESSING - Reload datatable to show updated information
+         ************************************************************************/
+        sqlModel->setQuery("SELECT Cities.CityID, Cities.Name, Foods.FoodName, Foods.Price FROM Foods, Cities WHERE Cities.CityID = Foods.CityID");
+        ui->databaseView->setModel(sqlModel);
+
+        //Clear the line edits
+        ui -> FoodNameLineEdit -> clear();
+        ui -> PriceLineEdit    -> clear();
+
+    }//end if
+
 }
 
-/*************************************************************************
- * void Administrator::on_DeleteFoodPushButton_clicked()
- * ----------------------------------------------------------------------
- * When clicking the delete food button, the food item that was selected
- * by the user will be deleted from the database.
- ************************************************************************/
-void Administrator::on_DeleteFoodPushButton_clicked()
+    /*************************************************************************
+    * void Administrator::on_DeleteFoodPushButton_clicked()
+    * ----------------------------------------------------------------------
+    * When clicking the delete food button, the food item that was selected
+    * by the user will be deleted from the database.
+    ************************************************************************/
+    void Administrator::on_DeleteFoodPushButton_clicked()
 {
     QSqlQuery queryName;  //PROC & PROC - Used to query database to delete name
     QSqlQuery queryPrice; //PROC & PROC - Used to query database to delete the price
@@ -177,8 +207,7 @@ void Administrator::on_DeleteFoodPushButton_clicked()
     /*************************************************************************
      * PROCESSING - Reload datatable to show updated information
      ************************************************************************/
-    sqlModel->setQuery("SELECT FoodName, Price, CityID FROM Foods");
-
+    sqlModel->setQuery("SELECT Cities.CityID, Cities.Name, Foods.FoodName, Foods.Price FROM Foods, Cities WHERE Cities.CityID = Foods.CityID");
     ui->databaseView->setModel(sqlModel);
 }
 
@@ -191,8 +220,14 @@ void Administrator::on_DeleteFoodPushButton_clicked()
  ************************************************************************/
 void Administrator::on_UpdateFoodPushButton_clicked()
 {
-    QString newPrice = ui -> PriceLineEdit    -> text(); //IN & PROC - The new price of the food item that will be changed
-    QString foodName = ui -> FoodNameLineEdit -> text(); //IN & PROC - The name of the food item that will be changed
+    QString newPrice;                       //IN   & PROC - The new price of the food item that will be changed
+    QString foodName;                       //IN   & PROC - The name of the food item that will be changed
+
+    /*******************
+     * INITIALIZATIONS *
+     *******************/
+    newPrice = ui -> PriceLineEdit    -> text();
+    foodName = ui -> FoodNameLineEdit -> text();
 
     /*************************************************************************
      * PROCESSING - Query the database to set the new price of the food item
@@ -213,7 +248,7 @@ void Administrator::on_UpdateFoodPushButton_clicked()
     /*************************************************************************
      * PROCESSING - Reload datatable to show updated information
      ************************************************************************/
-    sqlModel->setQuery("SELECT FoodName, Price, CityID FROM Foods");
+    sqlModel->setQuery("SELECT Cities.CityID, Cities.Name, Foods.FoodName, Foods.Price FROM Foods, Cities WHERE Cities.CityID = Foods.CityID");
     ui->databaseView->setModel(sqlModel);
 
     //Clear the line edits
