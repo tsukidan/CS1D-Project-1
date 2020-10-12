@@ -17,8 +17,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     administrator.cpp \
+    cityshoppingcartitem.cpp \
     customerpage.cpp \
     displayfoodsforcity.cpp \
+    foodshoppingcartitem.cpp \
     login.cpp \
     main.cpp \
     pathutils.cpp \
@@ -30,8 +32,10 @@ SOURCES += \
 HEADERS += \
     Header.h \
     administrator.h \
+    cityshoppingcartitem.h \
     customerpage.h \
     displayfoodsforcity.h \
+    foodshoppingcartitem.h \
     login.h \
     pathutils.h \
     routedisplayer.h \

@@ -325,6 +325,30 @@ int SQLDatabase::GetDistance(int fromID, int toID)
     return query.value(0).toInt();
 }
 
+/*!
+ * \brief Return a list of foods for city
+ */
+QList<food> SQLDatabase::GetFoodsForCity(int cityID)
+{
+    QList<food> list;
+    QSqlQuery query;
+    query.prepare("SELECT FoodName, Price FROM Foods "
+                  "WHERE cityID = (:cityID) ");
+
+    query.bindValue(":cityID", cityID);
+
+    if(!query.exec())
+        qDebug() << "GetFoodsForCity Failed: "<< cityID << query.lastError() << " " << query.executedQuery() ;
+// fetch row
+    while (query.next())
+        list.append({GetCityNameById(cityID),
+                     query.value(0).toString(),
+                     query.value(1).toFloat()});
+
+    return list;
+}
+
+
 
 /*!
  * \brief Returns the Database

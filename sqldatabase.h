@@ -4,6 +4,13 @@
 
 #include "Header.h"
 
+struct food
+{
+    QString cityName;
+    QString foodName;
+    float   price;
+};
+
 class SQLDatabase
 {
 public:
@@ -43,6 +50,8 @@ void readFileDistances();
  */
 void readFileFoods();
 
+
+
 /*!
  * \brief Returns the Database
  */
@@ -77,6 +86,8 @@ static int GetCityIdByName(QString cityName);
 static QString GetCityNameById(int id);
 
 static int GetDistance(int fromID, int toID);
+
+static QList<food> GetFoodsForCity(int cityID);
 
 private:
 QSqlDatabase database;
