@@ -54,6 +54,15 @@ void Administrator::on_cities_Button_clicked()
  ************************************************************************/
 void Administrator::on_food_Button_clicked()
 {
+//    QSqlRelationalTableModel *sqlTableModel = rebuildQuery();
+//    sqlTableModel->setTable("Foods");
+//    sqlTableModel->setRelation(2, QSqlRelation("Cities", "CityID", "Name"));
+//    sqlTableModel->select();	// this runs the select query
+//    sqlTableModel->setHeaderData(2, Qt::Horizontal, tr("City"));
+
+//    resetDatabaseView(sqlTableModel);
+//    ui->databaseView->hideColumn(0);
+//    ui->databaseView->horizontalHeader()->moveSection(2, 1);
     /*************************************************************************
      * PROCESSING - Run query to display information on each food item
      ************************************************************************/

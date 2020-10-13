@@ -98,7 +98,6 @@ void CustomerPage::on_CityFoodSelect_activated(const QString &selectedCity)
         // show the window for the selected city
         displayfoodsforcity->show();
     }
-
 }
 
 void CustomerPage::on_returnButton_clicked()
