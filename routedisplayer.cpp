@@ -11,6 +11,7 @@ RouteDisplayer::RouteDisplayer(QWidget *parent, QList<int> route, int totalDista
     model(new QStandardItemModel(this))
 {
     ui->setupUi(this);
+
     QList<food> foodList;
 
     for (auto cityID: route)
@@ -26,6 +27,7 @@ RouteDisplayer::RouteDisplayer(QWidget *parent, QList<int> route, int totalDista
 
     ui->SelectFoodTable->setRowCount(foodList.size());
 
+    // Food per city display and calculation (?)
     for (int i = 0; i < foodList.size(); i++)
     {
         /*
@@ -41,7 +43,8 @@ RouteDisplayer::RouteDisplayer(QWidget *parent, QList<int> route, int totalDista
 
 //        CityShoppingCartItem* cityShoppingItem = new CityShoppingCartItem(
 //                    this, foodList[i].cityName, foodList[i].price);
-//        connect(cityShoppingItem, &CityShoppingCartItem::qtyPerCityChanged, this, &RouteDisplayer::qtyPerCityChanged);
+//        connect(cityShoppingItem, &CityShoppingCartItem::qtyPerCityChanged,
+//                this, &RouteDisplayer::qtyPerCityChanged);
 //        cityShoppingCart.append(cityShoppingItem);
 
 //        QStandardItem *item = new QStandardItem;
@@ -49,7 +52,8 @@ RouteDisplayer::RouteDisplayer(QWidget *parent, QList<int> route, int totalDista
 //        model->setItem(i, 0, item);
         QSpinBox* spinBox = new QSpinBox(ui->SelectFoodTable);
         ui->SelectFoodTable->setCellWidget(i, 0, spinBox);
-        QObject::connect(spinBox, QOverload<int>::of(&QSpinBox::valueChanged), shoppingItem, &FoodShoppingCartItem::setQty);
+        QObject::connect(spinBox, QOverload<int>::of(&QSpinBox::valueChanged),
+                         shoppingItem, &FoodShoppingCartItem::setQty);
 //        item = new QStandardItem;
 //        item->setText(foodList[i].cityName);
 //        model->setItem(i, 1, item);

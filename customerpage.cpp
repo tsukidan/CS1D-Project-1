@@ -14,12 +14,18 @@ CustomerPage::CustomerPage(QWidget *parent) :
     sqlModel(new QSqlQueryModel(this))
 {
     ui->setupUi(this);
+
+    // Sets correct number to display for the ParisCitySelect spinbox
+    int max = SQLDatabase::GetSize();
+    QSpinBox *parisSpinBox = ui->ParisCitySelect;
+    parisSpinBox->setMaximum(max);
+    parisSpinBox->setWrapping(true);
+
     // this is for the table showing on the customer page
     // this has been moved to display foods for city
     //    sqlModel->setTable("Foods");
     //    sqlModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
     //    sqlModel->select();
-
     sqlModel->setQuery("SELECT FoodName, Price FROM Foods");
 
     // to show table
@@ -48,6 +54,7 @@ CustomerPage::CustomerPage(QWidget *parent) :
     // sets index to nothing - won't show on dropdown
     ui->CityFoodSelect->setCurrentIndex(-1);
 //    ui->StartingCitySelect->setCurrentIndex(-1);
+
 }
 
 /*!
@@ -70,8 +77,8 @@ void CustomerPage::on_CityFoodSelect_activated(const QString &selectedCity)
 
         // Begins new query
         QSqlQuery query;
-        // Prepared statement: Get every food for the current city.
 
+        // Prepared statement: Get every food for the current city.
         query.prepare("SELECT FoodName, Price FROM Foods "
                       "INNER JOIN Cities on cities.CityID = foods.CityID "
                       "WHERE cities.Name = (:City)");
@@ -122,7 +129,7 @@ void CustomerPage::on_pushButton_clicked()
 
     qDebug() << "Starting shortest path";
 
-    QList<int> path = shortestPath(startingCityID, selectedCities);
+    QList<int> path = shortestPath(startingCityID, selectedCities, 0);
     qDebug() << "Finished shortest path";
 
     // FIXME find a better way to get totalDistance from shortestPath
@@ -135,7 +142,8 @@ void CustomerPage::on_pushButton_clicked()
     routeDisplay->show();
 }
 
-QList<int> CustomerPage::shortestPath(int startingCity, QList<int>selectedCities)
+QList<int> CustomerPage::shortestPath(int startingCity,
+                                      QList<int>selectedCities, int numCities)
 {
     int totalDistance = 0;
     QList<int> visitedCities;
@@ -144,29 +152,63 @@ QList<int> CustomerPage::shortestPath(int startingCity, QList<int>selectedCities
     int currentCity = startingCity;
     bool canContinue = true;
 
-    while (!selectedCities.isEmpty() && canContinue)
+    // If using the Paris to selected # of cities
+    if (numCities >= 1)
     {
-        int nextCity = nearestCity(currentCity, visitedCities);
-        qDebug() << "Looking at next city. " << " " << nextCity;
-        qDebug() << "Visited cities " << visitedCities;
-        qDebug() << "Selected cities " << selectedCities;
-        qDebug() << "Route " << route;
-        if (nextCity == 0)
-            canContinue = false;
-        else if (selectedCities.contains(nextCity))
+        while (numCities > 0 && canContinue)
         {
-            int distance = SQLDatabase::GetDistance(currentCity, nextCity);
-            qDebug() << "Total distance " << totalDistance << " + " << distance;
-            totalDistance += distance;
-            selectedCities.removeOne(nextCity);
-            visitedCities << currentCity;
-            route << nextCity;
-            currentCity = nextCity;
+            int nextCity = nearestCity(currentCity, visitedCities);
+            qDebug() << "*** PARIS *** Looking at next city. " << " " << nextCity;
+            qDebug() << "Visited cities " << visitedCities;
+            qDebug() << "Selected cities " << selectedCities;
+            qDebug() << "Route " << route;
+            if (nextCity == 0)
+                canContinue = false;
+//            else if (selectedCities.contains(nextCity))
+            else if (numCities > 1)
+            {
+                int distance = SQLDatabase::GetDistance(currentCity, nextCity);
+                qDebug() << "Total distance " << totalDistance << " + " << distance;
+                totalDistance += distance;
+                numCities--;
+                visitedCities << currentCity;
+                route << nextCity;
+                currentCity = nextCity;
+            }
+            else
+            {
+                // don't care about this city; query will ignore it
+                visitedCities.append(nextCity);
+            }
         }
-        else
+    }
+    // If using selection boxes for different cities
+    else
+    {
+        while (!selectedCities.isEmpty() && canContinue)
         {
-            // don't care about this city; query will ignore it
-            visitedCities.append(nextCity);
+            int nextCity = nearestCity(currentCity, visitedCities);
+            qDebug() << "Looking at next city. " << " " << nextCity;
+            qDebug() << "Visited cities " << visitedCities;
+            qDebug() << "Selected cities " << selectedCities;
+            qDebug() << "Route " << route;
+            if (nextCity == 0)
+                canContinue = false;
+            else if (selectedCities.contains(nextCity))
+            {
+                int distance = SQLDatabase::GetDistance(currentCity, nextCity);
+                qDebug() << "Total distance " << totalDistance << " + " << distance;
+                totalDistance += distance;
+                selectedCities.removeOne(nextCity);
+                visitedCities << currentCity;
+                route << nextCity;
+                currentCity = nextCity;
+            }
+            else
+            {
+                // don't care about this city; query will ignore it
+                visitedCities.append(nextCity);
+            }
         }
     }
     // inserting totalDistance into the route (same as append)
@@ -199,4 +241,39 @@ int CustomerPage::nearestCity(int currentCity, QList<int>visitedCities)
 
     query.next();
     return query.value(0).toInt();
+}
+
+
+void CustomerPage::on_ParisGo_clicked()
+{
+    // Connect value chanaged from ParisCitySelect to Go button
+    // Then run shortest path, and display the list of cities as well as
+    // the distance.
+
+     // Get the number of cities selected
+    int numCities;
+    numCities = ui->ParisCitySelect->value() + 1;
+    qDebug() << "numCities " << numCities;
+
+    // Create list of cities
+    QList<int> numSelectedCities;
+
+    // Starting City
+    QString startingCity = "Paris";
+    int startingCityID = SQLDatabase::GetCityIdByName(startingCity);
+
+    qDebug() << "Starting shortest path";
+
+    QList<int> path = shortestPath(startingCityID, numSelectedCities, numCities);
+    qDebug() << "Finished shortest path";
+
+    // FIXME find a better way to get totalDistance from shortestPath
+    // Takes totalDistance from shortestPath
+    int totalDistance = path.back();
+    // removes from path
+    path.pop_back();
+
+    QDialog * routeDisplay = new RouteDisplayer(this, path, totalDistance);
+    routeDisplay->show();
+
 }

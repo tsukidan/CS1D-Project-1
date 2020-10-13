@@ -89,6 +89,8 @@ static int GetDistance(int fromID, int toID);
 
 static QList<food> GetFoodsForCity(int cityID);
 
+static int GetSize();
+
 private:
 QSqlDatabase database;
 };
