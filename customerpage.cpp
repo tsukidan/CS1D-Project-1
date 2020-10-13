@@ -32,7 +32,6 @@ CustomerPage::CustomerPage(QWidget *parent) :
     {
         QString city = query.value(0).toString();
         ui->CityFoodSelect->addItem(city);
-        ui->filterCartBox->addItem(city);
         ui->StartingCitySelect->addItem(city);
 
         // Checkboxes for cities to be visited
@@ -45,12 +44,10 @@ CustomerPage::CustomerPage(QWidget *parent) :
 
     // Adjust combo box to size of contents
     ui->CityFoodSelect->setSizeAdjustPolicy( QComboBox::AdjustToContents );
-    ui->filterCartBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     ui->StartingCitySelect->setSizeAdjustPolicy( QComboBox::AdjustToContents );
 
     // sets index to nothing - won't show on dropdown
     ui->CityFoodSelect->setCurrentIndex(-1);
-    ui->filterCartBox->setCurrentIndex(-1);
 //    ui->StartingCitySelect->setCurrentIndex(-1);
 }
 
@@ -208,6 +205,10 @@ int CustomerPage::nearestCity(int currentCity, QList<int>visitedCities)
 void CustomerPage::on_pushButton_2_clicked()
 {
     //PROC - Create new window of purchase dialogue.
+    purchaseFoods *purchaseUi;
+    purchaseUi = new purchaseFoods(this);
+    hide();
+    purchaseUi->show();
 }
 
 void CustomerPage::on_filterCartBox_activated(const QString &selectedCity)
@@ -231,7 +232,6 @@ void CustomerPage::on_filterCartBox_activated(const QString &selectedCity)
             qDebug() << "Failed: " << query.lastError();
 
         sqlModel->setQuery(query);
-        ui->cartCityView->setModel(sqlModel);
     }
 
 }
@@ -259,6 +259,5 @@ void CustomerPage::on_cartCityView_activated(const QModelIndex &index)
 
 void CustomerPage::on_cartCityView_pressed(const QModelIndex &index)
 {
-        queryVal = ui->cartCityView->model()->data(index).toString();
         qDebug() << queryVal;
 }

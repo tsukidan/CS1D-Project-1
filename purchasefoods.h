@@ -2,6 +2,7 @@
 #define PURCHASEFOODS_H
 
 #include <QDialog>
+#include <QStandardItemModel>
 
 namespace Ui {
 class purchaseFoods;
@@ -16,7 +17,8 @@ public:
     ~purchaseFoods();
 
 private:
-    Ui::purchaseFoods *ui;
+    Ui::purchaseFoods *purchaseUi;
+        QStandardItemModel* model;
 };
 
 #endif // PURCHASEFOODS_H

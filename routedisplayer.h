@@ -22,6 +22,8 @@ public:
 public slots:
     void qtyChanged();
 
+private slots:
+
 private:
     Ui::RouteDisplayer *ui;
     QList<int> route;

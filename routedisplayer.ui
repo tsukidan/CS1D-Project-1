@@ -115,6 +115,9 @@
      <height>361</height>
     </rect>
    </property>
+   <property name="gridStyle">
+    <enum>Qt::SolidLine</enum>
+   </property>
    <property name="sortingEnabled">
     <bool>true</bool>
    </property>
