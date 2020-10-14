@@ -204,11 +204,7 @@ int CustomerPage::nearestCity(int currentCity, QList<int>visitedCities)
 
 void CustomerPage::on_pushButton_2_clicked()
 {
-    //PROC - Create new window of purchase dialogue.
-    purchaseFoods *purchaseUi;
-    purchaseUi = new purchaseFoods(this);
-    hide();
-    purchaseUi->show();
+    qDebug() << "test";
 }
 
 void CustomerPage::on_filterCartBox_activated(const QString &selectedCity)

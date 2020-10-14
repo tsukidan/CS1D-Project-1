@@ -39,6 +39,8 @@ private slots:
     void on_cartCityView_pressed(const QModelIndex &index);
 
 private:
+    QList<int> route;
+    int totalDistance;
     Ui::CustomerPage *ui;
 // this was moved to display foods for city
 //    QSqlTableModel *sqlModel;
