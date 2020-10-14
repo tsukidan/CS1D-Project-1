@@ -53,7 +53,7 @@ CustomerPage::CustomerPage(QWidget *parent) :
 
     // sets index to nothing - won't show on dropdown
     ui->CityFoodSelect->setCurrentIndex(-1);
-//    ui->StartingCitySelect->setCurrentIndex(-1);
+    ui->StartingCitySelect->setCurrentIndex(-1);
 
 }
 
@@ -139,6 +139,7 @@ void CustomerPage::on_pushButton_clicked()
     path.pop_back();
 
     QDialog * routeDisplay = new RouteDisplayer(this, path, totalDistance);
+    routeDisplay->setWindowTitle(startingCity);
     routeDisplay->show();
 }
 
@@ -276,6 +277,7 @@ void CustomerPage::on_ParisGo_clicked()
     path.pop_back();
 
     QDialog * routeDisplay = new RouteDisplayer(this, path, totalDistance);
+    routeDisplay->setWindowTitle(startingCity);
     routeDisplay->show();
 
 }
