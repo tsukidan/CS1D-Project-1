@@ -49,6 +49,7 @@ CustomerPage::CustomerPage(QWidget *parent) :
     // sets index to nothing - won't show on dropdown
     ui->CityFoodSelect->setCurrentIndex(-1);
 //    ui->StartingCitySelect->setCurrentIndex(-1);
+
 }
 
 /*!
@@ -232,28 +233,32 @@ void CustomerPage::on_filterCartBox_activated(const QString &selectedCity)
 
 }
 
-void CustomerPage::on_updateCart_clicked()
+
+void CustomerPage::on_updateCartButton_clicked()
 {
-    // Begins new query
-    QSqlQuery query;
-    query.prepare("SELECT FROM Cities WHERE Name='"+queryVal+"'");
+    // Updated Cart
 
-    // Tell the query which city we're looking for
-    query.bindValue(":FoodName", queryVal);
+    ui->cartView->setRowCount(foood.size());
 
-    if(!query.exec())
-        qDebug() << "Failed: " << query.lastError();
+    for (int i = 0; i < foood.size(); i++ ) {
+        // Set  Food Quantity;
+        QTableWidgetItem* qty = new QTableWidgetItem(foood[i].qty);
+        ui->cartView->setItem(i, 0, qty);
 
-    sqlModel->setQuery(query);
-    ui->tableView->setModel(sqlModel);
-}
+        // Set City Name;
+        QTableWidgetItem* city = new QTableWidgetItem(foood[i].cityName);
+        ui->cartView->setItem(i, 1, city);
 
-void CustomerPage::on_cartCityView_activated(const QModelIndex &index)
-{
-       qDebug() << "activated " << index;
-}
+        // Set Food Name;
+        QTableWidgetItem* food = new QTableWidgetItem(foood[i].foodName);
+        ui->cartView->setItem(i, 2, food);
 
-void CustomerPage::on_cartCityView_pressed(const QModelIndex &index)
-{
-        qDebug() << queryVal;
+        // Set Food Price;
+        QTableWidgetItem* price = new QTableWidgetItem(foood[i].price);
+        ui->cartView->setItem(i, 3, price);
+
+        // Update Total;
+        cartTotal+=foood[i].price;
+    }
+
 }
