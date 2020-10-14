@@ -174,6 +174,8 @@ QList<int> CustomerPage::shortestPath(int startingCity,
                 visitedCities << currentCity;
                 route << nextCity;
                 currentCity = nextCity;
+                if (route.size() - 1 > numCities)
+                    canContinue = false;
             }
             else
             {
