@@ -112,7 +112,7 @@
      <x>330</x>
      <y>60</y>
      <width>461</width>
-     <height>361</height>
+     <height>191</height>
     </rect>
    </property>
    <property name="gridStyle">
@@ -154,8 +154,8 @@
   <widget class="QLabel" name="TotalFoodPrice">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>450</y>
+     <x>430</x>
+     <y>480</y>
      <width>51</width>
      <height>20</height>
     </rect>
@@ -167,14 +167,57 @@
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>330</x>
-     <y>450</y>
+     <x>340</x>
+     <y>480</y>
      <width>121</width>
      <height>20</height>
     </rect>
    </property>
    <property name="text">
     <string>Total Food Price:</string>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="tableWidget">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>280</y>
+     <width>461</width>
+     <height>192</height>
+    </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string>Qty</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>City</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Food</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Price</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>260</y>
+     <width>47</width>
+     <height>13</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cart:</string>
    </property>
   </widget>
  </widget>

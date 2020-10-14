@@ -233,32 +233,32 @@ void CustomerPage::on_filterCartBox_activated(const QString &selectedCity)
 
 }
 
-
 void CustomerPage::on_updateCartButton_clicked()
 {
     // Updated Cart
+    //    QVector<FoodShoppingCartItem> foood;
 
-    ui->cartView->setRowCount(foood.size());
+    //    ui->cartView->setRowCount(foood.size());
 
-    for (int i = 0; i < foood.size(); i++ ) {
-        // Set  Food Quantity;
-        QTableWidgetItem* qty = new QTableWidgetItem(foood[i].qty);
-        ui->cartView->setItem(i, 0, qty);
+    //    for (int i = 0; i < foood.size(); i++ ) {
+    //        // Set  Food Quantity;
+    //        QTableWidgetItem* qty = new QTableWidgetItem(foood[i].getQty());
+    //        ui->cartView->setItem(i, 0, qty);
 
-        // Set City Name;
-        QTableWidgetItem* city = new QTableWidgetItem(foood[i].cityName);
-        ui->cartView->setItem(i, 1, city);
+    //        // Set City Name;
+    //        QTableWidgetItem* city = new QTableWidgetItem(foood[i].getCityName());
+    //        ui->cartView->setItem(i, 1, city);
 
-        // Set Food Name;
-        QTableWidgetItem* food = new QTableWidgetItem(foood[i].foodName);
-        ui->cartView->setItem(i, 2, food);
+    //        // Set Food Name;
+    //        QTableWidgetItem* food = new QTableWidgetItem(foood[i].getFoodName());
+    //        ui->cartView->setItem(i, 2, food);
 
-        // Set Food Price;
-        QTableWidgetItem* price = new QTableWidgetItem(foood[i].price);
-        ui->cartView->setItem(i, 3, price);
+    //        // Set Food Price;
+    //        QTableWidgetItem* price = new QTableWidgetItem(foood[i].getPrice());
+    //        ui->cartView->setItem(i, 3, price);
 
-        // Update Total;
-        cartTotal+=foood[i].price;
-    }
+    //        // Update Total;
+    //        cartTotal+=foood[i].getPrice();
+    //    }
 
 }
