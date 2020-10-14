@@ -14,13 +14,17 @@ RouteDisplayer::RouteDisplayer(QWidget *parent, QList<int> route, int totalDista
 
     QList<food> foodList;
 
+    int i = 1;
     for (auto cityID: route)
     {
         QString cityName = SQLDatabase::GetCityNameById(cityID);
-//        ui->routeList->addItem(cityName);
+        ui->routeList->insertRow (ui->routeList->rowCount() );
+        ui->routeList->setItem   (ui->routeList->rowCount()-1, 0,
+                                 new QTableWidgetItem(cityName));
 
         QList<food> subList = SQLDatabase::GetFoodsForCity(cityID);
         foodList += subList;
+        i++;
     }
 
     ui->TotalDistance->setText(QString("%1").arg(totalDistance));
