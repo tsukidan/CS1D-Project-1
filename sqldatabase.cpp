@@ -348,6 +348,22 @@ QList<food> SQLDatabase::GetFoodsForCity(int cityID)
     return list;
 }
 
+/*!
+ * \brief Returns the size of the database
+ */
+int SQLDatabase::GetSize()
+{
+    QSqlQuery query;
+    query.prepare("SELECT count(*) FROM Cities ");
+
+//    query.bindValue(":fromID", fromID);
+
+    if(!query.exec())
+        qDebug() << "GetSize Failed: " << query.lastError() << " " << query.executedQuery() ;
+// fetch row
+    query.next();
+    return query.value(0).toInt();
+}
 
 
 /*!

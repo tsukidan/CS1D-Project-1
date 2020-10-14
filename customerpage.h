@@ -29,11 +29,15 @@ private slots:
 
     void on_pushButton_clicked();
 
+<<<<<<< HEAD
     void on_pushButton_2_clicked();
 
     void on_filterCartBox_activated(const QString &arg1);
 
     void on_updateCartButton_clicked();
+=======
+    void on_ParisGo_clicked();
+>>>>>>> a28f9f2c01dbae2334f91a5b432e4b70d94c970a
 
 private:
     QList<int> route;
@@ -46,7 +50,7 @@ private:
     QList<QCheckBox*> cityCheckBoxes;    // List of all cities to visit
     double cartTotal = 0.0;
 
-    QList<int> shortestPath(int startingCity, QList<int>selectedCities);
+    QList<int> shortestPath(int startingCity, QList<int>selectedCities, int numCities);
 
     int nearestCity(int currentCity, QList<int>visitedCities);
 
