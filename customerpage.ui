@@ -125,16 +125,6 @@
     </rect>
    </property>
   </widget>
-  <widget class="QTableView" name="tableView">
-   <property name="geometry">
-    <rect>
-     <x>291</x>
-     <y>370</y>
-     <width>521</width>
-     <height>191</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_6">
    <property name="geometry">
     <rect>
@@ -146,19 +136,6 @@
    </property>
    <property name="text">
     <string>Food Cart:</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_2">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>380</y>
-     <width>80</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Plan Food</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_7">
@@ -177,6 +154,42 @@
    </property>
    <property name="text">
     <string>Select Food For Your Trip: </string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>380</y>
+     <width>158</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QPushButton" name="pushButton_2">
+      <property name="text">
+       <string>Plan Food</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="updateCartButton">
+      <property name="text">
+       <string>Update Cart</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QTableWidget" name="cartView">
+   <property name="geometry">
+    <rect>
+     <x>295</x>
+     <y>381</y>
+     <width>521</width>
+     <height>181</height>
+    </rect>
    </property>
   </widget>
  </widget>

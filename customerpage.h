@@ -2,6 +2,7 @@
 #define CUSTOMERPAGE_H
 
 #include "Header.h"
+#include "foodshoppingcartitem.h"
 
 namespace Ui {
 class CustomerPage;
@@ -32,19 +33,16 @@ private slots:
 
     void on_filterCartBox_activated(const QString &arg1);
 
-    void on_updateCart_clicked();
-
-    void on_cartCityView_activated(const QModelIndex &index);
-
-    void on_cartCityView_pressed(const QModelIndex &index);
+    void on_updateCartButton_clicked();
 
 private:
     Ui::CustomerPage *ui;
-// this was moved to display foods for city
-//    QSqlTableModel *sqlModel;
+    // this was moved to display foods for city
+    //    QSqlTableModel *sqlModel;
     QSqlQueryModel *sqlModel;
-        QString queryVal;
+    QString queryVal;
     QList<QCheckBox*> cityCheckBoxes;    // List of all cities to visit
+    double cartTotal = 0.0;
 
     QList<int> shortestPath(int startingCity, QList<int>selectedCities);
 
