@@ -16,7 +16,7 @@ CustomerPage::CustomerPage(QWidget *parent) :
     ui->setupUi(this);
 
     // Sets correct number to display for the ParisCitySelect spinbox
-    int max = SQLDatabase::GetSize();
+    int max = SQLDatabase::GetSize() - 1;
     QSpinBox *parisSpinBox = ui->ParisCitySelect;
     parisSpinBox->setMaximum(max);
     parisSpinBox->setWrapping(true);
