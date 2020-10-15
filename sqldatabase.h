@@ -11,6 +11,12 @@ struct food
     float   price;
 };
 
+struct cityDistance
+{
+    QString cityName;
+    int     distance;
+};
+
 class SQLDatabase
 {
 public:
@@ -86,6 +92,8 @@ static int GetCityIdByName(QString cityName);
 static QString GetCityNameById(int id);
 
 static int GetDistance(int fromID, int toID);
+
+static QList<cityDistance> GetDistancesFromCity(int cityID);
 
 static QList<food> GetFoodsForCity(int cityID);
 

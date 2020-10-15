@@ -3,6 +3,7 @@
 #include "displayfoodsforcity.h"
 #include "mainwindow.h"
 #include "routedisplayer.h"
+#include "berlincitydisplay.h"
 #include <QComboBox>
 
 /*!
@@ -279,5 +280,14 @@ void CustomerPage::on_ParisGo_clicked()
     QDialog * routeDisplay = new RouteDisplayer(this, path, totalDistance);
     routeDisplay->setWindowTitle(startingCity);
     routeDisplay->show();
+
+}
+
+void CustomerPage::on_BerlinView_clicked()
+{
+
+    QDialog * berlinCityDisplay = new BerlinCityDisplay(this);
+    berlinCityDisplay->setWindowTitle("Cities from Berlin");
+    berlinCityDisplay->show();
 
 }

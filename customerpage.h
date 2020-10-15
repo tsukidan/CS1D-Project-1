@@ -30,6 +30,8 @@ private slots:
 
     void on_ParisGo_clicked();
 
+    void on_BerlinView_clicked();
+
 private:
     Ui::CustomerPage *ui;
 // this was moved to display foods for city

@@ -1,9 +1,9 @@
 #ifndef ROUTEDISPLAYER_H
 #define ROUTEDISPLAYER_H
 
+#include "cityshoppingcartitem.h"
 #include "foodshoppingcartitem.h"
 
-#include <CityShoppingCartItem.h>
 #include <QDialog>
 #include <QStandardItemModel>
 
@@ -26,9 +26,10 @@ private:
     Ui::RouteDisplayer *ui;
     QList<int> route;
     int totalDistance;
-    QStandardItemModel* model;
+//    QStandardItemModel* model;
     QVector<FoodShoppingCartItem*> shoppingCart;
     QVector<CityShoppingCartItem*> cityShoppingCart;
+    QMap<QString, CityShoppingCartItem*> cityTable;
 };
 
 #endif // ROUTEDISPLAYER_H

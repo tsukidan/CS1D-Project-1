@@ -34,8 +34,8 @@
     <rect>
      <x>30</x>
      <y>60</y>
-     <width>256</width>
-     <height>192</height>
+     <width>301</width>
+     <height>261</height>
     </rect>
    </property>
    <column>
@@ -58,7 +58,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>280</y>
+     <y>350</y>
      <width>101</width>
      <height>16</height>
     </rect>
@@ -70,8 +70,8 @@
   <widget class="QLabel" name="TotalDistance">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>280</y>
+     <x>130</x>
+     <y>350</y>
      <width>51</width>
      <height>20</height>
     </rect>
@@ -83,7 +83,7 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>330</x>
+     <x>410</x>
      <y>30</y>
      <width>211</width>
      <height>16</height>
@@ -109,9 +109,9 @@
   <widget class="QTableWidget" name="SelectFoodTable">
    <property name="geometry">
     <rect>
-     <x>330</x>
+     <x>410</x>
      <y>60</y>
-     <width>461</width>
+     <width>381</width>
      <height>361</height>
     </rect>
    </property>
@@ -148,10 +148,49 @@
     </property>
    </column>
   </widget>
-  <widget class="QLabel" name="TotalFoodPrice">
+  <widget class="QLabel" name="Subtotal">
    <property name="geometry">
     <rect>
-     <x>460</x>
+     <x>540</x>
+     <y>430</y>
+     <width>51</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="SubtotalLabel">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>430</y>
+     <width>121</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Subtotal:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="SalesTaxLabel">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>450</y>
+     <width>121</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Sales Tax:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="SalesTax">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
      <y>450</y>
      <width>51</width>
      <height>20</height>
@@ -161,17 +200,30 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="label_4">
+  <widget class="QLabel" name="TotalFoodPriLabel">
    <property name="geometry">
     <rect>
-     <x>330</x>
-     <y>450</y>
+     <x>410</x>
+     <y>470</y>
      <width>121</width>
      <height>20</height>
     </rect>
    </property>
    <property name="text">
-    <string>Total Food Price:</string>
+    <string>Total Food Price</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="TotalFoodPrice">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>470</y>
+     <width>51</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

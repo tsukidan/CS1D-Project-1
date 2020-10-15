@@ -8,83 +8,84 @@ RouteDisplayer::RouteDisplayer(QWidget *parent, QList<int> route, int totalDista
     ui(new Ui::RouteDisplayer),
     route(route),
     totalDistance(totalDistance),
-    model(new QStandardItemModel(this))
+    cityTable()
 {
     ui->setupUi(this);
 
     QList<food> foodList;
 
-    int i = 1;
+    // Create a food list to be displayed on table
     for (auto cityID: route)
     {
         QString cityName = SQLDatabase::GetCityNameById(cityID);
-        ui->routeList->insertRow (ui->routeList->rowCount() );
-        ui->routeList->setItem   (ui->routeList->rowCount()-1, 0,
-                                 new QTableWidgetItem(cityName));
 
+        // updating food list w/ current cities foods
         QList<food> subList = SQLDatabase::GetFoodsForCity(cityID);
         foodList += subList;
-        i++;
+
+        // adding city to the city table
+        CityShoppingCartItem* cityShoppingItem = new CityShoppingCartItem(
+                    this, cityName);
+        cityShoppingCart.append(cityShoppingItem);
+        cityTable[cityName] = cityShoppingItem;
     }
 
+    // create & display cities, qtys, price totals
+    for (int i = 0; i < cityShoppingCart.size(); i++)
+    {
+        CityShoppingCartItem* cityShoppingItem = cityShoppingCart[i];
+
+        ui->routeList->insertRow (ui->routeList->rowCount() );
+        ui->routeList->setItem   (ui->routeList->rowCount()-1, 0,
+                                  new QTableWidgetItem(cityShoppingItem->getCityName()));
+        ui->routeList->setItem   (ui->routeList->rowCount()-1, 1,
+                                  new QTableWidgetItem(
+                                      tr("%1").arg(cityShoppingItem->getQty())));
+        ui->routeList->setItem   (ui->routeList->rowCount()-1, 2,
+                                  new QTableWidgetItem(
+                                      tr("$%1").arg(cityShoppingItem->getTotalPrice(), 0, 'f', 2)));
+
+    }
+
+    // display total distance
     ui->TotalDistance->setText(QString("%1").arg(totalDistance));
 
+    // set row count for table
     ui->SelectFoodTable->setRowCount(foodList.size());
 
-    // Food per city display and calculation (?)
+    // Food per city display and calculation
     for (int i = 0; i < foodList.size(); i++)
     {
-        /*
-        QTableWidgetItem *newItem = new QTableWidgetItem(tr("%1").arg(
-            (row+1)*(column+1)));
-        tableWidget->setItem(row, column, newItem);
-        */
-
+        // stores food related items for each food row
         FoodShoppingCartItem* shoppingItem = new FoodShoppingCartItem(
                     this, foodList[i].cityName, foodList[i].foodName, foodList[i].price);
         connect(shoppingItem, &FoodShoppingCartItem::qtyChanged, this, &RouteDisplayer::qtyChanged);
         shoppingCart.append(shoppingItem);
 
-//        CityShoppingCartItem* cityShoppingItem = new CityShoppingCartItem(
-//                    this, foodList[i].cityName, foodList[i].price);
-//        connect(cityShoppingItem, &CityShoppingCartItem::qtyPerCityChanged,
-//                this, &RouteDisplayer::qtyPerCityChanged);
-//        cityShoppingCart.append(cityShoppingItem);
+        // stores food related items for each city row
 
-//        QStandardItem *item = new QStandardItem;
-//        item->setText(tr("%1").arg(0));
-//        model->setItem(i, 0, item);
         QSpinBox* spinBox = new QSpinBox(ui->SelectFoodTable);
         ui->SelectFoodTable->setCellWidget(i, 0, spinBox);
         QObject::connect(spinBox, QOverload<int>::of(&QSpinBox::valueChanged),
                          shoppingItem, &FoodShoppingCartItem::setQty);
-//        item = new QStandardItem;
-//        item->setText(foodList[i].cityName);
-//        model->setItem(i, 1, item);
+
         QTableWidgetItem* item = new QTableWidgetItem(foodList[i].cityName);
         item->setFlags(item->flags() ^ Qt::ItemIsEditable);
         ui->SelectFoodTable->setItem(i, 1, item);
-//        item = new QStandardItem;
-//        item->setText(foodList[i].foodName);
-//        model->setItem(i, 2, item);
+
         item = new QTableWidgetItem(foodList[i].foodName);
         item->setFlags(item->flags() ^ Qt::ItemIsEditable);
         ui->SelectFoodTable->setItem(i, 2, item);
-//        item = new QStandardItem;
-//        item->setData(QVariant::fromValue(foodList[i].price));
-//        item->setText(tr("$%1").arg(foodList[i].price, 0, 'f', 2));
-//        model->setItem(i, 3, item);
 
         item = new QTableWidgetItem(
                     tr("$%1").arg(foodList[i].price, 0, 'f', 2));
         item->setFlags(item->flags() ^ Qt::ItemIsEditable);
         ui->SelectFoodTable->setItem(i, 3, item);
     }
-//    ui->SelectFoodTable->setModel(model);
 
-//    model->setHorizontalHeaderLabels({"Qty", "City", "Food", "Price"});
-
+    // reset tables to size to contents
     ui->SelectFoodTable->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    ui->routeList->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 }
 
 RouteDisplayer::~RouteDisplayer()
@@ -96,9 +97,38 @@ void RouteDisplayer::qtyChanged()
 {
     float totalPrice = 0;
 
+    // resets tables
+    for (auto cityItem: cityTable)
+    {
+        cityItem->setQty(0);
+        cityItem->setPrice(0);
+    }
+
+    // updates the food list for all cities
     for (auto shoppingItem: shoppingCart)
     {
-        totalPrice += shoppingItem->getPrice() * shoppingItem->getQty();
+        float subtotal = shoppingItem->getPrice() * shoppingItem->getQty();
+        totalPrice += subtotal;
+
+        CityShoppingCartItem* city = cityTable[shoppingItem->getCityName()];
+        city->setQty(city->getQty() + shoppingItem->getQty());
+        city->setPrice(city->getTotalPrice() + subtotal);
     }
-    ui->TotalFoodPrice->setText(tr("$%1").arg(totalPrice, 0, 'f', 2));
+
+    // updates the food list PER city
+    for (int i = 0; i < cityShoppingCart.size(); i++)
+    {
+        CityShoppingCartItem* cityItem = cityShoppingCart[i];
+
+        ui->routeList->setItem(i, 1, new QTableWidgetItem(
+                                   tr("%1").arg(cityItem->getQty())));
+        ui->routeList->setItem(i, 2, new QTableWidgetItem(
+                                   tr("$%1").arg(cityItem->getTotalPrice(), 0, 'f', 2)));
+    }
+
+    // displays total prices
+    ui->Subtotal->setText(tr("$%1").arg(totalPrice, 0, 'f', 2));
+    ui->SalesTax->setText(tr("$%1").arg(totalPrice * 0.0875, 0, 'f', 2));
+    ui->TotalFoodPrice->setText(tr("$%1").arg(totalPrice * 1.0875, 0, 'f', 2));
 }
+

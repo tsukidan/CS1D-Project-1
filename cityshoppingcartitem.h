@@ -7,21 +7,23 @@ class CityShoppingCartItem : public QObject
 {
     Q_OBJECT
 public:
-    explicit CityShoppingCartItem(QObject *parent, QString cityName, float price);
+    explicit CityShoppingCartItem(QObject *parent, QString cityName);
 
     QString getCityName();
-    float getPrice();
+    float getTotalPrice();
     int getQty();
 
 public slots:
-    void setQtyPerCity(int newQty);
+    void setQty(int newQty);
+    void setPrice(float newPrice);
 
 signals:
     void qtyPerCityChanged();
+    void totalPriceChanged();
 
 private:
 QString cityName;
-float price;
+float totalPrice;
 int qty;
 };
 
