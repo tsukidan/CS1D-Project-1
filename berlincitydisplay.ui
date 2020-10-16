@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DisplayFoodsForCity</class>
- <widget class="QDialog" name="DisplayFoodsForCity">
+ <class>BerlinCityDisplay</class>
+ <widget class="QDialog" name="BerlinCityDisplay">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>311</width>
-    <height>290</height>
+    <width>400</width>
+    <height>414</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,10 +16,10 @@
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>220</y>
-     <width>71</width>
-     <height>61</height>
+     <x>290</x>
+     <y>10</y>
+     <width>91</width>
+     <height>71</height>
     </rect>
    </property>
    <property name="orientation">
@@ -29,14 +29,37 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QTableView" name="tableView">
+  <widget class="QTableWidget" name="berlinDisplay">
    <property name="geometry">
     <rect>
-     <x>15</x>
-     <y>11</y>
-     <width>281</width>
-     <height>201</height>
+     <x>10</x>
+     <y>50</y>
+     <width>256</width>
+     <height>351</height>
     </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string>City</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Distance</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>241</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cities and their distance from Berlin:</string>
    </property>
   </widget>
  </widget>
@@ -45,7 +68,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>DisplayFoodsForCity</receiver>
+   <receiver>BerlinCityDisplay</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -61,7 +84,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>DisplayFoodsForCity</receiver>
+   <receiver>BerlinCityDisplay</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
