@@ -88,20 +88,20 @@ void SQLDatabase::createDatabase()
             qDebug() << "Failed: " << query.lastError();
     }
     if (initCities)
-        readFileCities();
+        readFileCities(":/Database/Cities.txt");
     if (initDistances)
-        readFileDistances();
+        readFileDistances(":/Database/Distances.json");
     if (initFoods)
-        readFileFoods();
+        readFileFoods(":/Database/Foods.json");
 }
 
 /*!
  * \brief readFileCities
  * Reads the Cities file and inserts them into the CitiesTable
  */
-void SQLDatabase::readFileCities()
+void SQLDatabase::readFileCities(const QString& filename)
 {
-    QFile file(":/Database/Cities.txt");
+    QFile file(filename);
     file.open(QIODevice::ReadOnly);
     QTextStream inFile(&file);
 
@@ -123,6 +123,13 @@ void SQLDatabase::readFileCities()
             if(!query.exec())
                 qDebug() << "Failed: " << query.lastError();
         }
+        /****************************************************
+         * PROCESESSING - Clear file if it was a copy
+         ***************************************************/
+        if(filename.contains("_copy"))
+        {
+            file.resize(0);
+        }
 
         file.close();
     }
@@ -135,9 +142,11 @@ void SQLDatabase::readFileCities()
  * \brief readFileDistances
  * Reads the Distance files and inserts them into the Distance table
  */
-void SQLDatabase::readFileDistances()
+void SQLDatabase::readFileDistances(const QString &filename)
 {
-    QFile file(":/Database/Distances.json");
+    qDebug() << "file name for readFileDistances: " << filename;
+
+    QFile file(filename);
     file.open(QIODevice::ReadOnly);
     QTextStream inFile(&file);
     if(file.isOpen())
@@ -176,7 +185,7 @@ void SQLDatabase::readFileDistances()
             int toID = query.value(0).toInt();
 
             qDebug() << "Inserting distance";
-            query.prepare("INSERT OR IGNORE INTO Distances(FromCity, ToCity, Distance) "
+            query.prepare("INSERT OR REPLACE INTO Distances(FromCity, ToCity, Distance) "
                           "VALUES(:FromCity, :ToCity, :Distance)");
 
             query.bindValue(":FromCity", fromID);
@@ -185,6 +194,13 @@ void SQLDatabase::readFileDistances()
 
             if(!query.exec())
                 qDebug() << "Failed: " << query.lastError();
+        }
+        /****************************************************
+         * PROCESESSING - Clear file if it was a copy
+         ***************************************************/
+        if(filename.contains("_copy"))
+        {
+            file.resize(0);
         }
 
         file.close();
@@ -199,9 +215,10 @@ void SQLDatabase::readFileDistances()
  * \brief readFileFoods
  * Reads from the foods file and adds to the database
  */
-void SQLDatabase::readFileFoods()
+void SQLDatabase::readFileFoods(const QString &filename)
 {
-    QFile file(":/Database/Foods.json");
+    qDebug() << "file name for readFileFoods: " << filename;
+    QFile file(filename);
     file.open(QIODevice::ReadOnly);
     QTextStream inFile(&file);
     if(file.isOpen())
@@ -235,7 +252,7 @@ void SQLDatabase::readFileFoods()
                 double foodPrice = priceObj["Price"].toDouble();
                 qDebug() << "Inserting price";
 
-                query.prepare("INSERT OR IGNORE INTO Foods(FoodName, CityID, Price) "
+                query.prepare("INSERT OR REPLACE INTO Foods(FoodName, CityID, Price) "
                               "VALUES(:name, :city, :price)");
 
                 query.bindValue(":name", foodName);
@@ -245,6 +262,13 @@ void SQLDatabase::readFileFoods()
                 if(!query.exec())
                     qDebug() << "Failed: " << query.lastError();
             }
+        }
+        /****************************************************
+         * PROCESESSING - Clear file if it was a copy
+         ***************************************************/
+        if(filename.contains("_copy"))
+        {
+            file.resize(0);
         }
 
         file.close();
@@ -320,65 +344,6 @@ int SQLDatabase::GetDistance(int fromID, int toID)
 
     if(!query.exec())
         qDebug() << "GetDistance Failed: "<< fromID << " to " << toID << query.lastError() << " " << query.executedQuery() ;
-// fetch row
-    query.next();
-    return query.value(0).toInt();
-}
-
-QList<cityDistance> SQLDatabase::GetDistancesFromCity(int cityID)
-{
-    QList<cityDistance> list;
-    QSqlQuery query;
-    query.prepare("SELECT toCity, distance FROM Distances "
-                  "WHERE fromCity = (:cityID) ");
-
-    query.bindValue(":cityID", cityID);
-
-    if(!query.exec())
-        qDebug() << "GetDistancesFromCity Failed: "<< cityID << query.lastError() << " " << query.executedQuery() ;
-// fetch row
-    while (query.next())
-        list.append({GetCityNameById(query.value(0).toInt()),
-                     query.value(1).toInt()});
-
-    return list;
-}
-
-/*!
- * \brief Return a list of foods for city
- */
-QList<food> SQLDatabase::GetFoodsForCity(int cityID)
-{
-    QList<food> list;
-    QSqlQuery query;
-    query.prepare("SELECT FoodName, Price FROM Foods "
-                  "WHERE cityID = (:cityID) ");
-
-    query.bindValue(":cityID", cityID);
-
-    if(!query.exec())
-        qDebug() << "GetFoodsForCity Failed: "<< cityID << query.lastError() << " " << query.executedQuery() ;
-// fetch row
-    while (query.next())
-        list.append({GetCityNameById(cityID),
-                     query.value(0).toString(),
-                     query.value(1).toFloat()});
-
-    return list;
-}
-
-/*!
- * \brief Returns the size of the database
- */
-int SQLDatabase::GetSize()
-{
-    QSqlQuery query;
-    query.prepare("SELECT count(*) FROM Cities ");
-
-//    query.bindValue(":fromID", fromID);
-
-    if(!query.exec())
-        qDebug() << "GetSize Failed: " << query.lastError() << " " << query.executedQuery() ;
 // fetch row
     query.next();
     return query.value(0).toInt();
