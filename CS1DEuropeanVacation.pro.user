@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
+<<<<<<< HEAD
 <!-- Written by QtCreator 4.13.1, 2020-10-18T10:12:09. -->
+=======
+<!-- Written by QtCreator 4.13.2, 2020-10-18T12:50:45. -->
+>>>>>>> 04b1706ca73332f4b66ae79d05491a8df4d4f911
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -337,7 +341,11 @@
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
+<<<<<<< HEAD
     <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/iguid/Desktop/CS1D_Projects/build-CS1DEuropeanVacation-Desktop_Qt_5_15_1_MinGW_32_bit-Debug</value>
+=======
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default"></value>
+>>>>>>> 04b1706ca73332f4b66ae79d05491a8df4d4f911
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>
