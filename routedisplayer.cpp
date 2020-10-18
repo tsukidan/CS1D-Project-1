@@ -1,3 +1,4 @@
+#include "foodshoppingcartitem.h"
 #include "routedisplayer.h"
 #include "sqldatabase.h"
 #include "ui_routedisplayer.h"
@@ -7,17 +8,28 @@ RouteDisplayer::RouteDisplayer(QWidget *parent, QList<int> route, int totalDista
     QDialog(parent),
     ui(new Ui::RouteDisplayer),
     route(route),
-    totalDistance(totalDistance)
+    totalDistance(totalDistance),
+    cityTable()
 {
     ui->setupUi(this);
 
+    QList<food> foodList;
+
+    // Create a food list to be displayed on table
     for (auto cityID: route)
     {
         QString cityName = SQLDatabase::GetCityNameById(cityID);
-            ui->routeList->addItem(cityName);
 
+        // updating food list w/ current cities foods
+        QList<food> subList = SQLDatabase::GetFoodsForCity(cityID);
+        foodList += subList;
+
+        // adding city to the city table
+        CityShoppingCartItem* cityShoppingItem = new CityShoppingCartItem(
+                    this, cityName);
+        cityShoppingCart.append(cityShoppingItem);
+        cityTable[cityName] = cityShoppingItem;
     }
-
 
     // create & display cities, qtys, price totals
     for (int i = 0; i < cityShoppingCart.size(); i++)
@@ -81,7 +93,6 @@ RouteDisplayer::RouteDisplayer(QWidget *parent, QList<int> route, int totalDista
             (QHeaderView::ResizeToContents);
     ui->routeList->horizontalHeader()->setSectionResizeMode
             (QHeaderView::ResizeToContents);
-
 }
 
 // destructor
@@ -129,3 +140,4 @@ void RouteDisplayer::qtyChanged()
     ui->SalesTax->setText(tr("$%1").arg(totalPrice * 0.0875, 0, 'f', 2));
     ui->TotalFoodPrice->setText(tr("$%1").arg(totalPrice * 1.0875, 0, 'f', 2));
 }
+

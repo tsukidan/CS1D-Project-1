@@ -118,19 +118,6 @@ void Administrator::on_returnFromAdminUI_clicked()
 }
 
 
-
-void Administrator::on_delete_City_clicked()
-{
-    QSqlQuery q;
-    qDebug() << "ID: " << queryVal;
-    q.prepare("DELETE FROM Cities WHERE Name='"+queryVal+"'");
-    if(!q.exec())
-        qDebug() << "Failed: " << q.lastError();
-
-    sqlModel->setQuery("SELECT Name FROM Cities");
-    ui->databaseView->setModel(sqlModel);
-}
-
 void Administrator::on_databaseView_pressed(const QModelIndex &index)
 {
     queryVal = ui->databaseView->model()->data(index).toString();

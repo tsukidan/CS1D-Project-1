@@ -349,7 +349,6 @@ int SQLDatabase::GetDistance(int fromID, int toID)
     return query.value(0).toInt();
 }
 
-
 QList<cityDistance> SQLDatabase::GetDistancesFromCity(int cityID)
 {
     QList<cityDistance> list;
@@ -416,20 +415,3 @@ QSqlDatabase SQLDatabase::GetDatabase() const
     return database;
 }
 
-/*!
- * \brief addCity
- * Adds a city to the database
- */
-/*
-void SQLDatabase::addCity(City& newCity)
-{
-    QSqlQuery query;
-    query.prepare("INSERT OR IGNORE INTO Cities(name) "
-                  "VALUES(:name)");
-
-    query.bindValue(":name", newCity.name);
-
-    if(!query.exec())
-        qDebug() << "Failed: " << query.lastError();
-}
-*/
