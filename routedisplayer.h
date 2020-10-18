@@ -26,7 +26,6 @@ private:
     Ui::RouteDisplayer *ui;
     QList<int> route;
     int totalDistance;
-//    QStandardItemModel* model;
     QVector<FoodShoppingCartItem*> shoppingCart;
     QVector<CityShoppingCartItem*> cityShoppingCart;
     QMap<QString, CityShoppingCartItem*> cityTable;

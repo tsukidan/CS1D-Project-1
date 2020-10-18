@@ -16,7 +16,6 @@ public:
      * \brief DisplayFoodsForCity constructor
      */
     explicit DisplayFoodsForCity(QWidget *parent, QSqlQuery query);
-//    explicit DisplayFoodsForCity(QWidget *parent, QString selectedCity);
     /*!
      * \brief DisplayFoodsForCity destructor
      */

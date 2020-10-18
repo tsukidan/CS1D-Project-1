@@ -56,8 +56,6 @@ void readFileDistances();
  */
 void readFileFoods();
 
-
-
 /*!
  * \brief Returns the Database
  */
