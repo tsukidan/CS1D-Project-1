@@ -6,7 +6,6 @@
 /*!
  * \brief DisplayFoodsForCity constructor
  */
-
 DisplayFoodsForCity::DisplayFoodsForCity(QWidget *parent, QSqlQuery query) :
     QDialog(parent),
     ui(new Ui::DisplayFoodsForCity),

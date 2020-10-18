@@ -3,6 +3,7 @@
 #include "sqldatabase.h"
 #include "ui_routedisplayer.h"
 
+// constructor
 RouteDisplayer::RouteDisplayer(QWidget *parent, QList<int> route, int totalDistance) :
     QDialog(parent),
     ui(new Ui::RouteDisplayer),
@@ -37,14 +38,16 @@ RouteDisplayer::RouteDisplayer(QWidget *parent, QList<int> route, int totalDista
 
         ui->routeList->insertRow (ui->routeList->rowCount() );
         ui->routeList->setItem   (ui->routeList->rowCount()-1, 0,
-                                  new QTableWidgetItem(cityShoppingItem->getCityName()));
+                                  new QTableWidgetItem
+                                  (cityShoppingItem->getCityName()));
         ui->routeList->setItem   (ui->routeList->rowCount()-1, 1,
                                   new QTableWidgetItem(
                                       tr("%1").arg(cityShoppingItem->getQty())));
         ui->routeList->setItem   (ui->routeList->rowCount()-1, 2,
                                   new QTableWidgetItem(
-                                      tr("$%1").arg(cityShoppingItem->getTotalPrice(), 0, 'f', 2)));
-
+                                      tr("$%1").arg
+                                      (cityShoppingItem->getTotalPrice(),
+                                       0, 'f', 2)));
     }
 
     // display total distance
@@ -58,8 +61,10 @@ RouteDisplayer::RouteDisplayer(QWidget *parent, QList<int> route, int totalDista
     {
         // stores food related items for each food row
         FoodShoppingCartItem* shoppingItem = new FoodShoppingCartItem(
-                    this, foodList[i].cityName, foodList[i].foodName, foodList[i].price);
-        connect(shoppingItem, &FoodShoppingCartItem::qtyChanged, this, &RouteDisplayer::qtyChanged);
+                    this, foodList[i].cityName, foodList[i].foodName,
+                    foodList[i].price);
+        connect(shoppingItem, &FoodShoppingCartItem::qtyChanged, this,
+                &RouteDisplayer::qtyChanged);
         shoppingCart.append(shoppingItem);
 
         // stores food related items for each city row
@@ -84,15 +89,19 @@ RouteDisplayer::RouteDisplayer(QWidget *parent, QList<int> route, int totalDista
     }
 
     // reset tables to size to contents
-    ui->SelectFoodTable->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-    ui->routeList->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    ui->SelectFoodTable->horizontalHeader()->setSectionResizeMode
+            (QHeaderView::ResizeToContents);
+    ui->routeList->horizontalHeader()->setSectionResizeMode
+            (QHeaderView::ResizeToContents);
 }
 
+// destructor
 RouteDisplayer::~RouteDisplayer()
 {
     delete ui;
 }
 
+// Qty Changed - update tables in route displayer
 void RouteDisplayer::qtyChanged()
 {
     float totalPrice = 0;

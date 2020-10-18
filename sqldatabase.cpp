@@ -39,9 +39,6 @@ void SQLDatabase::createDatabase()
     // to execute sql queries
     QSqlQuery query;
 
-    // TODO: rewrite queries to check if the tables exists
-    // if they don't then create them & call the readfile function
-
     bool initCities = false;
     bool initFoods  = false;
     bool initDistances = false;
@@ -104,26 +101,35 @@ void SQLDatabase::readFileCities()
     QFile file(":/Database/Cities.txt");
     file.open(QIODevice::ReadOnly);
     QTextStream inFile(&file);
+    bool doesExist = false;
+    int exists = 0;
 
     if(file.isOpen())
     {
         qDebug() << "Opened File";
         while(!inFile.atEnd())
         {
+            // Get next city name
             QString newCityname;
             newCityname = inFile.readLine();
-            //            addCity(newCity);  CAN ADD select, insert, delete, update
-            //
+
+            // Check to see if city already exists
+            QSqlQuery check;
+            check.prepare("SELECT count(*) FROM Cities WHERE Name = (:name)");
+            exists = check.value(0).toInt();
+            qDebug() << "Check Cities number: " << exists;
+
             QSqlQuery query;
             query.prepare("INSERT OR IGNORE INTO Cities(name) "
-                          "VALUES(:name)");
+                          "SELECT (:name) "
+                          "WHERE NOT EXISTS "
+                          "(Select 1 FROM Cities WHERE Name = (:name))");
 
             query.bindValue(":name", newCityname);
 
             if(!query.exec())
                 qDebug() << "Failed: " << query.lastError();
         }
-
         file.close();
     }
 
@@ -282,7 +288,7 @@ int SQLDatabase::GetCityIdByName(QString cityName)
 
     if(!query.exec())
         qDebug() << "GetCityIdByName Failed: " << query.lastError() << " " << cityName;
-// fetch row
+    // fetch row
     query.next();
     return query.value(0).toInt();
 }
@@ -300,7 +306,7 @@ QString SQLDatabase::GetCityNameById(int id)
 
     if(!query.exec())
         qDebug() << "GetCityNameById Failed: " << query.lastError() << " " << id;
-// fetch row
+    // fetch row
     query.next();
     return query.value(0).toString();
 }
@@ -320,7 +326,7 @@ int SQLDatabase::GetDistance(int fromID, int toID)
 
     if(!query.exec())
         qDebug() << "GetDistance Failed: "<< fromID << " to " << toID << query.lastError() << " " << query.executedQuery() ;
-// fetch row
+    // fetch row
     query.next();
     return query.value(0).toInt();
 }
@@ -336,7 +342,7 @@ QList<cityDistance> SQLDatabase::GetDistancesFromCity(int cityID)
 
     if(!query.exec())
         qDebug() << "GetDistancesFromCity Failed: "<< cityID << query.lastError() << " " << query.executedQuery() ;
-// fetch row
+    // fetch row
     while (query.next())
         list.append({GetCityNameById(query.value(0).toInt()),
                      query.value(1).toInt()});
@@ -358,7 +364,7 @@ QList<food> SQLDatabase::GetFoodsForCity(int cityID)
 
     if(!query.exec())
         qDebug() << "GetFoodsForCity Failed: "<< cityID << query.lastError() << " " << query.executedQuery() ;
-// fetch row
+    // fetch row
     while (query.next())
         list.append({GetCityNameById(cityID),
                      query.value(0).toString(),
@@ -375,11 +381,9 @@ int SQLDatabase::GetSize()
     QSqlQuery query;
     query.prepare("SELECT count(*) FROM Cities ");
 
-//    query.bindValue(":fromID", fromID);
-
     if(!query.exec())
         qDebug() << "GetSize Failed: " << query.lastError() << " " << query.executedQuery() ;
-// fetch row
+    // fetch row
     query.next();
     return query.value(0).toInt();
 }
@@ -410,141 +414,3 @@ void SQLDatabase::addCity(City& newCity)
         qDebug() << "Failed: " << query.lastError();
 }
 */
-
-/*!
- * \brief addDistance
- * Adds a distance to the database
- */
-/*
-void SQLDatabase::addDistance(Distance &newDistance)
-{
-
-}
-*/
-
-/*!
- * \brief addFood
- * Adds a food to the database
- */
-/*
-void SQLDatabase::addFood(Food &newFood)
-{
-
-}
-*/
-
-
-/*
-void SQLDatabase::addSalesIntoTable(salesTableInfo& salesData)
-{
-
-    QSqlQuery query;
-
-    query.prepare("INSERT INTO SalesTable(PurchaseDate, CustomID, ItemName, ItemPrice, Quantity)"
-                  "VALUES(:date, :ID, :itemName, :itemPrice, :quantity)");
-
-    query.bindValue(":date", salesData.purchaseDate);
-    query.bindValue(":ID", salesData.customerID);
-    query.bindValue(":itemName", salesData.itemName);
-    query.bindValue(":itemPrice", salesData.itemPrice);
-    query.bindValue(":quantity", salesData.quantity);
-
-    if(!query.exec())
-        qDebug() << "Failed: " << query.lastError();
-
-    checkInventory();
-}
-
-/*!
- * \brief Inserts the Inventory into the InvenotryTable
- *
-void SQLDatabase::handleInventory()
-{
-    QSqlQuery query;
-
-    query.prepare("INSERT INTO InventoryTable(ItemName, ItemPrice, Quantity, InStock,Revenue)"
-                  "VALUES(:name, :price, :quant, :stock,:rev)");
-    query.bindValue(":name", inventoryData.itemName);
-    query.bindValue(":price", inventoryData.itemPrice);
-    query.bindValue(":quant", inventoryData.quantityPurchased);
-    query.bindValue(":stock", inventoryData.inStock);
-    query.bindValue(":rev", inventoryData.revenue);
-
-    if(!query.exec()){
-        qDebug() << "Failed: " << query.lastError();
-    }
-}
-/*!
- * \brief Checks the InventoryTable and adds the Quantity if there is an existing item
- *
-void SQLDatabase::checkInventory(){
-
-    QSqlQuery query;
-    query.prepare("SELECT * FROM InventoryTable"
-                  " WHERE ItemName       LIKE '%" + salesData.itemName + "%'");
-
-    query.bindValue(":searchingFor", salesData.itemName);
-
-    if(!query.exec()) {
-        qDebug() << query.lastError();
-    }
-
-    if (query.next()) {
-
-        double itemPrice = query.value(1).toDouble();
-        int quantFromDB = query.value(2).toInt();
-        double totalRevenue = query.value(4).toDouble();
-        int quantToInput = salesData.quantity.toInt();
-        int newQuantForDb =  quantFromDB + quantToInput;
-        int newStockForDb = 500 - newQuantForDb;
-        totalRevenue = newQuantForDb * itemPrice;
-        double dec = query.value(1).toString().toDouble();
-
-       if(newStockForDb <= 0 || newStockForDb < 0){
-            updateDB(0,quantFromDB,dec,query.value(4).toDouble());
-       }
-       else{
-            updateDB(newStockForDb,newQuantForDb,dec,totalRevenue);
-           }
-       }
-    else{
-        inventoryData.itemName = salesData.itemName;
-        inventoryData.itemPrice = salesData.itemPrice;
-        inventoryData.quantityPurchased = salesData.quantity;
-        int newStock = 500 - salesData.quantity.toInt();
-        QString m;
-        inventoryData.inStock = m.number(newStock);
-        double totalRev = salesData.quantity.toInt() * inventoryData.itemPrice.toDouble();
-        inventoryData.revenue = totalRev;
-        handleInventory();
-        }
-}
-/*!
- * \brief Updates the Inventory Table with the new or current Items
- *
-void SQLDatabase::updateDB(int stock,int quant,double dec,double totalRevenue){
-    QSqlQuery query;
-    query.prepare("UPDATE InventoryTable "
-                  "SET    ItemName = :name, "
-                  "       ItemPrice = :price, "
-                  "       Quantity = :quant, "
-                  "       InStock = :stock, "
-                  "       Revenue = :rev "
-                  "WHERE  ItemName = :c;");
-
-       QString price = price.number(dec,'f',2);
-       QString rev = rev.number(totalRevenue,'f',2);
-       qDebug() << price << " " << rev;
-
-       query.bindValue(":name", salesData.itemName);
-       query.bindValue(":price", price);
-       query.bindValue(":quant", quant);
-       query.bindValue(":stock", stock);
-       query.bindValue(":rev", rev);
-       query.bindValue(":c",salesData.itemName);
-
-       if(!query.exec())
-            qDebug() << query.lastError();
-}
-*/
-
