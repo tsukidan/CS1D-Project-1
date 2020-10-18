@@ -47,7 +47,6 @@ void MainWindow::on_pushButton_clicked()
     //Hide MainWindow
     hide();
 
-    customerUI->setWindowTitle("Travel Options");
     customerUI -> show();
 }
 

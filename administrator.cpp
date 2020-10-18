@@ -4,6 +4,9 @@
 #include "Header.h"
 #include "login.h"
 
+/********************************
+ *** CONSTRUCTOR / DESTRUCTOR ***
+ ********************************/
 Administrator::Administrator(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Administrator),
@@ -58,19 +61,24 @@ void Administrator::on_cities_Button_clicked()
  ************************************************************************/
 void Administrator::on_food_Button_clicked()
 {
-//    QSqlRelationalTableModel *sqlTableModel = rebuildQuery();
-//    sqlTableModel->setTable("Foods");
-//    sqlTableModel->setRelation(2, QSqlRelation("Cities", "CityID", "Name"));
-//    sqlTableModel->select();	// this runs the select query
-//    sqlTableModel->setHeaderData(2, Qt::Horizontal, tr("City"));
+    QSqlRelationalTableModel *sqlTableModel; //PROC & PROC - Create query to change column names
 
-//    resetDatabaseView(sqlTableModel);
-//    ui->databaseView->hideColumn(0);
-//    ui->databaseView->horizontalHeader()->moveSection(2, 1);
+    /*******************
+     * INITIALIZATIONS *
+     *******************/
+    sqlTableModel = rebuildQuery();
+
     /*************************************************************************
      * PROCESSING - Run query to display information on each food item
      ************************************************************************/
-    sqlModel->setQuery("SELECT Cities.CityID, Cities.Name, Foods.FoodName, Foods.Price FROM Foods, Cities WHERE Cities.CityID = Foods.CityID");
+    sqlTableModel->setHeaderData(0, Qt::Horizontal, tr("City ID"));
+    sqlTableModel->setHeaderData(1, Qt::Horizontal, tr("City Name"));
+
+    /*************************************************************************
+     * PROCESSING - Run query to display information on each food item
+     ************************************************************************/
+    sqlModel->setQuery("SELECT Cities.CityID, Cities.Name, Foods.FoodName, "
+                       "Foods.Price FROM Foods, Cities WHERE Cities.CityID = Foods.CityID");
     ui->databaseView->setModel(sqlModel);
 }
 
@@ -87,13 +95,28 @@ void Administrator::on_distances_Button_clicked()
     resetDatabaseView(sqlTableModel);
 }
 
+/*************************************************************************
+ * void Administrator::on_returnFromAdminUI_clicked()
+ * ----------------------------------------------------------------------
+ * This button will take the user from the administrator page to the login
+ * page. It essentially acts as a back button.
+ ************************************************************************/
 void Administrator::on_returnFromAdminUI_clicked()
 {
-    Login *loginUi;
+    Login *loginUi; //PROC & PROC - Pointer to login interface
+
+    /*******************
+     * INITIALIZATIONS *
+     *******************/
     loginUi = new Login(this);
+
+    /*************************************************************************
+     * PROCESSING - Hide Admin page and show the login page
+     ************************************************************************/
     hide();
     loginUi->show();
 }
+
 
 
 void Administrator::on_delete_City_clicked()
@@ -280,4 +303,33 @@ QSqlRelationalTableModel *Administrator::rebuildQuery()
     QSqlRelationalTableModel *sqlTableModel = new QSqlRelationalTableModel(this);
     this->sqlModel = sqlTableModel;
     return sqlTableModel;
+}
+
+/*************************************************************************
+ * void Administrator::on_AddFromFilePushButton_clicked()
+ * ----------------------------------------------------------------------
+ * When clicking the button, the program will read in additional data added
+ * to an input file. It will add the informstion to the database.
+ ************************************************************************/
+void Administrator::on_AddFromFilePushButton_clicked()
+{
+    SQLDatabase fileRead; //PROC & PROC - Used to read from files into database
+    QSqlQuery   query;
+
+    /*******************************************************************
+     * PROCESSING - Read the files passed in into the database
+     ******************************************************************/
+
+
+    fileRead.readFileCities   (":/Database/NewCities.txt");
+    fileRead.readFileDistances(":/Database/NewDistances.json");
+    fileRead.readFileFoods    (":/Database/NewFoods.json");
+
+
+    QSqlRelationalTableModel *sqlTableModel = rebuildQuery();
+    sqlTableModel->setTable("Cities");
+    sqlTableModel->select();	// this runs the select query
+
+    resetDatabaseView(sqlTableModel);
+    ui->databaseView->hideColumn(0);
 }
