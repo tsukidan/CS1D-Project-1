@@ -25,14 +25,17 @@ Administrator::Administrator(QWidget *parent) :
      *
      * To make it easier on the user to select each one
      ************************************************************************/
-    ui -> AddFoodPushButton    -> setStyleSheet(QString("#%1 { background-color: cyan; }").arg(ui -> AddFoodPushButton->objectName()));
+    ui -> AddFoodPushButton->setStyleSheet(
+                QString("#%1 { background-color: cyan; }")
+                .arg(ui -> AddFoodPushButton->objectName()));
 
-    ui -> UpdateFoodPushButton -> setStyleSheet(QString("#%1 { background-color: green; }").arg(ui -> UpdateFoodPushButton->objectName()));
+    ui -> UpdateFoodPushButton->setStyleSheet(
+                QString("#%1 { background-color: green; }")
+                .arg(ui -> UpdateFoodPushButton->objectName()));
 
-    ui -> DeleteFoodPushButton -> setStyleSheet(QString("#%1 { background-color: pink; }").arg(ui -> DeleteFoodPushButton->objectName()));
-
-
-
+    ui -> DeleteFoodPushButton->setStyleSheet(
+                QString("#%1 { background-color: pink; }")
+                .arg(ui -> DeleteFoodPushButton->objectName()));
 }
 
 Administrator::~Administrator()
@@ -49,7 +52,6 @@ void Administrator::on_cities_Button_clicked()
     resetDatabaseView(sqlTableModel);
     ui->databaseView->hideColumn(0);
 }
-
 
 /*************************************************************************
  * void Administrator::on_food_Button_clicked()
@@ -116,12 +118,24 @@ void Administrator::on_returnFromAdminUI_clicked()
 }
 
 
+
+void Administrator::on_delete_City_clicked()
+{
+    QSqlQuery q;
+    qDebug() << "ID: " << queryVal;
+    q.prepare("DELETE FROM Cities WHERE Name='"+queryVal+"'");
+    if(!q.exec())
+        qDebug() << "Failed: " << q.lastError();
+
+    sqlModel->setQuery("SELECT Name FROM Cities");
+    ui->databaseView->setModel(sqlModel);
+}
+
 void Administrator::on_databaseView_pressed(const QModelIndex &index)
 {
     queryVal = ui->databaseView->model()->data(index).toString();
     qDebug() << queryVal;
 }
-
 
 /*************************************************************************
  * void Administrator::on_AddFoodPushButton_clicked()
@@ -132,15 +146,19 @@ void Administrator::on_databaseView_pressed(const QModelIndex &index)
  ************************************************************************/
 void Administrator::on_AddFoodPushButton_clicked()
 {
-    QString foodName = ui -> FoodNameLineEdit -> text(); //IN & PROC - Name of food item that will be added
-    QString price    = ui -> PriceLineEdit    -> text(); //IN & PROC - Price of food item will be added
+    QString foodName = ui -> FoodNameLineEdit -> text();
+    //IN & PROC - Name of food item that will be added
+    QString price    = ui -> PriceLineEdit    -> text();
+    //IN & PROC - Price of food item will be added
     QSqlQuery query;
-
 
     /*************************************************************************
      * PROCESSING - Load datatable to show information
      ************************************************************************/
-    sqlModel->setQuery("SELECT Cities.CityID, Cities.Name, Foods.FoodName, Foods.Price FROM Foods, Cities WHERE Cities.CityID = Foods.CityID");
+    sqlModel->setQuery("SELECT Cities.CityID, Cities.Name, "
+                       "Foods.FoodName, Foods.Price "
+                       "FROM Foods, Cities "
+                       "WHERE Cities.CityID = Foods.CityID");
     ui->databaseView->setModel(sqlModel);
 
     /*************************************************************************
@@ -166,7 +184,6 @@ void Administrator::on_AddFoodPushButton_clicked()
         if(!query.exec())
             qDebug() << "Failed: " << query.lastError() << " (" << queryVal << ")";
 
-
         qDebug() << "cityID:    " << queryVal;
         qDebug() << "cityID int:" << queryVal.toInt();
 
@@ -187,8 +204,7 @@ void Administrator::on_AddFoodPushButton_clicked()
     }//end if
 
 }
-
-    /*************************************************************************
+   /*************************************************************************
     * void Administrator::on_DeleteFoodPushButton_clicked()
     * ----------------------------------------------------------------------
     * When clicking the delete food button, the food item that was selected
@@ -268,7 +284,6 @@ void Administrator::on_UpdateFoodPushButton_clicked()
 // this resets the tableview to show all the columns & resize them
 void Administrator::resetDatabaseView(QAbstractItemModel* model)
 {
-
     ui->databaseView->reset();
     ui->databaseView->horizontalHeader()->reset();
     ui->databaseView->setModel(model);

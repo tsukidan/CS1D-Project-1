@@ -2,6 +2,7 @@
 #include "sqldatabase.h"
 #include "ui_berlincitydisplay.h"
 
+// Constructor
 BerlinCityDisplay::BerlinCityDisplay(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::BerlinCityDisplay)
@@ -23,13 +24,9 @@ BerlinCityDisplay::BerlinCityDisplay(QWidget *parent) :
         item->setFlags(item->flags() ^ Qt::ItemIsEditable);
         ui->berlinDisplay->setItem(i, 1, item);
     }
-
-
-
-//    berlinDisplay
-
 }
 
+// destructor
 BerlinCityDisplay::~BerlinCityDisplay()
 {
     delete ui;

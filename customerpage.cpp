@@ -14,16 +14,13 @@ CustomerPage::CustomerPage(QWidget *parent) :
     sqlModel(new QSqlQueryModel(this))
 {
     ui->setupUi(this);
-    // this is for the table showing on the customer page
-    // this has been moved to display foods for city
-    //    sqlModel->setTable("Foods");
-    //    sqlModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
-    //    sqlModel->select();
 
-    sqlModel->setQuery("SELECT FoodName, Price FROM Foods");
+    // Sets correct number to display for the ParisCitySelect spinbox
+    int max = SQLDatabase::GetSize() - 1;
+    QSpinBox *parisSpinBox = ui->ParisCitySelect;
+    parisSpinBox->setMaximum(max);
+    parisSpinBox->setWrapping(true);
 
-    // to show table
-    // ui->tableView->setModel(sqlModel);
 
     QSqlQuery query;
     query.exec("SELECT Name FROM Cities");
@@ -47,7 +44,8 @@ CustomerPage::CustomerPage(QWidget *parent) :
 
     // sets index to nothing - won't show on dropdown
     ui->CityFoodSelect->setCurrentIndex(-1);
-//    ui->StartingCitySelect->setCurrentIndex(-1);
+
+    ui->StartingCitySelect->setCurrentIndex(-1);
 }
 
 /*!
@@ -97,6 +95,7 @@ void CustomerPage::on_CityFoodSelect_activated(const QString &selectedCity)
 
 }
 
+// Return "Home" button
 void CustomerPage::on_returnButton_clicked()
 {
     MainWindow *mainWindow;
@@ -105,6 +104,7 @@ void CustomerPage::on_returnButton_clicked()
     mainWindow->show();
 }
 
+// Button for customized city route
 void CustomerPage::on_pushButton_clicked()
 {
     // Create list of cities based on which ones were checked
@@ -126,8 +126,7 @@ void CustomerPage::on_pushButton_clicked()
     QList<int> path = shortestPath(startingCityID, selectedCities);
     qDebug() << "Finished shortest path";
 
-    // FIXME find a better way to get totalDistance from shortestPath
-    // Takes totalDistance from shortestPath
+     // Takes totalDistance from shortestPath
     int totalDistance = path.back();
     // removes from path
     path.pop_back();
@@ -136,13 +135,17 @@ void CustomerPage::on_pushButton_clicked()
     routeDisplay->show();
 }
 
-QList<int> CustomerPage::shortestPath(int startingCity, QList<int>selectedCities)
+
+// Shortest path for route display
+QList<int> CustomerPage::shortestPath(int startingCity,
+                                      QList<int>selectedCities, int numCities)
 {
     int totalDistance = 0;
     QList<int> visitedCities;
     QList<int> route;
     route << (startingCity);
     int currentCity = startingCity;
+    int totNumCities = numCities;
     bool canContinue = true;
 
     while (!selectedCities.isEmpty() && canContinue)
@@ -156,13 +159,40 @@ QList<int> CustomerPage::shortestPath(int startingCity, QList<int>selectedCities
             canContinue = false;
         else if (selectedCities.contains(nextCity))
         {
-            int distance = SQLDatabase::GetDistance(currentCity, nextCity);
-            qDebug() << "Total distance " << totalDistance << " + " << distance;
-            totalDistance += distance;
-            selectedCities.removeOne(nextCity);
-            visitedCities << currentCity;
-            route << nextCity;
-            currentCity = nextCity;
+
+            int nextCity = nearestCity(currentCity, visitedCities);
+            qDebug() << "*** PARIS *** Looking at next city. " << " " << nextCity;
+            qDebug() << "Visited cities " << visitedCities;
+            qDebug() << "Selected cities " << selectedCities;
+            qDebug() << "Route " << route;
+            if (nextCity == 0)
+            {
+                canContinue = false;
+                qDebug() << "nextCity == 0 canContinue " << canContinue;
+            }
+            else if (numCities > 1)
+            {
+                int distance = SQLDatabase::GetDistance(currentCity, nextCity);
+                qDebug() << "Total distance " << totalDistance << " + " << distance;
+                totalDistance += distance;
+                qDebug() << "NumCities before -- " << numCities;
+                numCities--;
+                qDebug() << "NumCities after " << numCities;
+                visitedCities << currentCity;
+                route << nextCity;
+                currentCity = nextCity;
+                if (route.size() - 1 > totNumCities)
+                {
+                     qDebug() << "Route size = " << route.size();
+                     canContinue = false;
+                     qDebug() << "canContinue " << canContinue;
+                }
+            }
+            else
+            {
+                // don't care about this city; query will ignore it
+                visitedCities.append(nextCity);
+            }
         }
         else
         {
@@ -171,8 +201,7 @@ QList<int> CustomerPage::shortestPath(int startingCity, QList<int>selectedCities
         }
     }
     // inserting totalDistance into the route (same as append)
-    // FIXME: find a better way to return the totalDistance to the caller
-    route << totalDistance;
+     route << totalDistance;
     return route;
 }
 
@@ -200,4 +229,48 @@ int CustomerPage::nearestCity(int currentCity, QList<int>visitedCities)
 
     query.next();
     return query.value(0).toInt();
+}
+
+// Paris trip button
+// Connect value chanaged from ParisCitySelect to Go button
+// Then run shortest path, and display the list of cities as well as
+// the distance.
+void CustomerPage::on_ParisGo_clicked()
+{
+     // Get the number of cities selected
+    int numCities;
+    numCities = ui->ParisCitySelect->value() + 1;
+    qDebug() << "numCities " << numCities;
+
+    // Create list of cities
+    QList<int> numSelectedCities;
+
+    // Starting City
+    QString startingCity = "Paris";
+    int startingCityID = SQLDatabase::GetCityIdByName(startingCity);
+
+    qDebug() << "Starting shortest path";
+
+    QList<int> path = shortestPath(startingCityID, numSelectedCities, numCities);
+    qDebug() << "Finished shortest path";
+
+    // Takes totalDistance from shortestPath
+    int totalDistance = path.back();
+    // removes from path
+    path.pop_back();
+
+    QDialog * routeDisplay = new RouteDisplayer(this, path, totalDistance);
+    routeDisplay->setWindowTitle(startingCity);
+    routeDisplay->show();
+
+}
+
+// Berlin trip button
+void CustomerPage::on_BerlinView_clicked()
+{
+
+    QDialog * berlinCityDisplay = new BerlinCityDisplay(this);
+    berlinCityDisplay->setWindowTitle("Cities from Berlin");
+    berlinCityDisplay->show();
+
 }

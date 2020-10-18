@@ -30,8 +30,6 @@ private slots:
 
 private:
     Ui::CustomerPage *ui;
-// this was moved to display foods for city
-//    QSqlTableModel *sqlModel;
     QSqlQueryModel *sqlModel;
     QList<QCheckBox*> cityCheckBoxes;    // List of all cities to visit
 

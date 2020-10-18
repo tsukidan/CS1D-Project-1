@@ -19,6 +19,10 @@ private:
     Ui::RouteDisplayer *ui;
     QList<int> route;
     int totalDistance;
+
+    QVector<FoodShoppingCartItem*> shoppingCart;
+    QVector<CityShoppingCartItem*> cityShoppingCart;
+    QMap<QString, CityShoppingCartItem*> cityTable;
 };
 
 #endif // ROUTEDISPLAYER_H

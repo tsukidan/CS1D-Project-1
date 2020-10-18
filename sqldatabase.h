@@ -43,6 +43,7 @@ void readFileDistances(const QString &filename);
  */
 void readFileFoods(const QString &filename);
 
+
 /*!
  * \brief Returns the Database
  */
