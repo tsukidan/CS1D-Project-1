@@ -112,28 +112,19 @@ void SQLDatabase::readFileCities(const QString& filename)
         {
             QString newCityname;
             newCityname = inFile.readLine();
-            //            addCity(newCity);  CAN ADD select, insert, delete, update
-            //
+
             QSqlQuery query;
             query.prepare("INSERT OR IGNORE INTO Cities(name) "
-                          "VALUES(:name)");
-
+                          "SELECT (:name) "
+                          "WHERE NOT EXISTS "
+                          "(Select 1 FROM Cities WHERE Name = (:name))");
             query.bindValue(":name", newCityname);
 
             if(!query.exec())
-                qDebug() << "Failed: " << query.lastError();
+                qDebug() << "Failed: " << query.lastError() << query.executedQuery();
+            file.close();
         }
-        /****************************************************
-         * PROCESESSING - Clear file if it was a copy
-         ***************************************************/
-        if(filename.contains("_copy"))
-        {
-            file.resize(0);
-        }
-
-        file.close();
     }
-
     else
         qDebug() << "Cannot open file thats used to Read File from Cities list";
 }
@@ -142,10 +133,8 @@ void SQLDatabase::readFileCities(const QString& filename)
  * \brief readFileDistances
  * Reads the Distance files and inserts them into the Distance table
  */
-void SQLDatabase::readFileDistances(const QString &filename)
+void SQLDatabase::readFileDistances(const QString& filename)
 {
-    qDebug() << "file name for readFileDistances: " << filename;
-
     QFile file(filename);
     file.open(QIODevice::ReadOnly);
     QTextStream inFile(&file);
@@ -184,8 +173,17 @@ void SQLDatabase::readFileDistances(const QString &filename)
             query.next();
             int toID = query.value(0).toInt();
 
+            query.prepare("DELETE FROM Distances WHERE "
+                          "FromCity = :FromCity AND ToCity = :ToCity");
+            query.bindValue(":FromCity", fromID);
+            query.bindValue(":ToCity", toID);
+
+
+            if(!query.exec())
+                qDebug() << "Failed: " << query.lastError();
+
             qDebug() << "Inserting distance";
-            query.prepare("INSERT OR REPLACE INTO Distances(FromCity, ToCity, Distance) "
+            query.prepare("INSERT OR IGNORE INTO Distances(FromCity, ToCity, Distance) "
                           "VALUES(:FromCity, :ToCity, :Distance)");
 
             query.bindValue(":FromCity", fromID);
@@ -194,13 +192,6 @@ void SQLDatabase::readFileDistances(const QString &filename)
 
             if(!query.exec())
                 qDebug() << "Failed: " << query.lastError();
-        }
-        /****************************************************
-         * PROCESESSING - Clear file if it was a copy
-         ***************************************************/
-        if(filename.contains("_copy"))
-        {
-            file.resize(0);
         }
 
         file.close();
@@ -252,7 +243,14 @@ void SQLDatabase::readFileFoods(const QString &filename)
                 double foodPrice = priceObj["Price"].toDouble();
                 qDebug() << "Inserting price";
 
-                query.prepare("INSERT OR REPLACE INTO Foods(FoodName, CityID, Price) "
+
+                query.prepare("DELETE FROM Foods WHERE FoodName = :name");
+                query.bindValue(":name", foodName);
+
+                if(!query.exec())
+                    qDebug() << "Failed: " << query.lastError();
+
+                query.prepare("INSERT OR IGNORE INTO Foods(FoodName,CityID, Price)"
                               "VALUES(:name, :city, :price)");
 
                 query.bindValue(":name", foodName);
@@ -262,13 +260,6 @@ void SQLDatabase::readFileFoods(const QString &filename)
                 if(!query.exec())
                     qDebug() << "Failed: " << query.lastError();
             }
-        }
-        /****************************************************
-         * PROCESESSING - Clear file if it was a copy
-         ***************************************************/
-        if(filename.contains("_copy"))
-        {
-            file.resize(0);
         }
 
         file.close();

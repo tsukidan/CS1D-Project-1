@@ -306,9 +306,9 @@ void Administrator::on_AddFromFilePushButton_clicked()
      ******************************************************************/
 
 
-    fileRead.readFileCities   (":/Database/NewCities_copy.txt");
-    fileRead.readFileDistances(":/Database/NewDistances_copy.json");
-    fileRead.readFileFoods    (":/Database/NewFoods_copy.json");
+    fileRead.readFileCities   (":/Database/NewCities.txt");
+    fileRead.readFileDistances(":/Database/NewDistances.json");
+    fileRead.readFileFoods    (":/Database/NewFoods.json");
 
 
     QSqlRelationalTableModel *sqlTableModel = rebuildQuery();
