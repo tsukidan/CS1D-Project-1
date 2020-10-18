@@ -3,7 +3,6 @@
 #include "displayfoodsforcity.h"
 #include "mainwindow.h"
 #include "routedisplayer.h"
-#include "berlincitydisplay.h"
 #include <QComboBox>
 
 /*!
@@ -22,7 +21,6 @@ CustomerPage::CustomerPage(QWidget *parent) :
     parisSpinBox->setMaximum(max);
     parisSpinBox->setWrapping(true);
 
-     sqlModel->setQuery("SELECT FoodName, Price FROM Foods");
 
     QSqlQuery query;
     query.exec("SELECT Name FROM Cities");
@@ -46,6 +44,7 @@ CustomerPage::CustomerPage(QWidget *parent) :
 
     // sets index to nothing - won't show on dropdown
     ui->CityFoodSelect->setCurrentIndex(-1);
+
     ui->StartingCitySelect->setCurrentIndex(-1);
 }
 
@@ -69,8 +68,8 @@ void CustomerPage::on_CityFoodSelect_activated(const QString &selectedCity)
 
         // Begins new query
         QSqlQuery query;
-
         // Prepared statement: Get every food for the current city.
+
         query.prepare("SELECT FoodName, Price FROM Foods "
                       "INNER JOIN Cities on cities.CityID = foods.CityID "
                       "WHERE cities.Name = (:City)");
@@ -93,6 +92,7 @@ void CustomerPage::on_CityFoodSelect_activated(const QString &selectedCity)
         // show the window for the selected city
         displayfoodsforcity->show();
     }
+
 }
 
 // Return "Home" button
@@ -123,7 +123,7 @@ void CustomerPage::on_pushButton_clicked()
 
     qDebug() << "Starting shortest path";
 
-    QList<int> path = shortestPath(startingCityID, selectedCities, 0);
+    QList<int> path = shortestPath(startingCityID, selectedCities);
     qDebug() << "Finished shortest path";
 
      // Takes totalDistance from shortestPath
@@ -132,9 +132,9 @@ void CustomerPage::on_pushButton_clicked()
     path.pop_back();
 
     QDialog * routeDisplay = new RouteDisplayer(this, path, totalDistance);
-    routeDisplay->setWindowTitle(startingCity);
     routeDisplay->show();
 }
+
 
 // Shortest path for route display
 QList<int> CustomerPage::shortestPath(int startingCity,
@@ -148,11 +148,18 @@ QList<int> CustomerPage::shortestPath(int startingCity,
     int totNumCities = numCities;
     bool canContinue = true;
 
-    // If using the Paris to selected # of cities
-    if (numCities >= 1)
+    while (!selectedCities.isEmpty() && canContinue)
     {
-        while (numCities > 0 && canContinue)
+        int nextCity = nearestCity(currentCity, visitedCities);
+        qDebug() << "Looking at next city. " << " " << nextCity;
+        qDebug() << "Visited cities " << visitedCities;
+        qDebug() << "Selected cities " << selectedCities;
+        qDebug() << "Route " << route;
+        if (nextCity == 0)
+            canContinue = false;
+        else if (selectedCities.contains(nextCity))
         {
+
             int nextCity = nearestCity(currentCity, visitedCities);
             qDebug() << "*** PARIS *** Looking at next city. " << " " << nextCity;
             qDebug() << "Visited cities " << visitedCities;
@@ -187,34 +194,10 @@ QList<int> CustomerPage::shortestPath(int startingCity,
                 visitedCities.append(nextCity);
             }
         }
-    }
-    // If using selection boxes for different cities
-    else
-    {
-        while (!selectedCities.isEmpty() && canContinue)
+        else
         {
-            int nextCity = nearestCity(currentCity, visitedCities);
-            qDebug() << "Looking at next city. " << " " << nextCity;
-            qDebug() << "Visited cities " << visitedCities;
-            qDebug() << "Selected cities " << selectedCities;
-            qDebug() << "Route " << route;
-            if (nextCity == 0)
-                canContinue = false;
-            else if (selectedCities.contains(nextCity))
-            {
-                int distance = SQLDatabase::GetDistance(currentCity, nextCity);
-                qDebug() << "Total distance " << totalDistance << " + " << distance;
-                totalDistance += distance;
-                selectedCities.removeOne(nextCity);
-                visitedCities << currentCity;
-                route << nextCity;
-                currentCity = nextCity;
-            }
-            else
-            {
-                // don't care about this city; query will ignore it
-                visitedCities.append(nextCity);
-            }
+            // don't care about this city; query will ignore it
+            visitedCities.append(nextCity);
         }
     }
     // inserting totalDistance into the route (same as append)

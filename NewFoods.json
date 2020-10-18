@@ -1,0 +1,19 @@
+[
+	{
+                "City": "Stockholm",
+		"Foods": [
+                        {"Food": "Raggmunk", "Price": 6.75},
+                        {"Food": "Gravad lax","Price": 13.76 },
+                        {"Food": "Husmanskost", "Price": 7.98}
+		]
+        },
+        {
+                "City": "Vienna",
+                "Foods": [
+                        {"Food": "Wiener Schnitzel", "Price": 4.94 },
+                        {"Food": "Kaiserschmarrn", "Price": 7.53 },
+                        {"Food": "Sachertorte", "Price": 5.85 }
+                ]
+        }
+]
+

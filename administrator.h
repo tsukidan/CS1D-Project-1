@@ -2,6 +2,7 @@
 #define ADMINISTRATOR_H
 
 #include "Header.h"
+#include "sqldatabase.h"
 
 namespace Ui {
 class Administrator;
@@ -26,13 +27,13 @@ private slots:
 
     void on_DeleteFoodPushButton_clicked();
 
-    void on_delete_City_clicked();
-
     void on_databaseView_pressed(const QModelIndex &index);
 
     void on_AddFoodPushButton_clicked();
 
     void on_UpdateFoodPushButton_clicked();
+
+    void on_AddFromFilePushButton_clicked();
 
 private:
     Ui::Administrator *ui;

@@ -22,6 +22,7 @@
 
 #include <QDialog>
 #include <QDebug>
+#include <iterator>
 using namespace std;
 using namespace Qt;
 

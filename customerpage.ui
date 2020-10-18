@@ -16,57 +16,57 @@
   <widget class="QComboBox" name="CityFoodSelect">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>90</y>
+     <x>40</x>
+     <y>40</y>
      <width>191</width>
      <height>32</height>
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="CityFoodLabel">
+  <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>70</y>
+     <x>50</x>
+     <y>20</y>
      <width>231</width>
      <height>16</height>
     </rect>
    </property>
    <property name="text">
-    <string>See food options from a city:</string>
+    <string>See foods from your city:</string>
    </property>
   </widget>
   <widget class="QPushButton" name="returnButton">
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>520</y>
+     <y>526</y>
      <width>80</width>
-     <height>31</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="text">
     <string>Home</string>
    </property>
   </widget>
-  <widget class="QLabel" name="VisitCityLabel">
+  <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>340</x>
-     <y>80</y>
-     <width>251</width>
+     <x>310</x>
+     <y>20</y>
+     <width>231</width>
      <height>16</height>
     </rect>
    </property>
    <property name="text">
-    <string>Select the cities you want to visit below</string>
+    <string>Select the cities you want to visit:</string>
    </property>
   </widget>
   <widget class="QFrame" name="CitySelectFrame">
    <property name="geometry">
     <rect>
-     <x>340</x>
-     <y>110</y>
+     <x>300</x>
+     <y>50</y>
      <width>421</width>
      <height>441</height>
     </rect>
@@ -82,21 +82,21 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>660</x>
-     <y>70</y>
+     <x>530</x>
+     <y>10</y>
      <width>61</width>
-     <height>31</height>
+     <height>32</height>
     </rect>
    </property>
    <property name="text">
     <string>Go</string>
    </property>
   </widget>
-  <widget class="QLabel" name="StartCityLabel">
+  <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>340</x>
-     <y>20</y>
+     <x>40</x>
+     <y>90</y>
      <width>231</width>
      <height>16</height>
     </rect>
@@ -108,85 +108,11 @@
   <widget class="QComboBox" name="StartingCitySelect">
    <property name="geometry">
     <rect>
-     <x>330</x>
-     <y>40</y>
+     <x>30</x>
+     <y>110</y>
      <width>191</width>
      <height>32</height>
     </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="ParisLabel">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>270</y>
-     <width>71</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>PARIS TRIP</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="ParisNumLabel">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>290</y>
-     <width>211</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Select the number of cities to visit:</string>
-   </property>
-  </widget>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>310</y>
-     <width>141</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <widget class="QSpinBox" name="ParisCitySelect"/>
-    </item>
-    <item>
-     <widget class="QPushButton" name="ParisGo">
-      <property name="text">
-       <string>Go</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QLabel" name="BerlinLabel">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>180</y>
-     <width>131</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>BERLIN TRIP</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="BerlinView">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>200</y>
-     <width>112</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Go</string>
    </property>
   </widget>
  </widget>

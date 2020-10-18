@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "sqldatabase.h"
 #include <QApplication>
+#include "shortestpath.h"
+#include "pathutils.h"
 
 int main(int argc, char *argv[])
 {

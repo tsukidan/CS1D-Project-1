@@ -110,7 +110,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Data Base</string>
+       <string>Database</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -153,28 +153,17 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="1">
-     <widget class="QPushButton" name="delete_City">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="font">
-       <font>
-        <family>Google Sans</family>
-        <pointsize>16</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Delete From Cities</string>
-      </property>
-     </widget>
-    </item>
     <item row="1" column="1">
      <widget class="QPushButton" name="pushButton">
       <property name="text">
        <string>Add Cities</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QPushButton" name="AddFromFilePushButton">
+      <property name="text">
+       <string>Add From File</string>
       </property>
      </widget>
     </item>
@@ -217,9 +206,9 @@
   <widget class="QLineEdit" name="FoodNameLineEdit">
    <property name="geometry">
     <rect>
-     <x>160</x>
+     <x>150</x>
      <y>240</y>
-     <width>331</width>
+     <width>341</width>
      <height>41</height>
     </rect>
    </property>
@@ -250,9 +239,9 @@
   <widget class="QLineEdit" name="PriceLineEdit">
    <property name="geometry">
     <rect>
-     <x>160</x>
+     <x>150</x>
      <y>290</y>
-     <width>331</width>
+     <width>341</width>
      <height>41</height>
     </rect>
    </property>

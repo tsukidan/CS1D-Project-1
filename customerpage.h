@@ -28,16 +28,12 @@ private slots:
 
     void on_pushButton_clicked();
 
-    void on_ParisGo_clicked();
-
-    void on_BerlinView_clicked();
-
 private:
     Ui::CustomerPage *ui;
     QSqlQueryModel *sqlModel;
     QList<QCheckBox*> cityCheckBoxes;    // List of all cities to visit
 
-    QList<int> shortestPath(int startingCity, QList<int>selectedCities, int numCities);
+    QList<int> shortestPath(int startingCity, QList<int>selectedCities);
 
     int nearestCity(int currentCity, QList<int>visitedCities);
 

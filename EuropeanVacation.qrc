@@ -3,5 +3,8 @@
         <file>Distances.json</file>
         <file>Cities.txt</file>
         <file>Foods.json</file>
+        <file>NewCities.txt</file>
+        <file>NewDistances.json</file>
+        <file>NewFoods.json</file>
     </qresource>
 </RCC>

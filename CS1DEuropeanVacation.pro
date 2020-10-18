@@ -17,33 +17,30 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     administrator.cpp \
-    berlincitydisplay.cpp \
-    cityshoppingcartitem.cpp \
     customerpage.cpp \
     displayfoodsforcity.cpp \
-    foodshoppingcartitem.cpp \
     login.cpp \
     main.cpp \
+    pathutils.cpp \
     routedisplayer.cpp \
+    shortestpath.cpp \
     sqldatabase.cpp \
     mainwindow.cpp
 
 HEADERS += \
     Header.h \
     administrator.h \
-    berlincitydisplay.h \
-    cityshoppingcartitem.h \
     customerpage.h \
     displayfoodsforcity.h \
-    foodshoppingcartitem.h \
     login.h \
+    pathutils.h \
     routedisplayer.h \
+    shortestpath.h \
     sqldatabase.h \
     mainwindow.h
 
 FORMS += \
     administrator.ui \
-    berlincitydisplay.ui \
     customerpage.ui \
     displayfoodsforcity.ui \
     login.ui \
