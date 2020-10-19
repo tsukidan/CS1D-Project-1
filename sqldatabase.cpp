@@ -348,6 +348,13 @@ int SQLDatabase::GetDistance(int fromID, int toID)
     return query.value(0).toInt();
 }
 
+/*******************************************************************************
+ * QList<cityDistance> SQLDatabase::GetDistancesFromCity(int cityID)
+ * -----------------------------------------------------------------------------
+ * THis function will query the SQL database to pull distancs from a city as
+ * well as the distance to a city. It will use an integer city ID passed into
+ * the function.
+ ******************************************************************************/
 QList<cityDistance> SQLDatabase::GetDistancesFromCity(int cityID)
 {
     QList<cityDistance> list;

@@ -20,97 +20,86 @@ struct cityDistance
 class SQLDatabase
 {
 public:
-/// SQLDatabase Constructor
+/*!
+ * \brief SQLDatabase Constructor
+ */
 SQLDatabase();
 
-/// ~SQLDatabase Destructor
+/*!
+ * \brief SQLDatabase Destructor
+ */
 ~SQLDatabase();
 
-/// createDatabase
-///
-/// Creates the Database.  Checks to see if the database has already
-/// been created, and if so doesn't re-create it. If not, it creates the
-/// databases and calls the readfile function.
-/// @return void
+/*!
+ * \brief createDatabase
+ * Creates the Database.  Checks to see if the database has already
+ * been created, and if so doesn't re-create it. If not, it creates the
+ * databases and calls the readfile function.
+ */
 void createDatabase();
 
-/// readFileCities
-///
-/// Reads the Cities file and inserts them into the CitiesTable.
-/// @param const QString &
-/// @return void
+/*!
+ * \brief readFileCities
+ * Reads the Cities file and inserts them into the CitiesTable
+ */
 void readFileCities(const QString &filename);
 
-///readFileDistances
-///
-/// Reads the Distance files and inserts them into the Distance table.
-/// @param cosnt QString &
-/// @return void
+/*!
+ * \brief readFileDistances
+ * Reads the Distance files and inserts them into the Distance table
+ */
 void readFileDistances(const QString &filename);
 
-
-/// readFileFoods
-///
-/// Reads from the foods file and adds to the database.
-/// @param const QString &
-/// @return void
+/*!
+ * \brief readFileFoods
+ * Reads from the foods file and adds to the database
+ */
 void readFileFoods(const QString &filename);
 
 
-/// GetDatabase
-///
-/// Returns the Database.
-/// @return QSQLDatabase
+/*!
+ * \brief Returns the Database
+ */
 QSqlDatabase GetDatabase() const;
 
-/// editFoods
-///
-/// Edits selected food price.
-/// @param { int, double }
-/// @return void
+/*!
+ * \brief editFoods
+ * Edits selected food price.
+ */
 void editFoods(int foodID, double newPrice);
 
-/// GetCityIdByName
-///
-/// This function reads the database to return a specific
-/// city ID from the *cities db*.
-/// @param QString
-/// @return int
+/*!
+ * \brief Returns the CityID #
+ */
 static int GetCityIdByName(QString cityName);
 
-/// GetCityNameById
-///
-/// This function reads the database to return a specific
-/// city name from the *cities db*.
-/// @param int
-/// @return QString
+/*!
+ * \brief Returns the CityID #
+ */
 static QString GetCityNameById(int id);
 
-/// GetDistance
-///
-/// Returns the distance between two cities
-/// @param { int, int }
-/// @return int
+/*!
+ * \brief Returns the distance between two cities
+ */
 static int GetDistance(int fromID, int toID);
 
-/// GetDistancesFromCity
-///
-/// Gets distance from a specific city using a city ID.
-/// @param int
-/// @return QList<cityDistance>
+/*******************************************************************************
+ * QList<cityDistance> SQLDatabase::GetDistancesFromCity(int cityID)
+ * -----------------------------------------------------------------------------
+ * THis function will query the SQL database to pull distancs from a city as
+ * well as the distance to a city. It will use an integer city ID passed into
+ * the function.
+ ******************************************************************************/
 static QList<cityDistance> GetDistancesFromCity(int cityID);
 
-/// GetFoodsForCity
-///
-/// Returns a list of foods for a specific city.
-/// @param int
-/// @return QList<food>
+/*!
+ * \brief Return a list of foods for city
+ */
 static QList<food> GetFoodsForCity(int cityID);
 
-/// GetSize
-///
-/// Returns the size of the database.
-/// @return int
+/*!
+ * \brief Returns the size of the database
+ */
 static int GetSize();
 
 private:

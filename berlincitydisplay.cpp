@@ -2,12 +2,15 @@
 #include "sqldatabase.h"
 #include "ui_berlincitydisplay.h"
 
-// Constructor
+/********************************
+ *** CONSTRUCTOR / DESTRUCTOR ***
+ ********************************/
 BerlinCityDisplay::BerlinCityDisplay(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::BerlinCityDisplay)
 {
     ui->setupUi(this);
+
 
     int berlinID = SQLDatabase::GetCityIdByName("Berlin");
     QList<cityDistance> cityDistances = SQLDatabase::GetDistancesFromCity(berlinID);

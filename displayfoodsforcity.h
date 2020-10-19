@@ -12,14 +12,13 @@ class DisplayFoodsForCity : public QDialog
     Q_OBJECT
 
 public:
-    /// DisplayFoodsForCity constructor
-    ///
-    /// Initializes the display food ui.
+    /*!
+     * \brief DisplayFoodsForCity constructor
+     */
     explicit DisplayFoodsForCity(QWidget *parent, QSqlQuery query);
-
-    /// ~DisplayFoodsForCity destructor
-    ///
-    /// Deletes the ui when the page is out of scope.
+    /*!
+     * \brief DisplayFoodsForCity destructor
+     */
     ~DisplayFoodsForCity();
 
 private:

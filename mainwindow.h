@@ -18,23 +18,26 @@ public:
     ~MainWindow();
 
 private slots:
-    /// on_pushButton_clicked
-    ///
-    /// Upon clicking on the customer page button, the main window will become
-    /// hidden and the prospective travler page will open.
-    /// @return void
+
+    /*************************************************************************
+     * void MainWindow::on_pushButton_clicked()
+     * ----------------------------------------------------------------------
+     * Upon clicking on the customer page button, the main window will become
+     * hidden and the prospective travler page will open.
+     ************************************************************************/
     void on_pushButton_clicked();
 
-    /// on_AdminPushButton_clicked
-    ///
-    /// Upon clicking on the administrator page button, the main window will become
-    /// hidden and the administrator page will open.
-    /// @return void
+    /*************************************************************************
+     * void MainWindow::on_AdminPushButton_clicked()
+     * ----------------------------------------------------------------------
+     * Upon clicking on the administrator page button, the main window will become
+     * hidden and the administrator page will open.
+     ************************************************************************/
     void on_AdminPushButton_clicked();
 
 private:
     Ui::MainWindow *ui;
-    CustomerPage   *customerUI;
-    Login          *loginUI;
+    CustomerPage   *customerUI; ///Pointer to customer page
+    Login          *loginUI;    ///Pointer to the login page
 };
 #endif // MAINWINDOW_H
