@@ -43,8 +43,14 @@ Administrator::~Administrator()
     delete ui;
 }
 
+/*************************************************************************
+ * void Administrator::on_cities_Button_clicked()
+ * ----------------------------------------------------------------------
+ * This button will display all the cities on the datable
+ ************************************************************************/
 void Administrator::on_cities_Button_clicked()
 {
+    ///Create table model that will display the cities
     QSqlRelationalTableModel *sqlTableModel = rebuildQuery();
     sqlTableModel->setTable("Cities");
     sqlTableModel->select();	// this runs the select query
@@ -59,7 +65,6 @@ void Administrator::on_cities_Button_clicked()
  * This will display the City ID, City Name, Food Name, and price of all
  * food items in the database.
  ************************************************************************/
-
 void Administrator::on_food_Button_clicked()
 {
     QSqlRelationalTableModel *sqlTableModel; //PROC & PROC - Create query to change column names
@@ -83,9 +88,22 @@ void Administrator::on_food_Button_clicked()
     ui->databaseView->setModel(sqlModel);
 }
 
+
+/*************************************************************************
+ * void Administrator::on_distances_Button_clicked()
+ * ----------------------------------------------------------------------
+ * This button will display the to and from distances of each city as
+ * well the to city's name and the from city's name
+ ************************************************************************/
 void Administrator::on_distances_Button_clicked()
 {
+
+    ///Create table model to select information from database
     QSqlRelationalTableModel *sqlTableModel = rebuildQuery();
+
+    /*************************************************************************
+     * PROCESSING - Set table column names
+     ************************************************************************/
     sqlTableModel->setTable("Distances");
     sqlTableModel->setRelation(0, QSqlRelation("Cities", "CityID", "Name"));
     sqlTableModel->setRelation(1, QSqlRelation("Cities", "CityID", "Name"));
@@ -102,7 +120,6 @@ void Administrator::on_distances_Button_clicked()
  * This button will take the user from the administrator page to the login
  * page. It essentially acts as a back button.
  ************************************************************************/
-
 void Administrator::on_returnFromAdminUI_clicked()
 {
     Login *loginUi; //PROC & PROC - Pointer to login interface
@@ -119,7 +136,7 @@ void Administrator::on_returnFromAdminUI_clicked()
     loginUi->show();
 }
 
-
+///Print the database view
 void Administrator::on_databaseView_pressed(const QModelIndex &index)
 {
     queryVal = ui->databaseView->model()->data(index).toString();
@@ -221,7 +238,9 @@ void Administrator::on_AddFoodPushButton_clicked()
     /*************************************************************************
      * PROCESSING - Reload datatable to show updated information
      ************************************************************************/
-    sqlModel->setQuery("SELECT Cities.CityID, Cities.Name, Foods.FoodName, Foods.Price FROM Foods, Cities WHERE Cities.CityID = Foods.CityID");
+    sqlModel->setQuery("SELECT Cities.CityID, Cities.Name, Foods.FoodName, "
+                       "Foods.Price FROM Foods, Cities "
+                       "WHERE Cities.CityID = Foods.CityID");
     ui->databaseView->setModel(sqlModel);
 }
 
@@ -234,8 +253,8 @@ void Administrator::on_AddFoodPushButton_clicked()
  ************************************************************************/
 void Administrator::on_UpdateFoodPushButton_clicked()
 {
-    QString newPrice;                       //IN   & PROC - The new price of the food item that will be changed
-    QString foodName;                       //IN   & PROC - The name of the food item that will be changed
+    QString newPrice;   //IN   & PROC - The new price of the food item that will be changed
+    QString foodName;   //IN   & PROC - The name of the food item that will be changed
 
     /*******************
      * INITIALIZATIONS *
@@ -270,7 +289,7 @@ void Administrator::on_UpdateFoodPushButton_clicked()
     ui -> PriceLineEdit    -> clear();
 }
 
-// this resets the tableview to show all the columns & resize them
+/// this resets the tableview to show all the columns & resize them
 void Administrator::resetDatabaseView(QAbstractItemModel* model)
 {
     ui->databaseView->reset();
@@ -283,9 +302,9 @@ void Administrator::resetDatabaseView(QAbstractItemModel* model)
     ui->databaseView->resizeColumnsToContents();
 }
 
-// This creates a new query model by deleting the sqlModel and replacing it
-// with a relationalTableModel so that we can do the the column names and
-// foreign key relations
+/// This creates a new query model by deleting the sqlModel and replacing it
+/// with a relationalTableModel so that we can do the the column names and
+/// foreign key relations
 QSqlRelationalTableModel *Administrator::rebuildQuery()
 {
     delete sqlModel;
@@ -308,8 +327,6 @@ void Administrator::on_AddFromFilePushButton_clicked()
     /*******************************************************************
      * PROCESSING - Read the files passed in into the database
      ******************************************************************/
-
-
     fileRead.readFileCities   (":/Database/NewCities.txt");
     fileRead.readFileDistances(":/Database/NewDistances.json");
     fileRead.readFileFoods    (":/Database/NewFoods.json");

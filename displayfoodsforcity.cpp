@@ -3,6 +3,9 @@
 #include "mainwindow.h"
 #include "Header.h"
 
+/*!
+ * \brief DisplayFoodsForCity constructor
+ */
 DisplayFoodsForCity::DisplayFoodsForCity(QWidget *parent, QSqlQuery query) :
     QDialog(parent),
     ui(new Ui::DisplayFoodsForCity),
@@ -14,6 +17,9 @@ DisplayFoodsForCity::DisplayFoodsForCity(QWidget *parent, QSqlQuery query) :
     ui->tableView->setModel(model);
 }
 
+/*!
+ * \brief DisplayFoodsForCity destructor
+ */
 DisplayFoodsForCity::~DisplayFoodsForCity()
 {
     delete ui;

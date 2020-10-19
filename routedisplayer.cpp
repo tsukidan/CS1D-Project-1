@@ -15,16 +15,16 @@ RouteDisplayer::RouteDisplayer(QWidget *parent, QList<int> route, int totalDista
 
     QList<food> foodList;
 
-    // Create a food list to be displayed on table
+    /// Create a food list to be displayed on table
     for (auto cityID: route)
     {
         QString cityName = SQLDatabase::GetCityNameById(cityID);
 
-        // updating food list w/ current cities foods
+        /// updating food list w/ current cities foods
         QList<food> subList = SQLDatabase::GetFoodsForCity(cityID);
         foodList += subList;
 
-        // adding city to the city table
+        /// adding city to the city table
         CityShoppingCartItem* cityShoppingItem = new CityShoppingCartItem(
                     this, cityName);
         cityShoppingCart.append(cityShoppingItem);
@@ -50,16 +50,16 @@ RouteDisplayer::RouteDisplayer(QWidget *parent, QList<int> route, int totalDista
                                        0, 'f', 2)));
     }
 
-    // display total distance
+    /// display total distance
     ui->TotalDistance->setText(QString("%1").arg(totalDistance));
 
-    // set row count for table
+    /// set row count for table
     ui->SelectFoodTable->setRowCount(foodList.size());
 
-    // Food per city display and calculation
+    /// Food per city display and calculation
     for (int i = 0; i < foodList.size(); i++)
     {
-        // stores food related items for each food row
+        /// stores food related items for each food row
         FoodShoppingCartItem* shoppingItem = new FoodShoppingCartItem(
                     this, foodList[i].cityName, foodList[i].foodName,
                     foodList[i].price);
@@ -67,7 +67,7 @@ RouteDisplayer::RouteDisplayer(QWidget *parent, QList<int> route, int totalDista
                 &RouteDisplayer::qtyChanged);
         shoppingCart.append(shoppingItem);
 
-        // stores food related items for each city row
+        /// stores food related items for each city row
 
         QSpinBox* spinBox = new QSpinBox(ui->SelectFoodTable);
         ui->SelectFoodTable->setCellWidget(i, 0, spinBox);
@@ -95,25 +95,25 @@ RouteDisplayer::RouteDisplayer(QWidget *parent, QList<int> route, int totalDista
             (QHeaderView::ResizeToContents);
 }
 
-// destructor
+/// destructor
 RouteDisplayer::~RouteDisplayer()
 {
     delete ui;
 }
 
-// Qty Changed - update tables in route displayer
+/// Qty Changed - update tables in route displayer
 void RouteDisplayer::qtyChanged()
 {
     float totalPrice = 0;
 
-    // resets tables
+    /// resets tables
     for (auto cityItem: cityTable)
     {
         cityItem->setQty(0);
         cityItem->setPrice(0);
     }
 
-    // updates the food list for all cities
+    /// updates the food list for all cities
     for (auto shoppingItem: shoppingCart)
     {
         float subtotal = shoppingItem->getPrice() * shoppingItem->getQty();
@@ -124,7 +124,7 @@ void RouteDisplayer::qtyChanged()
         city->setPrice(city->getTotalPrice() + subtotal);
     }
 
-    // updates the food list PER city
+    /// updates the food list PER city
     for (int i = 0; i < cityShoppingCart.size(); i++)
     {
         CityShoppingCartItem* cityItem = cityShoppingCart[i];
@@ -135,7 +135,7 @@ void RouteDisplayer::qtyChanged()
                                    tr("$%1").arg(cityItem->getTotalPrice(), 0, 'f', 2)));
     }
 
-    // displays total prices
+    /// displays total prices
     ui->Subtotal->setText(tr("$%1").arg(totalPrice, 0, 'f', 2));
     ui->SalesTax->setText(tr("$%1").arg(totalPrice * 0.0875, 0, 'f', 2));
     ui->TotalFoodPrice->setText(tr("$%1").arg(totalPrice * 1.0875, 0, 'f', 2));
