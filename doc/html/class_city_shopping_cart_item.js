@@ -7,5 +7,8 @@ var class_city_shopping_cart_item =
     [ "qtyPerCityChanged", "class_city_shopping_cart_item.html#ac3d9f4ec51d783afb2190119c2a83982", null ],
     [ "setPrice", "class_city_shopping_cart_item.html#ae401f624611e4939e20449af29264c73", null ],
     [ "setQty", "class_city_shopping_cart_item.html#a7a0c22b62487c6874cce1fceaf8bba35", null ],
-    [ "totalPriceChanged", "class_city_shopping_cart_item.html#af12d2d237ba5e41c5fe5e7dd846f6df0", null ]
+    [ "totalPriceChanged", "class_city_shopping_cart_item.html#af12d2d237ba5e41c5fe5e7dd846f6df0", null ],
+    [ "cityName", "class_city_shopping_cart_item.html#a34cd1a5a7e832d5b4dc83fe8a12df8fb", null ],
+    [ "qty", "class_city_shopping_cart_item.html#a7028fcb1fc00d5937787b9f423c90379", null ],
+    [ "totalPrice", "class_city_shopping_cart_item.html#a3c876913ae2fcd80336129ba495697cb", null ]
 ];

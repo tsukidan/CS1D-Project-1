@@ -1,8 +1,10 @@
 var hierarchy =
 [
     [ "cityConnection", "structcity_connection.html", null ],
+    [ "cityDistance", "structcity_distance.html", null ],
     [ "cityGraph", "structcity_graph.html", null ],
     [ "cityNode", "structcity_node.html", null ],
+    [ "food", "structfood.html", null ],
     [ "QDialog", null, [
       [ "Administrator", "class_administrator.html", null ],
       [ "BerlinCityDisplay", "class_berlin_city_display.html", null ],

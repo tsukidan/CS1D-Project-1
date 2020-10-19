@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['name_177',['name',['../structcity_node.html#aa47ebe291ce431bf5e3bab41817f6645',1,'cityNode']]]
+  ['loginui_250',['loginUI',['../class_main_window.html#a73029d0b30a4eb448a700cef4dce07f2',1,'MainWindow']]]
 ];

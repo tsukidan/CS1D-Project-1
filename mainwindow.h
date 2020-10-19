@@ -18,8 +18,18 @@ public:
     ~MainWindow();
 
 private slots:
+    /// on_pushButton_clicked
+    ///
+    /// Upon clicking on the customer page button, the main window will become
+    /// hidden and the prospective travler page will open.
+    /// @return void
     void on_pushButton_clicked();
 
+    /// on_AdminPushButton_clicked
+    ///
+    /// Upon clicking on the administrator page button, the main window will become
+    /// hidden and the administrator page will open.
+    /// @return void
     void on_AdminPushButton_clicked();
 
 private:

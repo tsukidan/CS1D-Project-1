@@ -7,5 +7,6 @@ var class_s_q_l_database =
     [ "GetDatabase", "class_s_q_l_database.html#a7ad73355bef530c86b1bef1f85757bd9", null ],
     [ "readFileCities", "class_s_q_l_database.html#a6c3e0b1f8eb8e3922aba95d16df03913", null ],
     [ "readFileDistances", "class_s_q_l_database.html#ab5f087a24c2c987cbab76de123246f7d", null ],
-    [ "readFileFoods", "class_s_q_l_database.html#adaec2789651fd1fca3c7c8f4acbf3cab", null ]
+    [ "readFileFoods", "class_s_q_l_database.html#adaec2789651fd1fca3c7c8f4acbf3cab", null ],
+    [ "database", "class_s_q_l_database.html#a7c89518eafafa4ab53be2a1a4410ebf7", null ]
 ];

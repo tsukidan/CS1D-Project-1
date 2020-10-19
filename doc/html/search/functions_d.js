@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['setprice_160',['setPrice',['../class_city_shopping_cart_item.html#ae401f624611e4939e20449af29264c73',1,'CityShoppingCartItem']]],
-  ['setqty_161',['setQty',['../class_city_shopping_cart_item.html#a7a0c22b62487c6874cce1fceaf8bba35',1,'CityShoppingCartItem::setQty()'],['../class_food_shopping_cart_item.html#a6f47c20f1f710442ea9c75d3725bef8d',1,'FoodShoppingCartItem::setQty()']]],
-  ['shortestpath_162',['ShortestPath',['../shortestpath_8cpp.html#acf7fa9e534358382a3bbff020df53ef0',1,'ShortestPath(const cityGraph &amp;graph, cityNode start, cityNode endLocation):&#160;shortestpath.cpp'],['../shortestpath_8h.html#acf7fa9e534358382a3bbff020df53ef0',1,'ShortestPath(const cityGraph &amp;graph, cityNode start, cityNode endLocation):&#160;shortestpath.cpp']]],
-  ['sqldatabase_163',['SQLDatabase',['../class_s_q_l_database.html#ac3f49fdf4d4698e5ad984b0733dc25bd',1,'SQLDatabase']]]
+  ['readfilecities_219',['readFileCities',['../class_s_q_l_database.html#a6c3e0b1f8eb8e3922aba95d16df03913',1,'SQLDatabase']]],
+  ['readfiledistances_220',['readFileDistances',['../class_s_q_l_database.html#ab5f087a24c2c987cbab76de123246f7d',1,'SQLDatabase']]],
+  ['readfilefoods_221',['readFileFoods',['../class_s_q_l_database.html#adaec2789651fd1fca3c7c8f4acbf3cab',1,'SQLDatabase']]],
+  ['rebuildquery_222',['rebuildQuery',['../class_administrator.html#a6471d67a23851ede31838bef7e8ad1fc',1,'Administrator']]],
+  ['resetdatabaseview_223',['resetDatabaseView',['../class_administrator.html#ac8c4d77c8ea4a40a4effc4ec97341d72',1,'Administrator']]],
+  ['routedisplayer_224',['RouteDisplayer',['../class_route_displayer.html#af1895a6a10a78aabefe0b1dd899a834b',1,'RouteDisplayer']]]
 ];

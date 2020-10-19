@@ -101,7 +101,6 @@ void SQLDatabase::readFileCities(const QString& filename)
     QFile file(filename);
     file.open(QIODevice::ReadOnly);
     QTextStream inFile(&file);
-    bool doesExist = false;
     int exists = 0;
 
     if(file.isOpen())

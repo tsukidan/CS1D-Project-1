@@ -113,50 +113,61 @@ $(document).ready(function(){initNavTree('administrator_8h_source.html',''); ini
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    Q_OBJECT</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_administrator.html#ac60fafcf260277db1bbddac184da9a59">Administrator</a>(QWidget *parent = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="class_administrator.html#af5ce6d3689295045ed589a912853cacc">~Administrator</a>();</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">private</span> slots:</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">void</span> on_cities_Button_clicked();</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> on_food_Button_clicked();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_administrator.html#ac60fafcf260277db1bbddac184da9a59">Administrator</a>(QWidget *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_administrator.html#af5ce6d3689295045ed589a912853cacc">~Administrator</a>();</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> on_distances_Button_clicked();</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> on_returnFromAdminUI_clicked();</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> on_DeleteFoodPushButton_clicked();</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> on_databaseView_pressed(<span class="keyword">const</span> QModelIndex &amp;index);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> on_AddFoodPushButton_clicked();</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> on_UpdateFoodPushButton_clicked();</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> on_AddFromFilePushButton_clicked();</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    Ui::Administrator *ui;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    QSqlQueryModel *sqlModel;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    QString queryVal;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">void</span> resetDatabaseView(QAbstractItemModel* model);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    QSqlRelationalTableModel* rebuildQuery();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;};</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">private</span> slots:</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_administrator.html#a8538c6718b5312f818817d8a93567b04">on_cities_Button_clicked</a>();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_administrator.html#af8276341313e722cac6da2ee2cdaebf5">on_food_Button_clicked</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_administrator.html#a745b526b1905a47b20fa2ceb265e0522">on_distances_Button_clicked</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_administrator.html#a8a16f9248f19a0af4b77c14a2df452a3">on_returnFromAdminUI_clicked</a>();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_administrator.html#a01b82b123274ac6cf9774a5486e1c32b">on_DeleteFoodPushButton_clicked</a>();</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#endif // ADMINISTRATOR_H</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_administrator.html#aedb22755e20afd23350192e641e2c776">on_databaseView_pressed</a>(<span class="keyword">const</span> QModelIndex &amp;index);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_administrator.html#a0a1d66d28ed2e9e6f785306ddb1b6f71">on_AddFoodPushButton_clicked</a>();</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_administrator.html#a0638d83a4aab2764de9cfa680a4a719e">on_UpdateFoodPushButton_clicked</a>();</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_administrator.html#a95c2e5f807b87f529a7f730b9998a1f0">on_AddFromFilePushButton_clicked</a>();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="class_administrator.html#a9303e2b7af6ae299cd8a485a49ca1fef">   92</a></span>&#160;    Ui::Administrator *<a class="code" href="class_administrator.html#a9303e2b7af6ae299cd8a485a49ca1fef">ui</a>;</div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="class_administrator.html#a73385bae23010e69acd38134c94566eb">   93</a></span>&#160;    QSqlQueryModel *<a class="code" href="class_administrator.html#a73385bae23010e69acd38134c94566eb">sqlModel</a>;</div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="class_administrator.html#a88ceb0ccd19d1c1a39732b1ce296a9ba">   94</a></span>&#160;    QString <a class="code" href="class_administrator.html#a88ceb0ccd19d1c1a39732b1ce296a9ba">queryVal</a>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_administrator.html#ac8c4d77c8ea4a40a4effc4ec97341d72">resetDatabaseView</a>(QAbstractItemModel* model);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    QSqlRelationalTableModel* <a class="code" href="class_administrator.html#a6471d67a23851ede31838bef7e8ad1fc">rebuildQuery</a>();</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;};</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor">#endif // ADMINISTRATOR_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aclass_administrator_html_a88ceb0ccd19d1c1a39732b1ce296a9ba"><div class="ttname"><a href="class_administrator.html#a88ceb0ccd19d1c1a39732b1ce296a9ba">Administrator::queryVal</a></div><div class="ttdeci">QString queryVal</div><div class="ttdef"><b>Definition:</b> administrator.h:94</div></div>
 <div class="ttc" id="asqldatabase_8h_html"><div class="ttname"><a href="sqldatabase_8h.html">sqldatabase.h</a></div></div>
 <div class="ttc" id="a_header_8h_html"><div class="ttname"><a href="_header_8h.html">Header.h</a></div></div>
-<div class="ttc" id="aclass_administrator_html_ac60fafcf260277db1bbddac184da9a59"><div class="ttname"><a href="class_administrator.html#ac60fafcf260277db1bbddac184da9a59">Administrator::Administrator</a></div><div class="ttdeci">Administrator(QWidget *parent=nullptr)</div><div class="ttdoc">Administrator constructor function.</div><div class="ttdef"><b>Definition:</b> administrator.cpp:15</div></div>
-<div class="ttc" id="aclass_administrator_html_af5ce6d3689295045ed589a912853cacc"><div class="ttname"><a href="class_administrator.html#af5ce6d3689295045ed589a912853cacc">Administrator::~Administrator</a></div><div class="ttdeci">~Administrator()</div><div class="ttdoc">Administrator destructor.</div><div class="ttdef"><b>Definition:</b> administrator.cpp:49</div></div>
+<div class="ttc" id="aclass_administrator_html_a0638d83a4aab2764de9cfa680a4a719e"><div class="ttname"><a href="class_administrator.html#a0638d83a4aab2764de9cfa680a4a719e">Administrator::on_UpdateFoodPushButton_clicked</a></div><div class="ttdeci">void on_UpdateFoodPushButton_clicked()</div><div class="ttdoc">on_UpdateFoodPushButton_clicked</div><div class="ttdef"><b>Definition:</b> administrator.cpp:235</div></div>
+<div class="ttc" id="aclass_administrator_html_a745b526b1905a47b20fa2ceb265e0522"><div class="ttname"><a href="class_administrator.html#a745b526b1905a47b20fa2ceb265e0522">Administrator::on_distances_Button_clicked</a></div><div class="ttdeci">void on_distances_Button_clicked()</div><div class="ttdoc">on_distance_Button_clicked creates a query to the database.</div><div class="ttdef"><b>Definition:</b> administrator.cpp:86</div></div>
+<div class="ttc" id="aclass_administrator_html_ac60fafcf260277db1bbddac184da9a59"><div class="ttname"><a href="class_administrator.html#ac60fafcf260277db1bbddac184da9a59">Administrator::Administrator</a></div><div class="ttdeci">Administrator(QWidget *parent=nullptr)</div><div class="ttdoc">Administrator constructor function.</div><div class="ttdef"><b>Definition:</b> administrator.cpp:10</div></div>
+<div class="ttc" id="aclass_administrator_html_a8538c6718b5312f818817d8a93567b04"><div class="ttname"><a href="class_administrator.html#a8538c6718b5312f818817d8a93567b04">Administrator::on_cities_Button_clicked</a></div><div class="ttdeci">void on_cities_Button_clicked()</div><div class="ttdoc">on_cities_Button_clicked Imports the data from cities database.</div><div class="ttdef"><b>Definition:</b> administrator.cpp:46</div></div>
+<div class="ttc" id="aclass_administrator_html_a73385bae23010e69acd38134c94566eb"><div class="ttname"><a href="class_administrator.html#a73385bae23010e69acd38134c94566eb">Administrator::sqlModel</a></div><div class="ttdeci">QSqlQueryModel * sqlModel</div><div class="ttdef"><b>Definition:</b> administrator.h:93</div></div>
+<div class="ttc" id="aclass_administrator_html_aedb22755e20afd23350192e641e2c776"><div class="ttname"><a href="class_administrator.html#aedb22755e20afd23350192e641e2c776">Administrator::on_databaseView_pressed</a></div><div class="ttdeci">void on_databaseView_pressed(const QModelIndex &amp;index)</div><div class="ttdoc">on_databaseView_pressed returns items clicked in QTableView.</div><div class="ttdef"><b>Definition:</b> administrator.cpp:123</div></div>
+<div class="ttc" id="aclass_administrator_html_a95c2e5f807b87f529a7f730b9998a1f0"><div class="ttname"><a href="class_administrator.html#a95c2e5f807b87f529a7f730b9998a1f0">Administrator::on_AddFromFilePushButton_clicked</a></div><div class="ttdeci">void on_AddFromFilePushButton_clicked()</div><div class="ttdoc">on_AddFromFilePushButton_clicked</div><div class="ttdef"><b>Definition:</b> administrator.cpp:303</div></div>
+<div class="ttc" id="aclass_administrator_html_af5ce6d3689295045ed589a912853cacc"><div class="ttname"><a href="class_administrator.html#af5ce6d3689295045ed589a912853cacc">Administrator::~Administrator</a></div><div class="ttdeci">~Administrator()</div><div class="ttdoc">Administrator destructor.</div><div class="ttdef"><b>Definition:</b> administrator.cpp:41</div></div>
+<div class="ttc" id="aclass_administrator_html_ac8c4d77c8ea4a40a4effc4ec97341d72"><div class="ttname"><a href="class_administrator.html#ac8c4d77c8ea4a40a4effc4ec97341d72">Administrator::resetDatabaseView</a></div><div class="ttdeci">void resetDatabaseView(QAbstractItemModel *model)</div><div class="ttdef"><b>Definition:</b> administrator.cpp:274</div></div>
+<div class="ttc" id="aclass_administrator_html_a01b82b123274ac6cf9774a5486e1c32b"><div class="ttname"><a href="class_administrator.html#a01b82b123274ac6cf9774a5486e1c32b">Administrator::on_DeleteFoodPushButton_clicked</a></div><div class="ttdeci">void on_DeleteFoodPushButton_clicked()</div><div class="ttdoc">on_DeleteFoodPushButton_clicked deletes a single item from database.</div><div class="ttdef"><b>Definition:</b> administrator.cpp:202</div></div>
+<div class="ttc" id="aclass_administrator_html_a6471d67a23851ede31838bef7e8ad1fc"><div class="ttname"><a href="class_administrator.html#a6471d67a23851ede31838bef7e8ad1fc">Administrator::rebuildQuery</a></div><div class="ttdeci">QSqlRelationalTableModel * rebuildQuery()</div><div class="ttdef"><b>Definition:</b> administrator.cpp:289</div></div>
 <div class="ttc" id="anamespace_ui_html"><div class="ttname"><a href="namespace_ui.html">Ui</a></div><div class="ttdef"><b>Definition:</b> administrator.h:7</div></div>
+<div class="ttc" id="aclass_administrator_html_af8276341313e722cac6da2ee2cdaebf5"><div class="ttname"><a href="class_administrator.html#af8276341313e722cac6da2ee2cdaebf5">Administrator::on_food_Button_clicked</a></div><div class="ttdeci">void on_food_Button_clicked()</div><div class="ttdoc">on_food_Button_clicked creates a query to the database.</div><div class="ttdef"><b>Definition:</b> administrator.cpp:63</div></div>
+<div class="ttc" id="aclass_administrator_html_a9303e2b7af6ae299cd8a485a49ca1fef"><div class="ttname"><a href="class_administrator.html#a9303e2b7af6ae299cd8a485a49ca1fef">Administrator::ui</a></div><div class="ttdeci">Ui::Administrator * ui</div><div class="ttdef"><b>Definition:</b> administrator.h:92</div></div>
+<div class="ttc" id="aclass_administrator_html_a0a1d66d28ed2e9e6f785306ddb1b6f71"><div class="ttname"><a href="class_administrator.html#a0a1d66d28ed2e9e6f785306ddb1b6f71">Administrator::on_AddFoodPushButton_clicked</a></div><div class="ttdeci">void on_AddFoodPushButton_clicked()</div><div class="ttdoc">on_AddFoodPushButton_clicked</div><div class="ttdef"><b>Definition:</b> administrator.cpp:136</div></div>
 <div class="ttc" id="aclass_administrator_html"><div class="ttname"><a href="class_administrator.html">Administrator</a></div><div class="ttdef"><b>Definition:</b> administrator.h:12</div></div>
+<div class="ttc" id="aclass_administrator_html_a8a16f9248f19a0af4b77c14a2df452a3"><div class="ttname"><a href="class_administrator.html#a8a16f9248f19a0af4b77c14a2df452a3">Administrator::on_returnFromAdminUI_clicked</a></div><div class="ttdeci">void on_returnFromAdminUI_clicked()</div><div class="ttdoc">on_returnFromAdminUI_clicked returns to the previous ui.</div><div class="ttdef"><b>Definition:</b> administrator.cpp:106</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

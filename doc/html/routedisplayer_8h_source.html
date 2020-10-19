@@ -101,37 +101,53 @@ $(document).ready(function(){initNavTree('routedisplayer_8h_source.html',''); in
 <a href="routedisplayer_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef ROUTEDISPLAYER_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define ROUTEDISPLAYER_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QDialog&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_ui.html">Ui</a> {</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">class </span><a class="code" href="class_route_displayer.html">RouteDisplayer</a>;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;}</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="cityshoppingcartitem_8h.html">cityshoppingcartitem.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="foodshoppingcartitem_8h.html">foodshoppingcartitem.h</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QDialog&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;QStandardItemModel&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_route_displayer.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_route_displayer.html">RouteDisplayer</a> : <span class="keyword">public</span> QDialog</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_ui.html">Ui</a> {</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">class </span><a class="code" href="class_route_displayer.html">RouteDisplayer</a>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;}</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_route_displayer.html#af1895a6a10a78aabefe0b1dd899a834b">RouteDisplayer</a>(QWidget *parent, QList&lt;int&gt; route, <span class="keywordtype">int</span> totalDistance);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="class_route_displayer.html#a8fe2a18c99195af19477d94ca1e83a86">~RouteDisplayer</a>();</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_route_displayer.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_route_displayer.html">RouteDisplayer</a> : <span class="keyword">public</span> QDialog</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    Q_OBJECT</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    Ui::RouteDisplayer *ui;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    QList&lt;int&gt; route;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">int</span> totalDistance;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    QVector&lt;FoodShoppingCartItem*&gt; shoppingCart;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    QVector&lt;CityShoppingCartItem*&gt; cityShoppingCart;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    QMap&lt;QString, CityShoppingCartItem*&gt; cityTable;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;};</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#endif // ROUTEDISPLAYER_H</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_route_displayer.html#af1895a6a10a78aabefe0b1dd899a834b">RouteDisplayer</a>(QWidget *parent, QList&lt;int&gt; <a class="code" href="class_route_displayer.html#abdb70f01143a3bb1425ce35a560eaf6d">route</a>, <span class="keywordtype">int</span> <a class="code" href="class_route_displayer.html#a5d859ace9bc632df9e139b1f92f8e072">totalDistance</a>);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="class_route_displayer.html#a8fe2a18c99195af19477d94ca1e83a86">~RouteDisplayer</a>();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_route_displayer.html#a1369368186691930f47bab4949752425">qtyChanged</a>();</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_route_displayer.html#a4e192a839de3ad8a92c4ab6d845669f0">   37</a></span>&#160;    Ui::RouteDisplayer *<a class="code" href="class_route_displayer.html#a4e192a839de3ad8a92c4ab6d845669f0">ui</a>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="class_route_displayer.html#abdb70f01143a3bb1425ce35a560eaf6d">   38</a></span>&#160;    QList&lt;int&gt; <a class="code" href="class_route_displayer.html#abdb70f01143a3bb1425ce35a560eaf6d">route</a>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="class_route_displayer.html#a5d859ace9bc632df9e139b1f92f8e072">   39</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_route_displayer.html#a5d859ace9bc632df9e139b1f92f8e072">totalDistance</a>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="class_route_displayer.html#a72863f7382979f3356b4937d1efc3f49">   40</a></span>&#160;    QVector&lt;FoodShoppingCartItem*&gt; <a class="code" href="class_route_displayer.html#a72863f7382979f3356b4937d1efc3f49">shoppingCart</a>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="class_route_displayer.html#a5825cfeaa7b96e9755f3440cb3c4a292">   41</a></span>&#160;    QVector&lt;CityShoppingCartItem*&gt; <a class="code" href="class_route_displayer.html#a5825cfeaa7b96e9755f3440cb3c4a292">cityShoppingCart</a>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_route_displayer.html#a2639aa839883828e29768d7d70c13958">   42</a></span>&#160;    QMap&lt;QString, CityShoppingCartItem*&gt; <a class="code" href="class_route_displayer.html#a2639aa839883828e29768d7d70c13958">cityTable</a>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;};</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif // ROUTEDISPLAYER_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_route_displayer_html"><div class="ttname"><a href="class_route_displayer.html">RouteDisplayer</a></div><div class="ttdef"><b>Definition:</b> routedisplayer.h:11</div></div>
-<div class="ttc" id="aclass_route_displayer_html_a8fe2a18c99195af19477d94ca1e83a86"><div class="ttname"><a href="class_route_displayer.html#a8fe2a18c99195af19477d94ca1e83a86">RouteDisplayer::~RouteDisplayer</a></div><div class="ttdeci">~RouteDisplayer()</div><div class="ttdef"><b>Definition:</b> routedisplayer.cpp:88</div></div>
+<div class="ttc" id="aclass_route_displayer_html"><div class="ttname"><a href="class_route_displayer.html">RouteDisplayer</a></div><div class="ttdef"><b>Definition:</b> routedisplayer.h:15</div></div>
+<div class="ttc" id="aclass_route_displayer_html_a8fe2a18c99195af19477d94ca1e83a86"><div class="ttname"><a href="class_route_displayer.html#a8fe2a18c99195af19477d94ca1e83a86">RouteDisplayer::~RouteDisplayer</a></div><div class="ttdeci">~RouteDisplayer()</div><div class="ttdoc">~RouteDisplayer Deconstructor</div><div class="ttdef"><b>Definition:</b> routedisplayer.cpp:99</div></div>
+<div class="ttc" id="aclass_route_displayer_html_a1369368186691930f47bab4949752425"><div class="ttname"><a href="class_route_displayer.html#a1369368186691930f47bab4949752425">RouteDisplayer::qtyChanged</a></div><div class="ttdeci">void qtyChanged()</div><div class="ttdoc">qtyChanged()</div><div class="ttdef"><b>Definition:</b> routedisplayer.cpp:105</div></div>
+<div class="ttc" id="aclass_route_displayer_html_a5d859ace9bc632df9e139b1f92f8e072"><div class="ttname"><a href="class_route_displayer.html#a5d859ace9bc632df9e139b1f92f8e072">RouteDisplayer::totalDistance</a></div><div class="ttdeci">int totalDistance</div><div class="ttdef"><b>Definition:</b> routedisplayer.h:39</div></div>
 <div class="ttc" id="anamespace_ui_html"><div class="ttname"><a href="namespace_ui.html">Ui</a></div><div class="ttdef"><b>Definition:</b> administrator.h:7</div></div>
-<div class="ttc" id="aclass_route_displayer_html_af1895a6a10a78aabefe0b1dd899a834b"><div class="ttname"><a href="class_route_displayer.html#af1895a6a10a78aabefe0b1dd899a834b">RouteDisplayer::RouteDisplayer</a></div><div class="ttdeci">RouteDisplayer(QWidget *parent, QList&lt; int &gt; route, int totalDistance)</div><div class="ttdef"><b>Definition:</b> routedisplayer.cpp:6</div></div>
+<div class="ttc" id="aclass_route_displayer_html_af1895a6a10a78aabefe0b1dd899a834b"><div class="ttname"><a href="class_route_displayer.html#af1895a6a10a78aabefe0b1dd899a834b">RouteDisplayer::RouteDisplayer</a></div><div class="ttdeci">RouteDisplayer(QWidget *parent, QList&lt; int &gt; route, int totalDistance)</div><div class="ttdoc">RouteDisplayer Constructor.</div><div class="ttdef"><b>Definition:</b> routedisplayer.cpp:7</div></div>
+<div class="ttc" id="acityshoppingcartitem_8h_html"><div class="ttname"><a href="cityshoppingcartitem_8h.html">cityshoppingcartitem.h</a></div></div>
+<div class="ttc" id="aclass_route_displayer_html_a4e192a839de3ad8a92c4ab6d845669f0"><div class="ttname"><a href="class_route_displayer.html#a4e192a839de3ad8a92c4ab6d845669f0">RouteDisplayer::ui</a></div><div class="ttdeci">Ui::RouteDisplayer * ui</div><div class="ttdef"><b>Definition:</b> routedisplayer.h:37</div></div>
+<div class="ttc" id="afoodshoppingcartitem_8h_html"><div class="ttname"><a href="foodshoppingcartitem_8h.html">foodshoppingcartitem.h</a></div></div>
+<div class="ttc" id="aclass_route_displayer_html_a2639aa839883828e29768d7d70c13958"><div class="ttname"><a href="class_route_displayer.html#a2639aa839883828e29768d7d70c13958">RouteDisplayer::cityTable</a></div><div class="ttdeci">QMap&lt; QString, CityShoppingCartItem * &gt; cityTable</div><div class="ttdef"><b>Definition:</b> routedisplayer.h:42</div></div>
+<div class="ttc" id="aclass_route_displayer_html_abdb70f01143a3bb1425ce35a560eaf6d"><div class="ttname"><a href="class_route_displayer.html#abdb70f01143a3bb1425ce35a560eaf6d">RouteDisplayer::route</a></div><div class="ttdeci">QList&lt; int &gt; route</div><div class="ttdef"><b>Definition:</b> routedisplayer.h:38</div></div>
+<div class="ttc" id="aclass_route_displayer_html_a5825cfeaa7b96e9755f3440cb3c4a292"><div class="ttname"><a href="class_route_displayer.html#a5825cfeaa7b96e9755f3440cb3c4a292">RouteDisplayer::cityShoppingCart</a></div><div class="ttdeci">QVector&lt; CityShoppingCartItem * &gt; cityShoppingCart</div><div class="ttdef"><b>Definition:</b> routedisplayer.h:41</div></div>
+<div class="ttc" id="aclass_route_displayer_html_a72863f7382979f3356b4937d1efc3f49"><div class="ttname"><a href="class_route_displayer.html#a72863f7382979f3356b4937d1efc3f49">RouteDisplayer::shoppingCart</a></div><div class="ttdeci">QVector&lt; FoodShoppingCartItem * &gt; shoppingCart</div><div class="ttdef"><b>Definition:</b> routedisplayer.h:40</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

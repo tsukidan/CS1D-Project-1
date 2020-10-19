@@ -7,11 +7,6 @@
 /********************************
  *** CONSTRUCTOR / DESTRUCTOR ***
  ********************************/
-/// Administrator constructor function.
-///
-/// Constructor is automatically called
-/// when object(instance of class) create,
-/// It is special member function of the class.
 Administrator::Administrator(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Administrator),
@@ -43,17 +38,11 @@ Administrator::Administrator(QWidget *parent) :
                 .arg(ui -> DeleteFoodPushButton->objectName()));
 }
 
-/// Administrator destructor.
-///
-/// Deletes the ui when it's scope is left.
 Administrator::~Administrator()
 {
     delete ui;
 }
 
-/// Imports the data from cities database.
-///
-/// Creates a call to the database to retrun all cities.
 void Administrator::on_cities_Button_clicked()
 {
     QSqlRelationalTableModel *sqlTableModel = rebuildQuery();
@@ -71,10 +60,6 @@ void Administrator::on_cities_Button_clicked()
  * food items in the database.
  ************************************************************************/
 
-/// on_food_Button_clicked creates a query to the database.
-///
-/// Creates a call to the database to retrun all food items belonging
-/// to each city. Updates the ui to display all food items.
 void Administrator::on_food_Button_clicked()
 {
     QSqlRelationalTableModel *sqlTableModel; //PROC & PROC - Create query to change column names
@@ -98,11 +83,6 @@ void Administrator::on_food_Button_clicked()
     ui->databaseView->setModel(sqlModel);
 }
 
-/// on_distance_Button_clicked creates a query to the database.
-///
-/// Creates a call to the database to retrun all distances from starting
-/// city to ending city. Updates the ui to display all food items.
-/// @return void.
 void Administrator::on_distances_Button_clicked()
 {
     QSqlRelationalTableModel *sqlTableModel = rebuildQuery();
@@ -122,11 +102,7 @@ void Administrator::on_distances_Button_clicked()
  * This button will take the user from the administrator page to the login
  * page. It essentially acts as a back button.
  ************************************************************************/
-/// on_returnFromAdminUI_clicked returns to the previous ui.
-///
-/// This button will take the user from the administrator page
-/// to the login page.
-/// @return void.
+
 void Administrator::on_returnFromAdminUI_clicked()
 {
     Login *loginUi; //PROC & PROC - Pointer to login interface
@@ -143,9 +119,7 @@ void Administrator::on_returnFromAdminUI_clicked()
     loginUi->show();
 }
 
-/// on_databaseView_pressed returns items clicked in QTableView.
-///
-///
+
 void Administrator::on_databaseView_pressed(const QModelIndex &index)
 {
     queryVal = ui->databaseView->model()->data(index).toString();

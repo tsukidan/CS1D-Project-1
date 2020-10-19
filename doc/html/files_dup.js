@@ -44,6 +44,8 @@ var files_dup =
     [ "shortestpath.h", "shortestpath_8h.html", "shortestpath_8h" ],
     [ "sqldatabase.cpp", "sqldatabase_8cpp.html", null ],
     [ "sqldatabase.h", "sqldatabase_8h.html", [
+      [ "food", "structfood.html", "structfood" ],
+      [ "cityDistance", "structcity_distance.html", "structcity_distance" ],
       [ "SQLDatabase", "class_s_q_l_database.html", "class_s_q_l_database" ]
     ] ]
 ];
